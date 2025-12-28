@@ -2,181 +2,451 @@
   "disciplines": [
     {
       "name": "Biopsionics",
-      "description": "Master the arts of physical healing and bodily control",
+      "description": "Biopsionic powers repair, augment, debilitate, or damage living creatures. Must touch target unless otherwise specified. Add System Strain to target with curative powers.",
       "core_technique": {
         "name": "Psychic Succor",
         "level": 0,
         "effort_cost": 0,
-        "description": "Heal 1d6+1 HP with a touch as an action. Can be used on self."
+        "description": "Level-0: Automatically stabilize mortally-wounded target within 6 rounds as Main Action. Level-1: Heal 1d6+1 HP, revive mortally wounded. Level-2: Heal 2d6+2 HP. Level-3: Heal 2d6+6 HP. Level-4: Heal 3d6+8 HP. Adds 1 System Strain (2 if mortally wounded). Commit Effort for day to activate, then free for scene."
       },
       "techniques": [
         {
-          "name": "Invincible Stand",
-          "level": 1,
-          "effort_cost": 1,
-          "description": "Commit Effort for the scene. Gain 1d10 temporary HP per Psychic skill level."
-        },
-        {
           "name": "Mastered Succor",
           "level": 1,
-          "effort_cost": 1,
-          "description": "Healing touch heals 2d6+2 HP instead. Can stabilize dying allies instantly."
+          "effort_cost": 0,
+          "description": "No longer need to Commit Effort to activate Psychic Succor. Can use whenever wished."
         },
         {
-          "name": "Organic Purification",
+          "name": "Organic Purification Protocols",
+          "level": 1,
+          "effort_cost": 1,
+          "description": "Psychic Succor now cures poisons/diseases. Commit additional Effort for day. Biowarfare/virulent diseases/TL5 toxins may resist (Wis/Biopsionics DC 10+). Cannot cure congenital illness."
+        },
+        {
+          "name": "Remote Repair",
+          "level": 1,
+          "effort_cost": 1,
+          "description": "Psychic Succor and other touch techniques work at distance up to 100m if can see target. Hostile powers hit automatically. Commit Effort for scene each use."
+        },
+        {
+          "name": "Invincible Stand",
           "level": 2,
-          "effort_cost": 2,
-          "description": "Remove disease, poison, or infection from a target with a touch."
+          "effort_cost": 1,
+          "description": "Commit Effort for scene as Instant to keep self or touched target active at 0 HP. Must use once/round or target collapses. If target takes damage, must Instantly Commit Effort for scene or they go down with mortal wound. Heavy weapons always kill."
+        },
+        {
+          "name": "Major Organ Restoration",
+          "level": 2,
+          "effort_cost": 0,
+          "description": "Psychic Succor cures congenital defects, regrows limbs/organs. Can stabilize Heavy weapon victims if used within 1 round per Biopsionics level. Stabilization only; must rest 24hr before further healing."
+        },
+        {
+          "name": "Tissue Integrity Field",
+          "level": 2,
+          "effort_cost": 1,
+          "description": "Psychic Succor affects all allies within 10m of target. Allies can decline. Commit additional Effort for day."
+        },
+        {
+          "name": "Accelerated Succor",
+          "level": 3,
+          "effort_cost": 1,
+          "description": "Psychic Succor as On Turn power (once/round). Commit additional Effort for day to use as Instant (once/round). Augmentation surcharges apply."
+        },
+        {
+          "name": "Metamorph",
+          "level": 3,
+          "effort_cost": 1,
+          "description": "Shape self or willing target into any humanoid within 50% mass as Main Action. Claws/armor (AC 13, Light/Medium weapons). Gills/environmental survival. Impersonate to DNA level with sample. Adds 1 System Strain. Commit Effort while maintained. Auto-ends if >100km away from target."
+        },
+        {
+          "name": "Teratic Overload",
+          "level": 3,
+          "effort_cost": 1,
+          "description": "Touch inflicts 1d6 damage per Biopsionics level as Main Action. Commit Effort for scene. Physical save or damage tripled and lethal cancer (kills in 1d6 months, curable by TL4 hospital within 1 month). Commit Effort for day instead: no HP damage, subtle tumors (undetectable without TL4 exam). Once per scene per target."
+        },
+        {
+          "name": "Holistic Optimization Patterning",
+          "level": 4,
+          "effort_cost": 1,
+          "description": "Augment self or touched ally as On Turn. Lasts scene. Adds 2 System Strain. +2 to Str/Dex checks, hit rolls, damage + 20 temp HP. Commit Effort for day. Once per scene per target."
+        },
+        {
+          "name": "Quintessential Reconstruction",
+          "level": 4,
+          "effort_cost": 0,
+          "description": "If killed, regenerate from largest fragment over 24hr. Max System Strain for 1 week. If reduced to 0 HP during week, die permanently. Aware while dead, can postpone regeneration up to 1 week. Each use: 1 permanent attribute loss (choice)."
         }
       ]
     },
     {
       "name": "Metapsionics",
-      "description": "Understand and manipulate psychic energies",
+      "description": "Metapsionics controls psychic energy itself, molding flows through MES-marked brains. Increases Effort, enables flexibility, teaches psychics, protects from psychic assault.",
       "core_technique": {
         "name": "Psychic Refinement",
         "level": 0,
         "effort_cost": 0,
-        "description": "Gain +1 maximum Effort. This benefit is permanent and always active."
+        "description": "Level-0: Detect psychic power use (visual/audible). Identify source/target if visible. +2 on saves vs psionic powers. Level-1: +1 max Effort. Level-2: Identify psychics/latents with 1 round inspection. +3 saves vs psionics. Level-3: +1 max Effort. Level-4: Safer torching - 10 HP damage instead of die roll (after power activates). Only natural rest heals this. Can stabilize if dropped to 0."
       },
       "techniques": [
         {
-          "name": "Psychic Static",
+          "name": "Cloak Powers",
           "level": 1,
           "effort_cost": 1,
-          "description": "Commit Effort for the scene. All hostile psychic abilities within 30m fail."
+          "description": "Conceal psychic abilities from metapsionic senses. Commit Effort while cloaked. Only equal/higher Metapsionics can detect (opposed Wis/Metapsionics roll)."
         },
         {
-          "name": "Deep Intrusion",
+          "name": "Mindtracing",
           "level": 1,
           "effort_cost": 1,
-          "description": "Increase range of psychic powers by 100m. Ignore line-of-sight requirements."
+          "description": "Trace psychic power use. Commit Effort for scene as Instant. See/hear through user's senses for 1 round, know location, treat as visible target."
         },
         {
-          "name": "Empowered Techniques",
+          "name": "Synthetic Adaptation",
+          "level": 1,
+          "effort_cost": 0,
+          "description": "Requires Program-0 or Fix-0. Apply Telepathy/Biopsion powers to VI/True AI. Adept pays any System Strain, not target."
+        },
+        {
+          "name": "Neural Trap",
           "level": 2,
-          "effort_cost": 2,
-          "description": "Your psychic techniques do +2 damage or heal +2 HP."
+          "effort_cost": 1,
+          "description": "When targeted by hostile psionic power with save, Commit Effort as Instant and voluntarily fail. Your next psychic attack on that assailant allows no save. Lasts until attack or Effort reclaimed. One trap per psychic per target."
+        },
+        {
+          "name": "Psychic Static",
+          "level": 2,
+          "effort_cost": 1,
+          "description": "Commit Effort for day as Instant to negate perceived psychic power. Psychic responsible must Commit Effort for day to resist or power ends/action wasted. Can counter-spend until one runs out. Once per round per power. Target knows your position."
+        },
+        {
+          "name": "Suspended Manifestation",
+          "level": 2,
+          "effort_cost": 1,
+          "description": "Hang psychic power in brain. Commit Effort for day plus normal Effort. No recovery until expended. Activate as Instant (or On Turn if allows save). One suspended power at a time."
+        },
+        {
+          "name": "Concert of Minds",
+          "level": 3,
+          "effort_cost": 1,
+          "description": "Commit Effort as On Turn to form gestalt with 1 willing psychic per Metapsion level within 3m. Members use each other's powers/techniques (their skill, your Effort). End of each round with power use: Commit Effort for scene or gestalt drops (can't re-establish)."
+        },
+        {
+          "name": "Metadimensional Friction",
+          "level": 3,
+          "effort_cost": 1,
+          "description": "Commit Effort for scene as Main Action. Visible psychic within 200m takes 1d8 per Metapsionics level when Committing Effort or using power. Mental save each time to end. Lasts max 1 scene. One friction per target."
+        },
+        {
+          "name": "Psychic Tutelage",
+          "level": 3,
+          "effort_cost": 0,
+          "description": "Train untapped psychics. Metapsionics-3: 10 pupils. Metapsionics-4: 100 pupils. 1 week to avoid accidental triggering. 1-4 years for effective use. Requires other psychics to assist."
+        },
+        {
+          "name": "Surge Momentum",
+          "level": 3,
+          "effort_cost": 1,
+          "description": "Commit Effort for day with save-allowing power. Target gets -Metapsionics penalty on save. If target HD/level < half your level (round up), auto-fail save."
+        },
+        {
+          "name": "Flawless Mastery",
+          "level": 4,
+          "effort_cost": 0,
+          "description": "Choose one technique from any known discipline. No Effort cost (augments may still cost). Duration-based lasts until ended or death. Once only. Can change with 1 month meditation."
+        },
+        {
+          "name": "Impervious Pavis of Will",
+          "level": 4,
+          "effort_cost": 1,
+          "description": "Choose discipline - immune to unwanted powers from it. Commit Effort for day as Instant: extend to allies within 50m for scene. Can learn multiple times for different disciplines."
         }
       ]
     },
     {
       "name": "Precognition",
-      "description": "Sense and manipulate the flow of probable futures",
+      "description": "Sense cascade of future events, read metadimensional energy chaos. Visions focus on psychic's interests. Can influence future by adjusting probabilities. Strictly future-oriented; postcognition impossible.",
       "core_technique": {
         "name": "Oracle",
         "level": 0,
-        "effort_cost": 0,
-        "description": "Ask the GM one yes/no question about the immediate future. GM must answer truthfully."
+        "effort_cost": 1,
+        "description": "Main Action, Commit Effort for day. Get brief vision (<1min insight) of future from own vantage. Relates to actions/events, not abstract facts. Once per question until situation changes or 1 week passes. Time horizon: Level-0: 1 min. Level-1: 1 day. Level-2: 1 week. Level-3: 3 months. Level-4: 1 year."
       },
       "techniques": [
         {
-          "name": "Tactical Precognition",
+          "name": "Intuitive Response",
           "level": 1,
           "effort_cost": 1,
-          "description": "Commit Effort for the scene. Gain +2 to initiative and AC."
+          "description": "Commit Effort for scene as Instant before initiative. Initiative treated as one better than anyone else's. If tie with similar ability, roll normally. Cannot use if surprised."
         },
         {
-          "name": "Forewarning",
+          "name": "Sense the Need",
           "level": 1,
           "effort_cost": 1,
-          "description": "Commit Effort for the day. Gain perfect awareness of ambushes and surprise attacks."
+          "description": "Commit Effort for day as Instant. Retroactively declare you brought any reasonably acquired/carried object. Must be plausible given recent events."
         },
         {
           "name": "Terminal Reflection",
+          "level": 1,
+          "effort_cost": 1,
+          "description": "Auto-triggers as Instant before unexpected danger/ambush. Brief vision of hazard. Negates surprise. Immediately Commit Effort for day or technique goes numb for rest of day."
+        },
+        {
+          "name": "Alternate Outcome",
           "level": 2,
-          "effort_cost": 2,
-          "description": "Once per scene, force an enemy to reroll an attack that would hit you."
+          "effort_cost": 1,
+          "description": "Commit Effort for day as Instant. Target visible ally or self. Reroll failed hit/save/skill check, take better. Once per day per target."
+        },
+        {
+          "name": "Destiny's Shield",
+          "level": 2,
+          "effort_cost": 1,
+          "description": "Commit Effort for day as Instant. Force attacker to reroll successful hit vs you. Only vs attacks on your person. If reroll hits, damage maximized. Once per attack."
+        },
+        {
+          "name": "Anguished Vision",
+          "level": 3,
+          "effort_cost": 1,
+          "description": "Commit Effort for day as Instant. Declare last action/sight was vision. Time rolls back to start of initiative count (or 6sec if out of combat). Nothing really happened yet. Once per day."
+        },
+        {
+          "name": "Cursed Luck",
+          "level": 3,
+          "effort_cost": 1,
+          "description": "Main Action, Commit Effort for scene. Visible animate target (robots/animals, not vehicles) rolls attacks/damage/checks/saves twice, takes worst. Rolls to hit target or damage dice vs it rolled twice, take best. Intelligent targets: Mental save at end of round (not penalized). "
+        },
+        {
+          "name": "Forced Outcome",
+          "level": 3,
+          "effort_cost": 1,
+          "description": "Main Action, Commit Effort for scene. Control simple random mechanical outcomes (roulette, shuffled cards). Make not-entirely-implausible physical events occur (few objects, no human involvement). Max one unusual coincidence per scene."
+        },
+        {
+          "name": "Not My Time",
+          "level": 4,
+          "effort_cost": 1,
+          "description": "Auto-triggers when about to die if can Commit Effort for day. Random events conspire to leave you alive via outrageous coincidence. Life secured for few minutes if don't thrust back into danger. May not survive intact in mind/body. Once per week."
+        },
+        {
+          "name": "Prophecy",
+          "level": 4,
+          "effort_cost": 1,
+          "description": "Main Action: predict personal future/condition within 1 year. Commit Effort (remains until fulfilled/abandoned). Requires reasonable measures, no direct enemy resistance, not highly improbable. Once per month. One active prophecy."
         }
       ]
     },
     {
       "name": "Telekinesis",
-      "description": "Move objects and creatures with the power of thought",
+      "description": "Strong but imprecise force. Usually invisible (can glow if desired). Source not obvious. Cannot manipulate objects held/worn by mobile creature or unwilling intelligent targets. Machines/robots affected. Cannot self-lift without techniques.",
       "core_technique": {
         "name": "Telekinetic Manipulation",
         "level": 0,
-        "effort_cost": 0,
-        "description": "Move objects up to 200kg within sight. Can use to attack for 1d6 damage."
+        "effort_cost": 1,
+        "description": "Commit Effort for scene as Main Action. Direct force to object/person in visual range or touched. Not weapon-effective without techniques. 1d6 damage per skill level vs immobile objects. Objects move 20m/round. Cannot activate on second object until first released. Level-0: One hand, own strength. Level-1: Both hands, 200kg. Level-2: 400kg, smash human-sized hole in light wood as Main Action. Level-3: 800kg, affect objects equal to skill levels. Level-4: 1 metric ton, smash holes in TL4 walls/light stone as Main Action."
       },
       "techniques": [
         {
           "name": "Kinetic Transversal",
           "level": 1,
           "effort_cost": 1,
-          "description": "Commit Effort for the scene. Fly at normal movement speed."
+          "description": "Commit Effort as On Turn. Move over vertical/overhanging surfaces as flat ground. Cross any solid surface supporting 5kg. Move over liquids at full rate. Lasts while Effort committed."
         },
         {
           "name": "Pressure Field",
           "level": 1,
           "effort_cost": 1,
-          "description": "Commit Effort for the scene. Gain +2 AC from telekinetic deflection."
+          "description": "Instant: manifest vacc suit equivalent. Ignore temps ±100°C, pressurize thin atmospheres, filter particulates/toxins. Commit Effort for scene: shield 6 comrades. Lasts until Effort reclaimed."
         },
         {
-          "name": "Telekinetic Maelstrom",
+          "name": "Telekinetic Armory",
+          "level": 1,
+          "effort_cost": 1,
+          "description": "Commit Effort as On Turn. Create TL4 weapons (rifle or adv melee) and armor. Attack with Dex/Wis/Con mod + Telekinesis skill. AC = 15 + Telekinesis (doesn't stack with armor; Dex/shields modify). Invisible or visible. Lasts while Effort committed."
+        },
+        {
+          "name": "Impact Sump",
           "level": 2,
-          "effort_cost": 2,
-          "description": "All targets within 30m take 2d6 damage from flying debris. No cover available."
+          "effort_cost": 1,
+          "description": "Commit Effort for day as Instant to negate single physical damage instance. Can trigger after damage rolled. Once per day."
+        },
+        {
+          "name": "Slip Field",
+          "level": 2,
+          "effort_cost": 1,
+          "description": "Main Action, Commit Effort for scene. Decrease friction at point in sight (10m diameter). Targets: Evasion save or fall prone, can't stand or move >1m per Move. Vehicles: Dex/Pilot DC 8+skill or lose control, crash. Targets who save immune for scene."
+        },
+        {
+          "name": "Telekinetic Expertise",
+          "level": 2,
+          "effort_cost": 0,
+          "description": "Use Telekinetic Manipulation without Committing Effort."
+        },
+        {
+          "name": "Thermokinesis",
+          "level": 2,
+          "effort_cost": 1,
+          "description": "Main Action, Commit Effort for scene. Melt/freeze inanimate object within lift capacity. Doesn't work on held/used objects. Non-sentient robots/objects with HP: 1d12 per Telekinesis level."
+        },
+        {
+          "name": "Tangible Force Construct",
+          "level": 3,
+          "effort_cost": 1,
+          "description": "Once per turn, On Turn: Commit Effort for scene. Create construct at visible point (3m cube max). Any shape, can float. TL4 sturdy. Visible/invisible. Lasts until scene end, dispelled, or 20 damage vs AC 15."
+        },
+        {
+          "name": "Telekinetic Ram",
+          "level": 3,
+          "effort_cost": 1,
+          "description": "Main Action, Commit Effort for scene. Tremendous burst at single target in sight. Detonates end of next round. Targets sense it, must be immobile or disrupted. Destroys civilian vehicle, 5m hole in non-hardened fortification, or 5d12 Heavy damage."
+        },
+        {
+          "name": "Reactive Telekinesis",
+          "level": 3,
+          "effort_cost": 1,
+          "description": "Instant when physical attack misses, Commit Effort for scene. Reflect attack back. Attacker rerolls vs self twice. If either hits, suffers own damage. If both hit, max damage."
+        },
+        {
+          "name": "Force Puppetry",
+          "level": 4,
+          "effort_cost": 1,
+          "description": "Main Action, Commit Effort for day. Suborn visible target's mobility (max ground car size). Sapient: Mental save to resist. Failed: lose physical control. Main Action to control for any action (uses your skills/bonus). Lasts until scene end, leaves sight, or sapient believes action/inaction will kill them. Cannot control speech, can silence."
+        },
+        {
+          "name": "Telekinetic Flight",
+          "level": 4,
+          "effort_cost": 1,
+          "description": "Instant, Commit Effort. Fly at 2× movement in any direction. Extend to 6 human-sized allies within 30m. Terminal velocity safe, orbital insertion survivable with vacc suit/Pressure Field. Allies control own motion, must end turn within 30m. Can negate falling damage. Lasts while Effort committed."
         }
       ]
     },
     {
       "name": "Telepathy",
-      "description": "Read and influence the thoughts of others",
+      "description": "Most threatening psychic power. Many worlds ban or restrict telepaths. Subtle, targets unaware except Metapsionics/Telepathy-0+ or rare TL5 devices. Cannot affect VIs, True AIs, non-biological intelligence. Unauthorized use usually illegal, hard to prove.",
       "core_technique": {
         "name": "Telepathic Contact",
         "level": 0,
-        "effort_cost": 0,
-        "description": "Establish mental communication with willing target within 50m."
+        "effort_cost": 1,
+        "description": "Commit Effort for day as Main Action. Target must be perceptible to unaided senses. Lasts max 1 scene. Can use any/all effects for skill level. Advanced probes allow Mental save; success prevents save-allowing techniques for scene. Level-0: Observe emotions, intense feelings give word/image. Level-1: Understand target's communication, speak their language if have body parts. Level-2: Read current thoughts (Mental save). Level-3: 1-2 sentence answer or vision from memory (Mental save, ends contact). Level-4: Full awareness of topic memory (Mental save, ends contact)."
       },
       "techniques": [
         {
-          "name": "Mind Reading",
+          "name": "Facile Mind",
           "level": 1,
           "effort_cost": 1,
-          "description": "Read surface thoughts of visible target. Opposed Mental save to resist."
+          "description": "Opening contact: Commit Effort for scene (not day). Practiced ally (1 week): no Effort. If Commit Effort for day: open contact as Instant (not Main)."
+        },
+        {
+          "name": "Transmit Thought",
+          "level": 1,
+          "effort_cost": 0,
+          "description": "Send thoughts/images over Telepathic Contact as Instant. Two-way with willing target."
+        },
+        {
+          "name": "Far Thought",
+          "level": 2,
+          "effort_cost": 0,
+          "description": "Once contacted, can activate within 100km (don't need to know location). Telepathy-3: 1,000km. Telepathy-4: planet-wide + orbital. Cannot use save-allowing techniques through distant connection."
+        },
+        {
+          "name": "Suppress Cognition",
+          "level": 2,
+          "effort_cost": 1,
+          "description": "Main Action, Commit Effort for scene. Target can't think about one thing (your presence, violence, missing docs, specific person). Mental save to resist (immune for scene). Lasts scene unless perceives physical danger/traumatic threat (instantly dissolves). Target oblivious to fugue unless told."
+        },
+        {
+          "name": "Reflex Response",
+          "level": 3,
+          "effort_cost": 1,
+          "description": "Main Action, Commit Effort for day. Force sudden impulse into contact target. Mental save to resist. Failed: next action carries out impulse. Cannot be self-harm or harm loved one. Can be foolish/reckless/harmful to others. May rationalize afterwards."
         },
         {
           "name": "Telepathic Assault",
-          "level": 1,
+          "level": 3,
           "effort_cost": 1,
-          "description": "Attack target's mind for 1d10 damage. Ignores armor. Mental save for half."
+          "description": "Main Action, Commit Effort for day. 6d6 damage (9d6 if Telepathy-4). Mental save halves. Cannot kill, knocks unconscious for 1hr if reduced to 0 (wake at 1 HP). Once per scene per target."
         },
         {
           "name": "Memory Editing",
-          "level": 2,
-          "effort_cost": 2,
-          "description": "Add, remove, or alter memories in a helpless or willing target."
+          "level": 4,
+          "effort_cost": 1,
+          "description": "Main Action, Commit Effort for day. Edit max 24hr memory in contact target. Erase events, create/change conversations, add events. Without good understanding (like level-4 contact), edits may not fit. Mental save to resist for scene. Won't notice changes until reason to recollect."
+        },
+        {
+          "name": "Unity of Thought",
+          "level": 4,
+          "effort_cost": 1,
+          "description": "Establish contact with willing ally: bind up to 6 willing participants (no extra Effort). Shallow: instant exchange of thoughts/images/senses. All know exact location/condition. Use best Initiative. 5min player discussion/coordination per round. One member/turn gets bonus round (not psychic). Lasts until new contact initiated. Range: anywhere in solar system."
         }
       ]
     },
     {
       "name": "Teleportation",
-      "description": "Instantly traverse vast distances",
+      "description": "Cause physical concern. Can reach/see anywhere ever visited. Security must ensure teleporters never access restricted areas. Locations fixed to nearest gravity well. Can leave clothing/shackles but not inserted matter. Instinctively abort if dangerous. Criminal teleporters face surgical bombs or execution.",
       "core_technique": {
         "name": "Personal Apportation",
         "level": 0,
-        "effort_cost": 0,
-        "description": "Teleport up to 10m to a visible location as a move action."
+        "effort_cost": 1,
+        "description": "Main Action, Commit Effort for scene. Translocate to previously-occupied location or visible point. Move self + carriable mass. Resisting targets can't be carried; unresisting touched targets can. Can leave clothing/adhesions, not inserted matter. Auto-abort if embedded or imminent harm. Range: Level-0: 10m. Level-1: 100m. Level-2: 10km. Level-3: 1,000km. Level-4: Planet surface + near orbit."
       },
       "techniques": [
         {
-          "name": "Spatial Distortion",
+          "name": "Proficient Apportation",
           "level": 1,
-          "effort_cost": 1,
-          "description": "Commit Effort for the scene. Melee attacks against you have 50% miss chance."
+          "effort_cost": 0,
+          "description": "Personal Apportation as Move action (once per round). Apportations ≤10m don't require Effort (augments still cost)."
         },
         {
-          "name": "Teleportation Surge",
+          "name": "Spatial Awareness",
           "level": 1,
           "effort_cost": 1,
-          "description": "Teleport up to 100m to any location you've previously visited."
+          "description": "Commit Effort as On Turn. 360° awareness ~sight to 100m. Blocked by solids, unimpeded by dark/mist/light/holograms/illusions. Can't read text or distinguish colors. Lasts while Effort committed."
         },
         {
-          "name": "Phase Shift",
+          "name": "Burdened Apportation",
           "level": 2,
-          "effort_cost": 2,
-          "description": "Commit Effort for the scene. Become partially intangible. Ignore obstacles and attacks."
+          "effort_cost": 1,
+          "description": "Carry 3 human-sized willing companions per Teleportation level + gear within 3m. Or 200kg inert mass per level (must touch). Extra Effort for day with Personal Apportation."
+        },
+        {
+          "name": "Perceptive Dislocation",
+          "level": 2,
+          "effort_cost": 1,
+          "description": "Commit Effort for day. Sense any teleportable location as if there. Lasts max 15min."
+        },
+        {
+          "name": "Spatial Synchrony Mandala",
+          "level": 2,
+          "effort_cost": 0,
+          "description": "1hr meditation: imprint object/person. Know exact location, teleport within 3m even if moved (must be in range). Willing/cooperative person. Min 1kg mass. One imprint at a time."
+        },
+        {
+          "name": "Effortless Apportation",
+          "level": 3,
+          "effort_cost": 0,
+          "description": "Don't Commit Effort for Personal Apportation. Augment costs still apply."
+        },
+        {
+          "name": "Stutterjump",
+          "level": 3,
+          "effort_cost": 1,
+          "description": "On Turn, Commit Effort: micro-teleport from attacks. AC 20 (no Dex/armor/shield mods). Doesn't move significantly. Instant, Commit Effort for day: negate successful weapon hit (even after damage). Once per day. Leaves just outside explosions/area-effects."
+        },
+        {
+          "name": "Rift Reduplication",
+          "level": 3,
+          "effort_cost": 1,
+          "description": "Instant, Commit additional Effort for day: use Personal Apportation as On Turn (even if used this round). Once per round. In-out lightning strike: no reaction/attack unless held action explicitly to counter (wasted if no chance). Not an Execution Attack."
+        },
+        {
+          "name": "Deep Intrusion",
+          "level": 4,
+          "effort_cost": 1,
+          "description": "Blind-teleport into visible building/structure/vehicle/spaceship (including ship combat range). Seek space large enough, no immediate hazards. Can't control precise destination. Commit additional Effort for day."
+        },
+        {
+          "name": "Offensive Apportation",
+          "level": 4,
+          "effort_cost": 1,
+          "description": "Main Action: teleport unwilling target with physical contact. Automatic if unsuspecting/incapacitated. Resisting: Punch hit + Teleportation skill. Can't teleport to unavailable or dangerous locations. Conscious target: Mental save (penalty = skill) to abort. Adds to Personal Apportation cost: additional Effort for day (hit or miss)."
         }
       ]
     }

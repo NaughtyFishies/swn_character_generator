@@ -47,9 +47,9 @@
       },
       "description": "Wielders of mental powers and psionic abilities",
       "special_abilities": [
-        "Gains Psychic skill at level 0",
+        "Gains 2 psychic disciplines as skills at level 0",
         "Can use psychic disciplines and techniques",
-        "Effort pool based on Psychic skill + WIS/INT modifier"
+        "Effort pool based on highest discipline skill + WIS/INT modifier"
       ],
       "requires_psychic": true
     },

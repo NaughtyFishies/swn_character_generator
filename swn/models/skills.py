@@ -57,11 +57,11 @@ class SkillSet:
             name: Skill name
 
         Returns:
-            Skill level (0 if skill not known)
+            Skill level (-1 if skill not known, which is untrained)
         """
         if name in self.skills:
             return self.skills[name].level
-        return 0
+        return -1  # Untrained in SWN is level -1
 
     def has_skill(self, name: str) -> bool:
         """
@@ -88,13 +88,13 @@ class SkillSet:
         """
         Calculate total skill points spent.
 
-        In SWN, skill costs are:
-        Level -1: 0 points (from background)
-        Level 0: 1 point
-        Level 1: 2 points
-        Level 2: 3 points
-        Level 3: 4 points
-        Level 4: 5 points
+        In SWN, CUMULATIVE skill costs to reach each level are:
+        Level -1: 0 points (from background, free)
+        Level 0: 1 point (cost: 0+1)
+        Level 1: 3 points (cost: 1+2)
+        Level 2: 6 points (cost: 1+2+3)
+        Level 3: 10 points (cost: 1+2+3+4)
+        Level 4: 15 points (cost: 1+2+3+4+5)
 
         Returns:
             Total points spent
@@ -106,13 +106,13 @@ class SkillSet:
             elif skill.level == 0:
                 total += 1
             elif skill.level == 1:
-                total += 2
+                total += 3  # 1 + 2
             elif skill.level == 2:
-                total += 3
+                total += 6  # 1 + 2 + 3
             elif skill.level == 3:
-                total += 4
+                total += 10  # 1 + 2 + 3 + 4
             elif skill.level == 4:
-                total += 5
+                total += 15  # 1 + 2 + 3 + 4 + 5
         return total
 
     def to_dict(self) -> Dict[str, int]:
@@ -152,10 +152,11 @@ def allocate_skill_points(skill_set: SkillSet, points: int, all_skill_names: Lis
         return
 
     # Determine max skill level based on character level
-    # Level 1-2: max skill 1
-    # Level 3-5: max skill 2
-    # Level 6-8: max skill 3
-    # Level 9+: max skill 4
+    # SWN Rules: Max +2 at lvl 3 | Max +3 at lvl 6 | Max +4 at lvl 9
+    # Level 1-2: max skill +1
+    # Level 3-5: max skill +2
+    # Level 6-8: max skill +3
+    # Level 9-10: max skill +4
     if character_level <= 2:
         max_level = 1
     elif character_level <= 5:
@@ -197,25 +198,23 @@ def calculate_skill_cost(current_level: int) -> int:
     """
     Calculate cost to increase a skill from current level to next level.
 
+    SWN Rule: Cost = (new level + 1)
+    - Level -1 to 0: 1 point (0 + 1)
+    - Level 0 to 1: 2 points (1 + 1)
+    - Level 1 to 2: 3 points (2 + 1)
+    - Level 2 to 3: 4 points (3 + 1)
+    - Level 3 to 4: 5 points (4 + 1)
+
     Args:
         current_level: Current skill level
 
     Returns:
         Point cost to increase to next level
     """
-    # Cost to go from -1 to 0: 1 point
-    # Cost to go from 0 to 1: 1 point (total 2)
-    # Cost to go from 1 to 2: 1 point (total 3)
-    # etc.
     if current_level == -1:
-        return 1
-    elif current_level == 0:
-        return 1
-    elif current_level == 1:
-        return 1
-    elif current_level == 2:
-        return 1
-    elif current_level == 3:
-        return 1
+        return 1  # Going to level 0 costs 1
+    elif current_level >= 0 and current_level < 4:
+        new_level = current_level + 1
+        return new_level + 1  # Formula: new level + 1
     else:
         return 99  # Can't increase beyond level 4

@@ -93,7 +93,9 @@ class CharacterClass:
         elif self.name == "Expert":
             return ["Fix", "Program", "Notice", "Sneak", "Talk", "Connect"]
         elif self.name == "Psychic":
-            return ["Psychic", "Know", "Notice", "Talk", "Connect"]
+            # Psychics prioritize their discipline skills (which are granted at class creation)
+            # Plus general useful skills
+            return ["Know", "Notice", "Talk", "Connect", "Survive"]
         elif self.name == "Adventurer":
             return ["Notice", "Survive", "Shoot", "Fix", "Talk"]
         else:

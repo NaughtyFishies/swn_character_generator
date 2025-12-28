@@ -1,8 +1,13 @@
-"""Psychic powers system for SWN characters."""
+"""Psychic powers system for SWN characters.
+
+In SWN, each psychic discipline (Biopsionics, Telepathy, etc.) is its own skill.
+When a character has level-0 in a discipline, they automatically get the core technique.
+Each time they increase the skill level, they choose ONE new technique from that discipline.
+"""
 import json
 import random
 from pathlib import Path
-from typing import List, Dict
+from typing import List, Dict, Optional
 
 
 class PsychicTechnique:
@@ -14,7 +19,7 @@ class PsychicTechnique:
 
         Args:
             name: Technique name
-            level: Required Psychic skill level (0-4)
+            level: Required skill level in the discipline (0-4)
             effort_cost: Effort points required to use
             description: Technique description
         """
@@ -37,6 +42,16 @@ class PsychicTechnique:
         effort_str = f"({self.effort_cost} Effort)" if self.effort_cost > 0 else "(Core)"
         return f"   {self.name} {effort_str}\n      {self.description}"
 
+    def __eq__(self, other):
+        """Check equality based on name."""
+        if isinstance(other, PsychicTechnique):
+            return self.name == other.name
+        return False
+
+    def __hash__(self):
+        """Make hashable for use in sets/dicts."""
+        return hash(self.name)
+
 
 class PsychicDiscipline:
     """Represents a psychic discipline with its techniques."""
@@ -47,29 +62,43 @@ class PsychicDiscipline:
         Initialize a psychic discipline.
 
         Args:
-            name: Discipline name
+            name: Discipline name (matches skill name)
             description: Discipline description
-            core_technique: Level 0 core technique (always available)
-            techniques: List of higher-level techniques
+            core_technique: Level 0 core technique (always available at level-0)
+            techniques: List of higher-level techniques (levels 1-4)
         """
         self.name = name
         self.description = description
         self.core_technique = core_technique
         self.techniques = techniques
 
-    def get_available_techniques(self, psychic_skill_level: int) -> List[PsychicTechnique]:
+    def get_techniques_at_level(self, skill_level: int) -> List[PsychicTechnique]:
         """
-        Get techniques available at a given Psychic skill level.
+        Get all techniques available at a specific skill level.
 
         Args:
-            psychic_skill_level: Character's Psychic skill level
+            skill_level: Skill level in this discipline (0-4)
 
         Returns:
-            List of available techniques (always includes core)
+            List of techniques available at exactly this level (not including lower levels)
+        """
+        if skill_level == 0:
+            return [self.core_technique]
+        return [t for t in self.techniques if t.level == skill_level]
+
+    def get_available_techniques(self, skill_level: int) -> List[PsychicTechnique]:
+        """
+        Get all techniques available up to and including a skill level.
+
+        Args:
+            skill_level: Skill level in this discipline (0-4)
+
+        Returns:
+            List of all techniques available (core + all techniques <= skill_level)
         """
         available = [self.core_technique]
         for tech in self.techniques:
-            if tech.level <= psychic_skill_level:
+            if tech.level <= skill_level:
                 available.append(tech)
         return available
 
@@ -88,67 +117,76 @@ class PsychicDiscipline:
 
 
 class PsychicPowers:
-    """Manages a character's psychic powers."""
+    """Manages a character's psychic powers.
 
-    def __init__(self, disciplines: List[PsychicDiscipline], psychic_skill_level: int,
-                 effort_pool: int):
+    Tracks which techniques have been chosen for each discipline skill.
+    The discipline skills themselves are stored in the character's SkillSet.
+    """
+
+    def __init__(self, effort_pool: int):
         """
         Initialize psychic powers.
 
         Args:
-            disciplines: List of disciplines the character knows
-            psychic_skill_level: Character's Psychic skill level
-            effort_pool: Maximum effort points
+            effort_pool: Maximum effort points (1 + highest discipline skill + WIS/INT mod)
         """
-        self.disciplines = disciplines
-        self.psychic_skill_level = psychic_skill_level
         self.effort_pool = effort_pool
-        self.selected_techniques: List[PsychicTechnique] = []
+        # Map: discipline name -> list of chosen techniques (in order chosen)
+        # Core techniques are implicit based on having the skill at level-0+
+        self.discipline_techniques: Dict[str, List[PsychicTechnique]] = {}
 
-        # Automatically grant all core techniques
-        for discipline in disciplines:
-            self.selected_techniques.append(discipline.core_technique)
-
-    def add_technique(self, technique: PsychicTechnique):
+    def add_technique(self, discipline_name: str, technique: PsychicTechnique):
         """
-        Add a technique to the character's known techniques.
+        Add a chosen technique for a discipline.
 
         Args:
-            technique: Technique to add
+            discipline_name: Name of the discipline
+            technique: Technique that was chosen
         """
-        if technique not in self.selected_techniques:
-            self.selected_techniques.append(technique)
+        if discipline_name not in self.discipline_techniques:
+            self.discipline_techniques[discipline_name] = []
+        if technique not in self.discipline_techniques[discipline_name]:
+            self.discipline_techniques[discipline_name].append(technique)
 
-    def get_all_techniques(self) -> List[PsychicTechnique]:
+    def get_techniques(self, discipline_name: str) -> List[PsychicTechnique]:
         """
-        Get all known techniques.
+        Get all chosen techniques for a discipline.
+
+        Args:
+            discipline_name: Name of the discipline
 
         Returns:
-            List of known techniques
+            List of chosen techniques (does not include core technique)
         """
-        return self.selected_techniques
+        return self.discipline_techniques.get(discipline_name, [])
+
+    def get_all_disciplines(self) -> List[str]:
+        """
+        Get names of all disciplines the character has techniques in.
+
+        Returns:
+            List of discipline names
+        """
+        return list(self.discipline_techniques.keys())
 
     def to_dict(self) -> dict:
         """Convert psychic powers to dictionary format."""
         return {
-            "disciplines": [disc.name for disc in self.disciplines],
-            "psychic_skill_level": self.psychic_skill_level,
             "effort_pool": self.effort_pool,
-            "techniques": [tech.to_dict() for tech in self.selected_techniques]
+            "disciplines": {
+                disc: [tech.to_dict() for tech in techs]
+                for disc, techs in self.discipline_techniques.items()
+            }
         }
 
     def __str__(self) -> str:
         """Return formatted psychic powers description."""
         lines = [f"Effort Pool: {self.effort_pool}"]
-        lines.append(f"Psychic Skill: {self.psychic_skill_level}")
         lines.append("")
 
-        for discipline in self.disciplines:
-            lines.append(f"{discipline.name}:")
-            # Get techniques for this discipline
-            disc_techs = [t for t in self.selected_techniques
-                         if t in [discipline.core_technique] + discipline.techniques]
-            for tech in disc_techs:
+        for disc_name, techniques in self.discipline_techniques.items():
+            lines.append(f"{disc_name}:")
+            for tech in techniques:
                 lines.append(str(tech))
             lines.append("")
 
@@ -166,6 +204,7 @@ class PsychicPowerSelector:
             disciplines: List of all available disciplines
         """
         self.disciplines = disciplines
+        self.disciplines_by_name = {d.name: d for d in disciplines}
 
     @classmethod
     def load_from_file(cls, file_path: str) -> 'PsychicPowerSelector':
@@ -217,49 +256,125 @@ class PsychicPowerSelector:
 
         return cls(disciplines)
 
-    def create_psychic_powers(self, power_type: str, power_level: str,
-                             psychic_skill_level: int, effort_modifier: int) -> PsychicPowers:
+    def get_discipline(self, name: str) -> Optional[PsychicDiscipline]:
         """
-        Create psychic powers for a character.
+        Get a discipline by name.
 
         Args:
-            power_type: "magic" or "psionic"
-            power_level: "weak", "normal", or "strong"
-            psychic_skill_level: Character's Psychic skill level
-            effort_modifier: Modifier to effort pool (usually WIS or INT mod)
+            name: Discipline name
+
+        Returns:
+            PsychicDiscipline or None if not found
+        """
+        return self.disciplines_by_name.get(name)
+
+    def get_random_disciplines(self, count: int) -> List[str]:
+        """
+        Get random discipline names.
+
+        Args:
+            count: Number of disciplines to select
+
+        Returns:
+            List of discipline names
+        """
+        count = min(count, len(self.disciplines))
+        selected = random.sample(self.disciplines, count)
+        return [d.name for d in selected]
+
+    def select_technique_for_level(self, discipline_name: str,
+                                   skill_level: int,
+                                   already_chosen: List[PsychicTechnique]) -> Optional[PsychicTechnique]:
+        """
+        Select a random technique when a discipline skill level increases.
+
+        Args:
+            discipline_name: Name of the discipline
+            skill_level: New skill level (1-4)
+            already_chosen: List of techniques already chosen for this discipline
+
+        Returns:
+            Selected technique, or None if no valid options
+        """
+        discipline = self.get_discipline(discipline_name)
+        if not discipline:
+            return None
+
+        # Get techniques available at this level that haven't been chosen yet
+        available_at_level = discipline.get_techniques_at_level(skill_level)
+
+        # Filter out already chosen techniques
+        valid_choices = [t for t in available_at_level if t not in already_chosen]
+
+        if not valid_choices:
+            # If no techniques at this exact level, try lower levels not yet chosen
+            all_available = discipline.get_available_techniques(skill_level)
+            valid_choices = [t for t in all_available
+                           if t != discipline.core_technique and t not in already_chosen]
+
+        if valid_choices:
+            return random.choice(valid_choices)
+
+        return None
+
+    def calculate_effort_pool(self, discipline_skills: Dict[str, int],
+                             effort_modifier: int) -> int:
+        """
+        Calculate effort pool based on highest discipline skill.
+
+        Formula: 1 + highest discipline skill level + WIS or INT modifier (whichever is higher)
+
+        Args:
+            discipline_skills: Dict of discipline_name -> skill_level
+            effort_modifier: WIS or INT modifier (whichever is higher)
+
+        Returns:
+            Effort pool value
+        """
+        if not discipline_skills:
+            return 1
+
+        highest_skill = max(discipline_skills.values())
+        return 1 + highest_skill + max(0, effort_modifier)
+
+    def create_psychic_powers_for_character(self, discipline_skills: Dict[str, int],
+                                           effort_modifier: int) -> PsychicPowers:
+        """
+        Create PsychicPowers object for a character with discipline skills.
+
+        For each discipline skill level from 1 to current, selects one technique.
+        Core techniques (level-0) are automatically added for each discipline.
+
+        Args:
+            discipline_skills: Dict of discipline_name -> skill_level
+            effort_modifier: WIS or INT modifier for effort pool
 
         Returns:
             PsychicPowers instance
         """
-        # Determine number of disciplines
-        if power_type == "magic":
-            num_disciplines = 1 if power_level != "strong" else 2
-        else:  # psionic
-            num_disciplines = 2 if power_level == "normal" else 3
-            if power_level == "weak":
-                num_disciplines = 1
+        effort_pool = self.calculate_effort_pool(discipline_skills, effort_modifier)
+        powers = PsychicPowers(effort_pool)
 
-        # Select random disciplines
-        num_disciplines = min(num_disciplines, len(self.disciplines))
-        selected_disciplines = random.sample(self.disciplines, num_disciplines)
+        # For each discipline the character has
+        for disc_name, skill_level in discipline_skills.items():
+            if skill_level < 0:
+                continue
 
-        # Calculate effort pool: 1 + Psychic skill + WIS/INT modifier
-        effort_pool = 1 + psychic_skill_level + max(0, effort_modifier)
+            discipline = self.get_discipline(disc_name)
+            if not discipline:
+                continue
 
-        # Create psychic powers
-        powers = PsychicPowers(selected_disciplines, psychic_skill_level, effort_pool)
+            # Always add the core technique (available at level 0+)
+            powers.add_technique(disc_name, discipline.core_technique)
 
-        # Grant additional techniques based on Psychic skill level
-        for discipline in selected_disciplines:
-            available_techs = discipline.get_available_techniques(psychic_skill_level)
-            # Grant 1-2 techniques per discipline beyond the core
-            num_to_grant = min(2, len(available_techs) - 1)  # -1 for core which is already added
+            # Initialize technique list for this discipline
+            already_chosen = []
 
-            # Filter out core technique
-            non_core = [t for t in available_techs if t != discipline.core_technique]
-            if non_core and num_to_grant > 0:
-                granted = random.sample(non_core, min(num_to_grant, len(non_core)))
-                for tech in granted:
-                    powers.add_technique(tech)
+            # For each level from 1 to current skill level, pick one technique
+            for level in range(1, skill_level + 1):
+                technique = self.select_technique_for_level(disc_name, level, already_chosen)
+                if technique:
+                    powers.add_technique(disc_name, technique)
+                    already_chosen.append(technique)
 
         return powers

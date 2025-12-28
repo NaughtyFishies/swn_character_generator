@@ -79,19 +79,28 @@ class CharacterDisplay:
             lines.append("PSYCHIC POWERS")
             lines.append("-" * 70)
             lines.append(f"Effort Pool: {character.psychic_powers.effort_pool}")
-            lines.append(f"Psychic Skill Level: {character.psychic_powers.psychic_skill_level}")
             lines.append("")
 
-            for discipline in character.psychic_powers.disciplines:
-                lines.append(f"{discipline.name}:")
-                # Get techniques for this discipline
-                disc_techs = [t for t in character.psychic_powers.selected_techniques
-                             if t in [discipline.core_technique] + discipline.techniques]
-                for tech in disc_techs:
-                    effort_str = f"({tech.effort_cost} Effort)" if tech.effort_cost > 0 else "(Core)"
-                    lines.append(f"  - {tech.name} {effort_str}")
-                    lines.append(f"    {tech.description}")
-                lines.append("")
+            # Display each discipline the character has
+            psychic_disciplines = ["Biopsionics", "Metapsionics", "Precognition",
+                                  "Telekinesis", "Telepathy", "Teleportation"]
+
+            for disc_name in psychic_disciplines:
+                if character.skills and character.skills.has_skill(disc_name):
+                    skill_level = character.skills.get_level(disc_name)
+                    lines.append(f"{disc_name} (Level {skill_level}):")
+
+                    # Get chosen techniques for this discipline
+                    chosen_techs = character.psychic_powers.get_techniques(disc_name)
+                    for tech in chosen_techs:
+                        effort_str = f"({tech.effort_cost} Effort)" if tech.effort_cost > 0 else ""
+                        lines.append(f"  - {tech.name} {effort_str}")
+                        if len(tech.description) > 80:
+                            # Truncate long descriptions for display
+                            lines.append(f"    {tech.description[:77]}...")
+                        else:
+                            lines.append(f"    {tech.description}")
+                    lines.append("")
 
         # Spells
         if character.spells:

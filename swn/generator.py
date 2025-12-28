@@ -112,10 +112,20 @@ class CharacterGenerator:
         character.skills.add_skill(quick_skill, 0)
 
         # Step 6: Add class starting skills (if applicable)
-        if character.character_class.name == "Psychic" or power_type in ["magic", "psionic"]:
-            # Psychics and magic/psionic characters get Psychic skill
-            if not character.skills.has_skill("Psychic"):
-                character.skills.add_skill("Psychic", 0)
+        # Grant psychic discipline skills for psychic characters
+        # Full Psychic: 2 disciplines, Partial Psychic/Psionic type: 1 discipline
+        discipline_count = 0
+        if character.character_class.name == "Psychic":
+            discipline_count = 2  # Full psychic gets 2 disciplines
+        elif power_type in ["magic", "psionic"]:
+            discipline_count = 1  # Partial psychic gets 1 discipline
+
+        # Select and grant random disciplines as skills at level 0
+        if discipline_count > 0:
+            discipline_names = self.psychic_selector.get_random_disciplines(discipline_count)
+            for disc_name in discipline_names:
+                if not character.skills.has_skill(disc_name):
+                    character.skills.add_skill(disc_name, 0)
 
         # Step 7: Calculate available skill points
         # Formula: (class base + INT modifier) + (3 points per level)
@@ -126,21 +136,29 @@ class CharacterGenerator:
         total_points = max(1, total_points)  # Minimum 1 skill point
 
         # Step 8: Allocate remaining skill points
+        # Exclude psychic disciplines from random allocation unless character is psychic
+        psychic_disciplines = ["Biopsionics", "Metapsionics", "Precognition",
+                              "Telekinesis", "Telepathy", "Teleportation"]
+        is_psychic = (power_type in ["magic", "psionic"] or
+                     character.character_class.name == "Psychic")
+
+        # Filter skills list for allocation
+        if is_psychic:
+            available_skills = self.all_skills
+        else:
+            available_skills = [s for s in self.all_skills if s not in psychic_disciplines]
+
         priority_skills = character.character_class.get_priority_skills()
         allocate_skill_points(
             character.skills,
             total_points,
-            self.all_skills,
+            available_skills,
             priority_skills,
             character.level  # Pass character level for skill cap calculation
         )
 
-        # Step 8.5: Add one free non-psychic skill
-        available_skills = [s for s in self.all_skills
-                           if s != "Psychic" and not character.skills.has_skill(s)]
-        if available_skills:
-            free_skill = random.choice(available_skills)
-            character.skills.add_skill(free_skill, 0)
+        # Step 8.5: No longer adding a "free" skill here
+        # (Removed to match official SWN rules and fix skill point budget)
 
         # Step 9: Select foci based on class
         # Everyone gets 1 focus
@@ -198,26 +216,27 @@ class CharacterGenerator:
         character.foci = foci_list
 
         # Step 10: Handle psychic powers
-        # Note: For magic/psionic types, use simplified "normal" power level
-        # Official SWN: Psychics get 2 disciplines, Partial Psychics get 1
-        if power_type in ["magic", "psionic"]:
-            # Ensure Psychic skill exists
-            if not character.skills.has_skill("Psychic"):
-                character.skills.add_skill("Psychic", 0)
+        # Generate psychic powers based on discipline skills
+        if power_type in ["magic", "psionic"] or character.character_class.name == "Psychic":
+            # Get all discipline skills the character has
+            psychic_disciplines = ["Biopsionics", "Metapsionics", "Precognition",
+                                  "Telekinesis", "Telepathy", "Teleportation"]
+            discipline_skills = {}
+            for disc_name in psychic_disciplines:
+                if character.skills.has_skill(disc_name):
+                    discipline_skills[disc_name] = character.skills.get_level(disc_name)
 
-            psychic_level = character.skills.get_level("Psychic")
-            effort_mod = max(
-                character.attributes.get_modifier("WIS"),
-                character.attributes.get_modifier("INT")
-            )
+            # Only create psychic powers if character has at least one discipline
+            if discipline_skills:
+                effort_mod = max(
+                    character.attributes.get_modifier("WIS"),
+                    character.attributes.get_modifier("INT")
+                )
 
-            # Use "normal" power level for standard SWN rules
-            character.psychic_powers = self.psychic_selector.create_psychic_powers(
-                power_type,
-                "normal",  # Standard power level
-                psychic_level,
-                effort_mod
-            )
+                character.psychic_powers = self.psychic_selector.create_psychic_powers_for_character(
+                    discipline_skills,
+                    effort_mod
+                )
 
         # Step 10.5: Handle spell assignment for spellcasting classes
         if character.character_class.is_spellcaster:

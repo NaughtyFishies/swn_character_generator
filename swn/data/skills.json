@@ -41,8 +41,28 @@
       "description": "Computer programming and hacking"
     },
     {
-      "name": "Psychic",
-      "description": "Use psychic powers and disciplines"
+      "name": "Biopsionics",
+      "description": "Psychic discipline for healing and manipulating biological systems"
+    },
+    {
+      "name": "Metapsionics",
+      "description": "Psychic discipline for manipulating and enhancing psychic energy"
+    },
+    {
+      "name": "Precognition",
+      "description": "Psychic discipline for perceiving future events and probabilities"
+    },
+    {
+      "name": "Telekinesis",
+      "description": "Psychic discipline for manipulating physical objects with the mind"
+    },
+    {
+      "name": "Telepathy",
+      "description": "Psychic discipline for reading and influencing minds"
+    },
+    {
+      "name": "Teleportation",
+      "description": "Psychic discipline for spatial displacement and dimensional travel"
     },
     {
       "name": "Punch",
