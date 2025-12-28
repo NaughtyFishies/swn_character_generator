@@ -1,0 +1,158 @@
+{
+  "spells": {
+    "level_1": [
+      {
+        "name": "Adaptive Modification",
+        "description": "Change one target per character level to survive a hostile environment"
+      },
+      {
+        "name": "Biometric Imposture",
+        "description": "Cast Instantly to fool any biometric identification device"
+      },
+      {
+        "name": "Font of Persistent Life",
+        "description": "Stabilize all nearby mortally wounded targets at 1 System Strain/target healed"
+      },
+      {
+        "name": "Reinforce Tissue",
+        "description": "Heal a visible wounded target by 2d6 hit points, more if cast at a higher level"
+      },
+      {
+        "name": "Siphon Strain",
+        "description": "Touch a target to shift one System Strain/level to the caster's total"
+      },
+      {
+        "name": "Superficial Tissue Sculpture",
+        "description": "Shape surface tissue and coloration in a target as desired; persists as a Change"
+      },
+      {
+        "name": "Temporary Limb",
+        "description": "The target sprouts extra manipulatory limbs as a Change"
+      },
+      {
+        "name": "Truth of Flesh and Bone",
+        "description": "Diagnose a target; gain +2 on Heal checks on them. Sense magical transformation"
+      }
+    ],
+    "level_2": [
+      {
+        "name": "Disjunctive Shift",
+        "description": "Shift objects into metadimensional storage and carry them with you"
+      },
+      {
+        "name": "Feral Guise",
+        "description": "A touched target gains the shape of a non-sentient animal as a Change"
+      },
+      {
+        "name": "Flowing Form",
+        "description": "Turn liquid for one round per level, flowing through holes and along walls"
+      },
+      {
+        "name": "Means of Ascent",
+        "description": "Only usable with a shape-altering spell; allows flight in the new shape"
+      },
+      {
+        "name": "Sanctity of Self",
+        "description": "Instant defense to ignore 3 HP damage/level for one System Strain and an action"
+      },
+      {
+        "name": "Temporary Excellence",
+        "description": "Let a visible target treat Strength or Dexterity as 18 for 1 System Strain/round"
+      },
+      {
+        "name": "Ten Thousand Senses",
+        "description": "A touched target gets a new sense that exists in some creature as a Change"
+      },
+      {
+        "name": "Toxin Purge",
+        "description": "Purge a poison or disease in a visible target for 1 System Strain"
+      }
+    ],
+    "level_3": [
+      {
+        "name": "Manifest Aspect",
+        "description": "Become an arbitrary organic shape as a Change and gain various benefits"
+      },
+      {
+        "name": "Perpetual Molding",
+        "description": "Permanently alter a willing target's shape within the parameters of their kind"
+      },
+      {
+        "name": "Physical Perfection",
+        "description": "Grant a visible target boosted attributes and hit points while Deep Focus is held"
+      },
+      {
+        "name": "Proprioceptive Crash",
+        "description": "Cripple a visible foe's ability to control their body until they save"
+      },
+      {
+        "name": "Resolve Strain",
+        "description": "Shed one System Strain per two levels, rounded down. Usable once per day"
+      },
+      {
+        "name": "Restore Organ",
+        "description": "Repair organ or limb loss or damage in a willing or unconscious subject"
+      },
+      {
+        "name": "Return to the Root",
+        "description": "Dispel the magic of physical transformations or mental influences"
+      },
+      {
+        "name": "Sensory Leech",
+        "description": "Use Light Focus to eavesdrop on a target's sensory impressions"
+      }
+    ],
+    "level_4": [
+      {
+        "name": "Accelerando",
+        "description": "Grant a target a bonus Main Action per round so long as Deep Focus is held"
+      },
+      {
+        "name": "Arcane Cyst",
+        "description": "Encyst a spell in your flesh to cast it later as an On Turn action"
+      },
+      {
+        "name": "Balance of Power",
+        "description": "Shuffle attribute points in a willing target as a Change"
+      },
+      {
+        "name": "Mask of Passion",
+        "description": "Pick an emotion and a visible target; shift to force that emotion in them"
+      },
+      {
+        "name": "Polymorphous Pervasity",
+        "description": "Swap shapes with a visible target instantly, whether or not they're willing"
+      },
+      {
+        "name": "Sloughing Curse",
+        "description": "Inflict continuous rotting damage on a target until a save is made. Induces Surge"
+      }
+    ],
+    "level_5": [
+      {
+        "name": "Bodily Panoply",
+        "description": "Transform body parts to gain functions equivalent to TL4 tech"
+      },
+      {
+        "name": "Compel Change",
+        "description": "An Instant adjunct spell that lets alteration spells affect even unwilling targets"
+      },
+      {
+        "name": "Eternal Persistence",
+        "description": "While this spell is maintained as a Change, the target is eternally young"
+      },
+      {
+        "name": "Mend the Shattered Vessel",
+        "description": "Grant resurrection to a body with an intact brain as a temporary Change"
+      },
+      {
+        "name": "One In All",
+        "description": "Explode as a swarm when mortally wounded; regenerate if any survive"
+      },
+      {
+        "name": "Rectify",
+        "description": "Completely reset a target's physical health, at considerable cost to the Rectifier"
+      }
+    ]
+  }
+}

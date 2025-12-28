@@ -1,0 +1,158 @@
+{
+  "spells": {
+    "level_1": [
+      {
+        "name": "Analyze Shadow",
+        "description": "Target a Shadow to get details of its Principles, hit dice, and abilities"
+      },
+      {
+        "name": "Call Lesser Servitor",
+        "description": "Summon a Lesser Servitor Shadow to perform mindless tasks"
+      },
+      {
+        "name": "Call Manipulatory Manifestation",
+        "description": "Summon a Manipulatory Manifestation Shadow to remotely move objects"
+      },
+      {
+        "name": "Conjured Implement",
+        "description": "Summon a Shadow-object of no more than TL3 mechanical complexity"
+      },
+      {
+        "name": "Put Down",
+        "description": "Banish a Shadow you have summoned before its natural dissolution"
+      },
+      {
+        "name": "Shadow Nourishment",
+        "description": "Sustain yourself on metadimensional energies, like a Shadow might"
+      },
+      {
+        "name": "Shadow Reinforcement",
+        "description": "Heal 1d6+2 HP of damage per caster level on a visible allied Shadow"
+      },
+      {
+        "name": "Shadow Ward, Lesser",
+        "description": "Weak Shadows cannot cross a warding line you indicate without damage"
+      }
+    ],
+    "level_2": [
+      {
+        "name": "Afflictive Focus Pact",
+        "description": "Pact with a Shadow to exchange the damage suffered by each to the other"
+      },
+      {
+        "name": "Call Drudge",
+        "description": "Summon a Drudge Shadow to provide intelligent if obsequious labor"
+      },
+      {
+        "name": "Call Myrmidon",
+        "description": "Summon a Myrmidon Shadow to fight for you or guard you"
+      },
+      {
+        "name": "Call Odalisque",
+        "description": "Summon an Odalisque Shadow to blandish or distract another"
+      },
+      {
+        "name": "Shadow Cyst",
+        "description": "Fold a summoned Shadow into a hidden cyst to carry it around discreetly"
+      },
+      {
+        "name": "Shadow Displacement",
+        "description": "Exchange locations with a summoned Shadow within 10 meters per caster level"
+      },
+      {
+        "name": "Shadow Impulse",
+        "description": "Compel a Shadow to obey a sentence of command for a few rounds"
+      },
+      {
+        "name": "Telepathic Shadow Link",
+        "description": "Forge a telepathic communications link with a visible Shadow"
+      }
+    ],
+    "level_3": [
+      {
+        "name": "Call Minion",
+        "description": "Summon a Minion Shadow to provide a wide variety of competent services"
+      },
+      {
+        "name": "Call Shadow Chariot",
+        "description": "Summon a Shadow Chariot to serve as a flying vehicle"
+      },
+      {
+        "name": "Call Vigilant",
+        "description": "Summon a Vigilant Shadow to act as a guardian and observer"
+      },
+      {
+        "name": "Prolong Pact",
+        "description": "As an Instant, triple the duration of a summons after you withdraw Focus"
+      },
+      {
+        "name": "Shadow Compulsion",
+        "description": "Compel a Shadow to obey a simple command for the rest of the scene"
+      },
+      {
+        "name": "Shadow Puppetry",
+        "description": "Take remote control of a summoned Shadow's body, at some risk if destroyed"
+      },
+      {
+        "name": "Shadow Ward, Greater",
+        "description": "Shadows cannot cross the ward-line you draw without risk of damage"
+      },
+      {
+        "name": "Substitutionary Focus Pact",
+        "description": "Accept a persistent point of System Strain to maintain a Shadow without Focus"
+      }
+    ],
+    "level_4": [
+      {
+        "name": "Call Deceiver",
+        "description": "Summon a clever, shapeshifting Deceiver Shadow"
+      },
+      {
+        "name": "Call Render",
+        "description": "Summon a sluggish, stupid, but immensely strong Render Shadow"
+      },
+      {
+        "name": "Directive Focus Pact",
+        "description": "Grant a Shadow continued existence by giving it a specific task to achieve"
+      },
+      {
+        "name": "Shadow Domination",
+        "description": "Implant a Shadow with an overriding compulsion to carry out a particular task"
+      },
+      {
+        "name": "Summon Forth the Servant",
+        "description": "Teleport a summoned Shadow into your presence if they're in the same system"
+      },
+      {
+        "name": "Sustaining Focus Pact",
+        "description": "Expend costly ingredients to permanently fix a Shadow in this world"
+      }
+    ],
+    "level_5": [
+      {
+        "name": "Blood Sacrifice",
+        "description": "Feed sentient lives to a Shadow to fix it permanently in this world"
+      },
+      {
+        "name": "Call Devourer",
+        "description": "Summon a blindly murderous Devourer Shadow to kill everything around you"
+      },
+      {
+        "name": "Call Stellar Phoenix",
+        "description": "Summon a Stellar Phoenix to carry you to any in-system destination"
+      },
+      {
+        "name": "Shadow Enslavement",
+        "description": "Utterly enslave a visible Shadow at a cost of a persistent System Strain point"
+      },
+      {
+        "name": "Shadow Ward, Perfected",
+        "description": "Shadows cannot cross your ward line safely, and weak Shadows can't at all"
+      },
+      {
+        "name": "Summoner's Font",
+        "description": "Consecrate an area to fuel friendly Shadows without need for Focus"
+      }
+    ]
+  }
+}

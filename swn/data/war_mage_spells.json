@@ -1,0 +1,154 @@
+{
+  "spells": {
+    "level_1": [
+      {
+        "name": "Ammo Drop",
+        "description": "Reloads allied weapons and keeps them full for a short time"
+      },
+      {
+        "name": "Combat Stabilization",
+        "description": "Temporarily stabilizes a mortally-wounded ally"
+      },
+      {
+        "name": "Consecrated Arms",
+        "description": "Grants a +1 bonus to weapon hit and damage for the party while Light Focus is held"
+      },
+      {
+        "name": "Field Report",
+        "description": "Opens a brief telepathic speech link to a willing target while Deep Focus is held"
+      },
+      {
+        "name": "Force Shelter",
+        "description": "Conjures a metadimensional tent shelter that also conceals those inside it"
+      },
+      {
+        "name": "Meta-rations",
+        "description": "Feeds and waters allies for a day per caster level, but can't be kept up constantly"
+      },
+      {
+        "name": "Ruck Platform",
+        "description": "Summons a floating platform to bear heavy loads or downed allies"
+      },
+      {
+        "name": "This Is My Rifle",
+        "description": "Calls a personal weapon owned by the caster to hand from any intra-solar distance"
+      }
+    ],
+    "level_2": [
+      {
+        "name": "Commando Invocation",
+        "description": "Hides the caster and allies from some TL4 sensors and grants night vision"
+      },
+      {
+        "name": "Fighting Withdrawal",
+        "description": "Short-range group teleport that goes off at the end of the round"
+      },
+      {
+        "name": "Firing Position",
+        "description": "Conjures metadimensional barrier that serves as a wall or a covered firing position"
+      },
+      {
+        "name": "Ghost Soldiers",
+        "description": "Create illusions of the caster and allies that remain as long as Light Focus is held"
+      },
+      {
+        "name": "Roof Instantiation",
+        "description": "Call up an overhead screen that moves with the caster and screens from aerial view"
+      },
+      {
+        "name": "Rookie Courage",
+        "description": "Imbue allies with tremendous courage and +2 to hit, at a cost of -2 to AC"
+      },
+      {
+        "name": "Salvage Gear",
+        "description": "Repair a vehicle, object, or other piece of gear so long as Light Focus is held"
+      },
+      {
+        "name": "Stifle Explosion",
+        "description": "Instantly squelch a grenade, explosion, artillery blast, or other concussive detonation"
+      }
+    ],
+    "level_3": [
+      {
+        "name": "Artillery Strike",
+        "description": "Invoke a 1d8/level metadimensional blast, but it goes off at the next round's end"
+      },
+      {
+        "name": "Breaching Charge",
+        "description": "Disintegrate a section of wall or other structure on an instant or delayed timer"
+      },
+      {
+        "name": "Double Tap",
+        "description": "Doubles a chosen ally's attack speed while Light Focus is held, costing System Strain"
+      },
+      {
+        "name": "High Road Invocation",
+        "description": "Grant the caster and two allies per level a limited flight at 10m per Main Action"
+      },
+      {
+        "name": "Tank Kill",
+        "description": "Touch a vehicle to instantly disable it for a short period, forcing open any hatches"
+      },
+      {
+        "name": "Team Liaison",
+        "description": "Grant an ally the ability to speak with anyone and read, but not write, anything"
+      },
+      {
+        "name": "Terror of Battle",
+        "description": "Causes all targets in a small burst area to suffer a Morale check"
+      },
+      {
+        "name": "Walking Wounded",
+        "description": "Stabilize and get mobile all downed targets in a 10-meter zone, but they remain fragile"
+      }
+    ],
+    "level_4": [
+      {
+        "name": "Entrenchment Kinesis",
+        "description": "Move earth and soil to create structures such as berms and trenches"
+      },
+      {
+        "name": "Forced March",
+        "description": "Make the caster and 2 allies/level tireless for one day per level, with 1 HP/hour healing"
+      },
+      {
+        "name": "Metadimensional Minefield",
+        "description": "Conjures an invisible minefield in an area; moving into it risks 4d6 mine explosions"
+      },
+      {
+        "name": "Radio Intercept Protocol",
+        "description": "Detect and overhear all nearby pertinent comm messages, even encrypted ones"
+      },
+      {
+        "name": "War Gas Cloud",
+        "description": "Creates a toxic gas cloud that does 2 HP/caster level in damage to susceptible targets"
+      }
+    ],
+    "level_5": [
+      {
+        "name": "Air Cover",
+        "description": "Creates mobile overhead shield that deflects aerial attacks and TL4 sensors"
+      },
+      {
+        "name": "Forlorn Hope's Charge",
+        "description": "Very brief, impervious group force field that also prevents attacks from the subjects"
+      },
+      {
+        "name": "Infectious Despair",
+        "description": "Instantly triggers a group Morale check at -3 when an ally kills or defeats one of them"
+      },
+      {
+        "name": "Murphy's Law",
+        "description": "Cause a visible vehicle or equipment piece to malfunction or disintegrate"
+      },
+      {
+        "name": "Summon Fire Support",
+        "description": "Conjures a fixed gun emplacement that can be manned to provide fire support"
+      },
+      {
+        "name": "Ten Thousand Bullets",
+        "description": "Invoke 1d10 dmg/level rain of death on target, but with dire effects if interrupted"
+      }
+    ]
+  }
+}

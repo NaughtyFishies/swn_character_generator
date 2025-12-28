@@ -1,0 +1,184 @@
+{
+  "disciplines": [
+    {
+      "name": "Biopsionics",
+      "description": "Master the arts of physical healing and bodily control",
+      "core_technique": {
+        "name": "Psychic Succor",
+        "level": 0,
+        "effort_cost": 0,
+        "description": "Heal 1d6+1 HP with a touch as an action. Can be used on self."
+      },
+      "techniques": [
+        {
+          "name": "Invincible Stand",
+          "level": 1,
+          "effort_cost": 1,
+          "description": "Commit Effort for the scene. Gain 1d10 temporary HP per Psychic skill level."
+        },
+        {
+          "name": "Mastered Succor",
+          "level": 1,
+          "effort_cost": 1,
+          "description": "Healing touch heals 2d6+2 HP instead. Can stabilize dying allies instantly."
+        },
+        {
+          "name": "Organic Purification",
+          "level": 2,
+          "effort_cost": 2,
+          "description": "Remove disease, poison, or infection from a target with a touch."
+        }
+      ]
+    },
+    {
+      "name": "Metapsionics",
+      "description": "Understand and manipulate psychic energies",
+      "core_technique": {
+        "name": "Psychic Refinement",
+        "level": 0,
+        "effort_cost": 0,
+        "description": "Gain +1 maximum Effort. This benefit is permanent and always active."
+      },
+      "techniques": [
+        {
+          "name": "Psychic Static",
+          "level": 1,
+          "effort_cost": 1,
+          "description": "Commit Effort for the scene. All hostile psychic abilities within 30m fail."
+        },
+        {
+          "name": "Deep Intrusion",
+          "level": 1,
+          "effort_cost": 1,
+          "description": "Increase range of psychic powers by 100m. Ignore line-of-sight requirements."
+        },
+        {
+          "name": "Empowered Techniques",
+          "level": 2,
+          "effort_cost": 2,
+          "description": "Your psychic techniques do +2 damage or heal +2 HP."
+        }
+      ]
+    },
+    {
+      "name": "Precognition",
+      "description": "Sense and manipulate the flow of probable futures",
+      "core_technique": {
+        "name": "Oracle",
+        "level": 0,
+        "effort_cost": 0,
+        "description": "Ask the GM one yes/no question about the immediate future. GM must answer truthfully."
+      },
+      "techniques": [
+        {
+          "name": "Tactical Precognition",
+          "level": 1,
+          "effort_cost": 1,
+          "description": "Commit Effort for the scene. Gain +2 to initiative and AC."
+        },
+        {
+          "name": "Forewarning",
+          "level": 1,
+          "effort_cost": 1,
+          "description": "Commit Effort for the day. Gain perfect awareness of ambushes and surprise attacks."
+        },
+        {
+          "name": "Terminal Reflection",
+          "level": 2,
+          "effort_cost": 2,
+          "description": "Once per scene, force an enemy to reroll an attack that would hit you."
+        }
+      ]
+    },
+    {
+      "name": "Telekinesis",
+      "description": "Move objects and creatures with the power of thought",
+      "core_technique": {
+        "name": "Telekinetic Manipulation",
+        "level": 0,
+        "effort_cost": 0,
+        "description": "Move objects up to 200kg within sight. Can use to attack for 1d6 damage."
+      },
+      "techniques": [
+        {
+          "name": "Kinetic Transversal",
+          "level": 1,
+          "effort_cost": 1,
+          "description": "Commit Effort for the scene. Fly at normal movement speed."
+        },
+        {
+          "name": "Pressure Field",
+          "level": 1,
+          "effort_cost": 1,
+          "description": "Commit Effort for the scene. Gain +2 AC from telekinetic deflection."
+        },
+        {
+          "name": "Telekinetic Maelstrom",
+          "level": 2,
+          "effort_cost": 2,
+          "description": "All targets within 30m take 2d6 damage from flying debris. No cover available."
+        }
+      ]
+    },
+    {
+      "name": "Telepathy",
+      "description": "Read and influence the thoughts of others",
+      "core_technique": {
+        "name": "Telepathic Contact",
+        "level": 0,
+        "effort_cost": 0,
+        "description": "Establish mental communication with willing target within 50m."
+      },
+      "techniques": [
+        {
+          "name": "Mind Reading",
+          "level": 1,
+          "effort_cost": 1,
+          "description": "Read surface thoughts of visible target. Opposed Mental save to resist."
+        },
+        {
+          "name": "Telepathic Assault",
+          "level": 1,
+          "effort_cost": 1,
+          "description": "Attack target's mind for 1d10 damage. Ignores armor. Mental save for half."
+        },
+        {
+          "name": "Memory Editing",
+          "level": 2,
+          "effort_cost": 2,
+          "description": "Add, remove, or alter memories in a helpless or willing target."
+        }
+      ]
+    },
+    {
+      "name": "Teleportation",
+      "description": "Instantly traverse vast distances",
+      "core_technique": {
+        "name": "Personal Apportation",
+        "level": 0,
+        "effort_cost": 0,
+        "description": "Teleport up to 10m to a visible location as a move action."
+      },
+      "techniques": [
+        {
+          "name": "Spatial Distortion",
+          "level": 1,
+          "effort_cost": 1,
+          "description": "Commit Effort for the scene. Melee attacks against you have 50% miss chance."
+        },
+        {
+          "name": "Teleportation Surge",
+          "level": 1,
+          "effort_cost": 1,
+          "description": "Teleport up to 100m to any location you've previously visited."
+        },
+        {
+          "name": "Phase Shift",
+          "level": 2,
+          "effort_cost": 2,
+          "description": "Commit Effort for the scene. Become partially intangible. Ignore obstacles and attacks."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,214 @@
+{
+  "spells": {
+    "level_1": [
+      {
+        "name": "Adaptive Modification",
+        "description": "Alter targets to withstand specific environmental conditions without needing to eat, drink, or breathe"
+      },
+      {
+        "name": "Aspect of Elegance",
+        "description": "Render target clean, groomed, and wearing holographic outfit that cannot be dirtied"
+      },
+      {
+        "name": "Cerebral Buffer Regeneration",
+        "description": "Restore 1 + (level/3) Effort to a friendly Psychic or Adept, once per day"
+      },
+      {
+        "name": "Energetic Construct Evocation",
+        "description": "Create solid object up to 2x2x1m per level from metadimensional force, lasts 1 hour/level"
+      },
+      {
+        "name": "Evoked Image Projection",
+        "description": "Create visual illusion in 3m radius, intangible and soundless but movable"
+      },
+      {
+        "name": "Implanted Whim",
+        "description": "Touch charges skin; next touch implants minor impulse in target (Mental save to resist)"
+      },
+      {
+        "name": "Manipulatory Shadow Manifestation",
+        "description": "Summon a Manipulatory Shadow that manipulates objects with suicidal obedience"
+      },
+      {
+        "name": "Neural Burn Cascade",
+        "description": "Blast visible target for 1d6+1 psychic damage per 3 levels. Induces Surge"
+      },
+      {
+        "name": "Personal Shielding Field",
+        "description": "Grant AC 15 + (level/2), functions as vacc suit, protects from radiation. Requires Light Focus"
+      },
+      {
+        "name": "Variant MES Perception",
+        "description": "Visually perceive MES signatures, detect Arcanists, Magisters, Psychics on sight"
+      },
+      {
+        "name": "Void Flow Scan",
+        "description": "See metadimensional energy flows, detect active magic and trace it to caster. Requires Light Focus"
+      },
+      {
+        "name": "Void Slip",
+        "description": "Teleport up to 10m to visible location. Can cast as On Turn with Surge"
+      },
+      {
+        "name": "Void Transceiver Emanation",
+        "description": "Create mental comm grid with 4 targets/level, 10,000km range. Requires Deep Focus"
+      }
+    ],
+    "level_2": [
+      {
+        "name": "Aversive Impulse Projection",
+        "description": "Create intense mental aversion to action in target (Mental save). Can be cast silently"
+      },
+      {
+        "name": "Blindside Skip",
+        "description": "Target doesn't notice caster's actions for 1 round/2 levels unless threatened (Mental save)"
+      },
+      {
+        "name": "Combat Shadow Manifestation",
+        "description": "Manifest Myrmidon Shadow that fights until destroyed or Light Focus dropped. Induces Surge"
+      },
+      {
+        "name": "Concussive Pinhole Gate",
+        "description": "Explosion at visible point within 100m for 2d6 damage in 3m (Physical save for half). Induces Surge"
+      },
+      {
+        "name": "Doppleganger Manifestation",
+        "description": "Create copy of self with 1 HP, AC 10. Can act as either real or copy. Lasts while Deep Focus held"
+      },
+      {
+        "name": "Genetic Privacy Field",
+        "description": "Cloak genetic signature from scans/spells, can mimic specific DNA. Requires Light Focus"
+      },
+      {
+        "name": "Ghost Field Emission",
+        "description": "2m radius invisibility bubble around caster. Blocks lasers. Requires Deep Focus"
+      },
+      {
+        "name": "Patterned Energy Flare",
+        "description": "Cut hole in inanimate object up to (level/3)m thick. Induces Surge"
+      },
+      {
+        "name": "Shadow Adjutant Manifestation",
+        "description": "Summon Minion Shadow that obeys dutifully. Requires Deep Focus, lasts 10 min/level after"
+      },
+      {
+        "name": "Shadow Disruption Rubric",
+        "description": "Damage Shadow for 1d6/level (Mental save for half). Auto-dispel if HD ≤ level/2. Induces Surge"
+      },
+      {
+        "name": "Universal Translator Rubric",
+        "description": "Perfectly understand target and be understood, but bluntness gives -2 to social checks. Requires Light Focus"
+      }
+    ],
+    "level_3": [
+      {
+        "name": "Arcane Grounding",
+        "description": "End all arcane spells in 5m of visible point, damage Shadows 1d6/level (Physical save)"
+      },
+      {
+        "name": "Cryptographic Control Protocol",
+        "description": "Detect and decode hidden messages, or imbue object with telepathic message for recipient"
+      },
+      {
+        "name": "Extradimensional Pocket",
+        "description": "Create cyst holding 1 person + gear or 30 items. Requires Deep Focus + 1 hour/level"
+      },
+      {
+        "name": "Gravitic Control Rubric",
+        "description": "Grant target flight at normal movement rate. Requires Light Focus, max 1 scene"
+      },
+      {
+        "name": "Hot Zone Invocation",
+        "description": "5m radius invisible radiation zone, 2×level damage/turn. Requires Deep Focus. Induces Surge"
+      },
+      {
+        "name": "Kinetic Siphon",
+        "description": "Slow target to 10m/round or lose every other round's actions. Requires Light Focus"
+      },
+      {
+        "name": "Metadimensional Power Font",
+        "description": "Recharge and maintain power cells for 1 object/level. Requires Light Focus"
+      },
+      {
+        "name": "Projectile Repulsion Field",
+        "description": "5m bubble reduces incoming projectile damage by caster level. Requires Deep Focus. Induces Surge"
+      },
+      {
+        "name": "Quantum Jamming Field",
+        "description": "Disable remote control in 50m/level, jam civilian comms, halt military comms 1 min/level"
+      },
+      {
+        "name": "Random Organic Failure",
+        "description": "Target mortally wounded in 6 rounds (Physical save). Costs caster 1d6 damage per 2 target HD. Induces Surge"
+      },
+      {
+        "name": "Shadow Puppetry",
+        "description": "Remotely control summoned Shadow anywhere in system. Costs 1 System Strain. Death requires Physical save or drop to 0 HP"
+      }
+    ],
+    "level_4": [
+      {
+        "name": "Cerebral Scramble Code",
+        "description": "Stun enemies in 10m for 1 round/level. Failed Mental save randomizes their actions. Induces Surge"
+      },
+      {
+        "name": "Clairvoyance Window Probe",
+        "description": "View location within 10m/level, can drop 1kg object through. Lasts 1 scene"
+      },
+      {
+        "name": "Energy Amplification Boost",
+        "description": "Boost 1 target/level: +level/2 damage, +2 hit, weapons count as Heavy. Requires Light Focus"
+      },
+      {
+        "name": "Orbital Insertion",
+        "description": "Cast as Instant. Drop from orbit safely with 1 ally/level, concealed from detection"
+      },
+      {
+        "name": "Solid Image Matrix",
+        "description": "Create 10m cube audiovisual illusion with light tactile feedback. Takes 2×level HP to destroy. Requires Light Focus"
+      },
+      {
+        "name": "Spatial Realignment Warp",
+        "description": "Teleport 1 target/level to point within 30m (Mental save to resist). Induces Surge"
+      },
+      {
+        "name": "Spatial Ripcord Shift",
+        "description": "Set ripcord on ally; they can trigger within 1 hour/level to teleport back to casting location"
+      }
+    ],
+    "level_5": [
+      {
+        "name": "Devourer Manifestation",
+        "description": "Summon horrific Devourer Shadow for 2 rounds/level. Breaks free if doesn't kill each round"
+      },
+      {
+        "name": "Gravcar Pattern Instantiation",
+        "description": "Manifest gravcar from metadimensional energy, self-repairs 5 HP/hour, lasts 24 hours"
+      },
+      {
+        "name": "Metadimensional Passage",
+        "description": "Make self + 1 target/level intangible, can pass through matter. Costs 1 System Strain/round/target"
+      },
+      {
+        "name": "Protocol Amplification",
+        "description": "Cast as Instant when casting another spell. Roll effect dice twice, take better. Saving throws at -Cast Magic penalty. Induces Surge"
+      },
+      {
+        "name": "Psychic Compulsion Induction",
+        "description": "Implant overwhelming compulsion in target. Lasts while Deep Focus held + 1 day/level. Induces Haze"
+      },
+      {
+        "name": "Uncontrolled Metadimensional Rift",
+        "description": "1-10m radius explosion for 1d6/level (Physical save for half). Caster takes half damage. Induces Surge"
+      },
+      {
+        "name": "Void Barrier Instantiation",
+        "description": "Create 3m high wall, 3m/level long. Crossing deals 1d6 per 2 levels (Physical save for half), counts as Heavy"
+      },
+      {
+        "name": "Zero Energy Sink",
+        "description": "Drain all power cells in 10m radius (Mental save for living bearers). Remote power suppressed 1 round/level. Induces Surge"
+      }
+    ]
+  }
+}

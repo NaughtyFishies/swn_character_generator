@@ -1,0 +1,11 @@
+# Stars Without Number Character Generator
+# No external dependencies required!
+# This project uses only Python standard library modules.
+
+# Python 3.7+ required
+# All functionality is built using:
+# - json (standard library)
+# - random (standard library)
+# - argparse (standard library)
+# - pathlib (standard library)
+# - typing (standard library)

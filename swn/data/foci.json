@@ -1,0 +1,568 @@
+{
+  "foci": [
+    {
+      "name": "Alert",
+      "tier": "basic",
+      "level_1": "Always act first in surprise rounds. Gain Notice as a bonus skill.",
+      "level_2": "Enemies never surprise you. +2 on initiative rolls.",
+      "incompatible_with": [],
+      "psychic_only": false
+    },
+    {
+      "name": "Arcane Mind",
+      "tier": "basic",
+      "level_1": "Pick mental attribute; modifier +1 (max +3). Can take multiple times for different attributes",
+      "level_2": "",
+      "incompatible_with": [],
+      "psychic_only": false,
+      "allowed_classes": [
+        "Arcane Expert",
+        "Sunblade",
+        "Yama King"
+      ]
+    },
+    {
+      "name": "Arcane Physique",
+      "tier": "basic",
+      "level_1": "Pick physical attribute; modifier +1 (max +3). Can take multiple times for different attributes",
+      "level_2": "",
+      "incompatible_with": [],
+      "psychic_only": false,
+      "allowed_classes": [
+        "Arcane Warrior",
+        "Godhunter",
+        "Sunblade"
+      ]
+    },
+    {
+      "name": "Armored Technique",
+      "tier": "advanced",
+      "level_1": "Cast spells in street/combat armor (Enc \u22641) or powered armor (Enc 0)",
+      "level_2": "Cast spells regardless of armor bulk",
+      "incompatible_with": [],
+      "psychic_only": false,
+      "allowed_classes": [
+        "Arcanist",
+        "Pacter",
+        "Rectifier",
+        "War Mage"
+      ]
+    },
+    {
+      "name": "Armsman",
+      "tier": "basic",
+      "level_1": "Gain Stab or Shoot as a bonus skill. +1 to hit with one type of weapon.",
+      "level_2": "+1 damage with your chosen weapon type.",
+      "incompatible_with": [],
+      "psychic_only": false
+    },
+    {
+      "name": "Assassin",
+      "tier": "advanced",
+      "level_1": "Gain Sneak as bonus skill. +2 damage when attacking unaware targets.",
+      "level_2": "+4 damage vs unaware targets. Attacks ignore up to 4 points of armor.",
+      "incompatible_with": [],
+      "psychic_only": false
+    },
+    {
+      "name": "Authority",
+      "tier": "basic",
+      "level_1": "Gain Lead as a bonus skill. Followers gain +1 to morale saves.",
+      "level_2": "Command respect. Strangers tend to obey your orders.",
+      "incompatible_with": [],
+      "psychic_only": false
+    },
+    {
+      "name": "Blade Ward",
+      "tier": "advanced",
+      "level_1": "After 15min prep, nominate weapon type. Reduce damage by 2/level (min 0) from that weapon",
+      "level_2": "Immune to non-magical nominated weapons. Magical damage reduced as level 1. Ward 2 weapons at 7th level",
+      "incompatible_with": [],
+      "psychic_only": false,
+      "allowed_classes": [
+        "Arcane Warrior",
+        "Godhunter",
+        "Sunblade"
+      ]
+    },
+    {
+      "name": "Close Combatant",
+      "tier": "basic",
+      "level_1": "+2 damage with melee weapons. Gain Punch or Stab as bonus skill.",
+      "level_2": "Can use Shock damage even on targets normally immune to it.",
+      "incompatible_with": [
+        "Unarmed Combatant"
+      ],
+      "psychic_only": false
+    },
+    {
+      "name": "Compelling Gaze",
+      "tier": "advanced",
+      "level_1": "1 System Strain + Main Action: implant suggestion in target meeting your gaze (Mental save if not verbalized)",
+      "level_2": "+1 System Strain to paralyze target for scene (Mental save -2). Breaks if harm intended",
+      "incompatible_with": [],
+      "psychic_only": false,
+      "allowed_classes": [
+        "Arcane Expert",
+        "Sunblade",
+        "Yama King"
+      ]
+    },
+    {
+      "name": "Connected",
+      "tier": "advanced",
+      "level_1": "Gain Connect as bonus skill. Have useful contacts in most civilized locations.",
+      "level_2": "Contacts are exceptionally helpful and well-placed.",
+      "incompatible_with": [],
+      "psychic_only": false
+    },
+    {
+      "name": "Cross-Disciplinary Study",
+      "tier": "advanced",
+      "level_1": "Learn one spell from another tradition of any level you can cast. Can change once per level",
+      "level_2": "Learn one spell per spell level you can cast from other traditions. Can change each once per level",
+      "incompatible_with": [],
+      "psychic_only": false,
+      "allowed_classes": [
+        "Pacter",
+        "Rectifier",
+        "War Mage"
+      ]
+    },
+    {
+      "name": "Die Hard",
+      "tier": "basic",
+      "level_1": "Gain +2 maximum hit points per character level.",
+      "level_2": "Can survive one attack that would kill you, dropping to 1 HP instead.",
+      "incompatible_with": [],
+      "psychic_only": false
+    },
+    {
+      "name": "Eldritch Battery",
+      "tier": "advanced",
+      "level_1": "Fuel ally's spell once per day (no resource cost to caster)",
+      "level_2": "Fuel 1 + max(CON, WIS mod) spells/day. Extra spells deal 1d6 per 2 spell levels. Can't use if below 1 HP",
+      "incompatible_with": [],
+      "psychic_only": false,
+      "allowed_classes": [
+        "Arcane Expert",
+        "Sunblade",
+        "Yama King",
+        "Arcane Warrior",
+        "Godhunter",
+        "Sunblade"
+      ]
+    },
+    {
+      "name": "Elemental Warrior",
+      "tier": "basic",
+      "level_1": "Choose energy type. Resist 2 HP/level/round. Add skill to damage (Stab/Punch for melee, Shoot for ranged). Can fire as TL2 rifle",
+      "level_2": "Main Action + 1 System Strain: 2d6 + level Heavy damage in radius up to 1m/level within 30m (Evasion save)",
+      "incompatible_with": [],
+      "psychic_only": false,
+      "allowed_classes": [
+        "Arcane Warrior",
+        "Godhunter",
+        "Sunblade"
+      ]
+    },
+    {
+      "name": "Ghost Tech",
+      "tier": "advanced",
+      "level_1": "Conjure TL4 tech (non-weapon/armor) as Main Action. Have up to level items at once. Inexhaustible power",
+      "level_2": "Conjure as On Turn. Once per session: 1 System Strain for specialized tech, roll skill check twice",
+      "incompatible_with": [],
+      "psychic_only": false,
+      "allowed_classes": [
+        "Arcane Expert",
+        "Sunblade",
+        "Yama King"
+      ]
+    },
+    {
+      "name": "Gunslinger",
+      "tier": "basic",
+      "level_1": "Gain Shoot as a bonus skill. Can draw and reload weapons instantly.",
+      "level_2": "+2 to hit with ranged weapons at 30 feet or closer.",
+      "incompatible_with": [],
+      "psychic_only": false
+    },
+    {
+      "name": "Hacker",
+      "tier": "basic",
+      "level_1": "Gain Program as a bonus skill. Can hack systems in half the time.",
+      "level_2": "Can attempt to hack even extremely secured systems.",
+      "incompatible_with": [],
+      "psychic_only": false
+    },
+    {
+      "name": "Healer",
+      "tier": "basic",
+      "level_1": "Gain Know as a bonus skill. Heal +2 HP when providing medical care.",
+      "level_2": "Can stabilize dying characters as a move action.",
+      "incompatible_with": [],
+      "psychic_only": false
+    },
+    {
+      "name": "Henchkeeper",
+      "tier": "advanced",
+      "level_1": "Gain Lead as bonus skill. Can hire henchmen for half the normal cost.",
+      "level_2": "Henchmen are exceptionally loyal and capable. +2 to their morale.",
+      "incompatible_with": [],
+      "psychic_only": false
+    },
+    {
+      "name": "Imprinted Spell",
+      "tier": "advanced",
+      "level_1": "Imprint one spell to cast in place of equal/higher level spell slot. Change once per level",
+      "level_2": "Change imprinted spell once per day during preparation",
+      "incompatible_with": [],
+      "psychic_only": false,
+      "allowed_classes": [
+        "Arcanist"
+      ]
+    },
+    {
+      "name": "Initiate of Healing",
+      "tier": "basic",
+      "level_1": "Expend spell slot to heal visible ally within 30m for 1d6/level + Cast Magic skill",
+      "level_2": "Touch to heal 1d6 per 3 levels (rounded up), adds 1 System Strain. Once per hour per target",
+      "incompatible_with": [],
+      "psychic_only": false,
+      "allowed_classes": [
+        "Arcanist",
+        "War Mage",
+        "Rectifier"
+      ]
+    },
+    {
+      "name": "Ironhide",
+      "tier": "basic",
+      "level_1": "Gain Exert as a bonus skill. Innate AC 15 without armor.",
+      "level_2": "Innate AC becomes 16. Ignore 1 point of damage from attacks.",
+      "incompatible_with": [],
+      "psychic_only": false
+    },
+    {
+      "name": "Limited Study",
+      "tier": "basic",
+      "level_1": "Learn one spell (level \u2264 your level/2). Cast once per day, can cast in armor. Change once per level",
+      "level_2": "Learn second spell (level \u2264 your level/2). Cast each once per day",
+      "incompatible_with": [],
+      "psychic_only": false,
+      "allowed_classes": null
+    },
+    {
+      "name": "Mageblade",
+      "tier": "basic",
+      "level_1": "Manifest 1d10+1 weapon (any attribute mod, +Stab skill). Shock 2/AC 15. 100m range. Silent ranged option",
+      "level_2": "At 1st and each odd level: +1 hit/dmg (max +3), invisible, Shock AC +2 (max 21), Shock dmg +2 (max 6), or 1km range",
+      "incompatible_with": [],
+      "psychic_only": false,
+      "allowed_classes": [
+        "Arcane Warrior",
+        "Godhunter",
+        "Sunblade"
+      ]
+    },
+    {
+      "name": "Maskwalker",
+      "tier": "advanced",
+      "level_1": "Main Action: alter appearance and attuned gear. Physical changes pass DNA tests. +1 System Strain for specific person mimicry",
+      "level_2": "+1 System Strain for perfect imposture with language/social skills. Wis/Connect DC 9 to remember facts (+3 for secrets)",
+      "incompatible_with": [],
+      "psychic_only": false,
+      "allowed_classes": [
+        "Arcane Expert",
+        "Sunblade",
+        "Yama King"
+      ]
+    },
+    {
+      "name": "Masterful Expertise",
+      "tier": "exotic",
+      "level_1": "Pick one non-combat skill. Impossible tasks with this skill become merely difficult.",
+      "level_2": "With your chosen skill, you can accomplish legendary feats.",
+      "incompatible_with": [],
+      "psychic_only": false
+    },
+    {
+      "name": "Occult Healer",
+      "tier": "basic",
+      "level_1": "Touch + Main Action: stabilize dying (+1 System Strain) or heal 1d6 (+1 System Strain). Continue healing 1d6/round up to level rounds total",
+      "level_2": "Ranged healing within 30m. Heal 2d6/round",
+      "incompatible_with": [],
+      "psychic_only": false,
+      "allowed_classes": [
+        "Arcane Expert",
+        "Sunblade",
+        "Yama King"
+      ]
+    },
+    {
+      "name": "Occult Resilience",
+      "tier": "advanced",
+      "level_1": "Don't eat, drink, sleep, breathe. Survive vacuum/hostile environments as vacc suit. Immune to gaseous toxins",
+      "level_2": "Immune to all toxins/diseases. Auto-stabilize at 0 HP, recover 1 HP in 1 hour. 1 HP/hour regeneration. Physical save vs instant death",
+      "incompatible_with": [],
+      "psychic_only": false,
+      "allowed_classes": [
+        "Arcane Warrior",
+        "Godhunter",
+        "Sunblade"
+      ]
+    },
+    {
+      "name": "Petty Sorceries",
+      "tier": "basic",
+      "level_1": "Produce minor magical effects freely for flavor. Concretely useful once per session",
+      "level_2": "",
+      "incompatible_with": [],
+      "psychic_only": false,
+      "allowed_classes": [
+        "Arcanist",
+        "Pacter",
+        "Rectifier",
+        "War Mage"
+      ]
+    },
+    {
+      "name": "Probability Manipulator",
+      "tier": "exotic",
+      "level_1": "Once per scene, force a reroll of any die roll you can see.",
+      "level_2": "Can use probability manipulation twice per scene.",
+      "incompatible_with": [],
+      "psychic_only": true
+    },
+    {
+      "name": "Psychic Synergy",
+      "tier": "advanced",
+      "level_1": "Once per day, trade Psychic Effort for spell or vice versa. Restore Effort by trading spell slot",
+      "level_2": "Convert power twice per day",
+      "incompatible_with": [],
+      "psychic_only": false,
+      "allowed_classes": [
+        "Arcanist",
+        "Pacter",
+        "Rectifier",
+        "War Mage"
+      ]
+    },
+    {
+      "name": "Psychic Training",
+      "tier": "basic",
+      "level_1": "Gain Psychic skill at level 0 and one psychic discipline.",
+      "level_2": "Gain another psychic discipline.",
+      "incompatible_with": [],
+      "psychic_only": true
+    },
+    {
+      "name": "Reality Sculptor",
+      "tier": "exotic",
+      "level_1": "Can subtly manipulate reality within 10 meters once per scene.",
+      "level_2": "Reality manipulation has stronger effects and longer duration.",
+      "incompatible_with": [],
+      "psychic_only": true
+    },
+    {
+      "name": "Savage Sorcery",
+      "tier": "basic",
+      "level_1": "Magic bolt (1d8 + level, 100m range, +Cast Magic to hit). +1 damage per die on damaging spells",
+      "level_2": "Convert spell to raw damage: 1d6+1 per spell level to single target within 100m",
+      "incompatible_with": [],
+      "psychic_only": false,
+      "allowed_classes": [
+        "Arcanist",
+        "Pacter",
+        "Rectifier",
+        "War Mage"
+      ]
+    },
+    {
+      "name": "Shadow Companion",
+      "tier": "advanced",
+      "level_1": "Shadow with 5 + 2\u00d7level HP, +level hit bonus, 1d10 melee dmg, AC 15, Morale 12, Save 16-level, +1 to nature skills. 100m range",
+      "level_2": "Each odd level: communicate with others, normal form, +1 HP/level (max +2), AC +2 (max 21), Shock 3/AC 15, +1 skill (max +2), flight 2\u00d7speed, carry level Enc when dismissed, suicidally obedient, or 1d6+4 melee dmg",
+      "incompatible_with": [],
+      "psychic_only": false,
+      "allowed_classes": [
+        "Arcane Expert",
+        "Sunblade",
+        "Yama King",
+        "Arcane Warrior",
+        "Godhunter",
+        "Sunblade"
+      ]
+    },
+    {
+      "name": "Shocking Assault",
+      "tier": "advanced",
+      "level_1": "Can use Shock damage against targets normally immune (like powered armor).",
+      "level_2": "Roll Shock damage twice and take the better result.",
+      "incompatible_with": [],
+      "psychic_only": false
+    },
+    {
+      "name": "Sniper",
+      "tier": "advanced",
+      "level_1": "Gain Shoot as bonus skill. No penalty for firing at long range.",
+      "level_2": "+2 damage when firing from a prepared position.",
+      "incompatible_with": [],
+      "psychic_only": false
+    },
+    {
+      "name": "Soul Shield",
+      "tier": "advanced",
+      "level_1": "Once/day Instant: auto-succeed failed save vs magic. Always aware of magic targeted at you",
+      "level_2": "Roll twice on saves vs magic. Once/day Instant: resist lethal/unacceptable magic effect (drop to 1 HP)",
+      "incompatible_with": [],
+      "psychic_only": false,
+      "allowed_classes": [
+        "Arcane Warrior",
+        "Godhunter",
+        "Sunblade"
+      ]
+    },
+    {
+      "name": "Specialist",
+      "tier": "basic",
+      "level_1": "Pick a non-combat, non-psychic skill. Gain it as a bonus skill. Roll 3d6 and drop lowest die for checks with this skill.",
+      "level_2": "Roll 4d6 drop lowest for checks with your specialist skill.",
+      "incompatible_with": [],
+      "psychic_only": false
+    },
+    {
+      "name": "Starfarer",
+      "tier": "basic",
+      "level_1": "Gain Pilot as a bonus skill. Gain +1 to all skill checks related to spacecraft.",
+      "level_2": "Can plot jumps in half the time. Navigate hazards with ease.",
+      "incompatible_with": [],
+      "psychic_only": false
+    },
+    {
+      "name": "Supernal Mobility",
+      "tier": "advanced",
+      "level_1": "Leap up to movement distance (horizontal/vertical), disengage freely. Travel on walls/ceilings. Immune to <30m falls",
+      "level_2": "Choose: fly at normal speed OR teleport (Move action) to visible location within movement range",
+      "incompatible_with": [],
+      "psychic_only": false,
+      "allowed_classes": [
+        "Arcane Expert",
+        "Sunblade",
+        "Yama King",
+        "Arcane Warrior",
+        "Godhunter",
+        "Sunblade"
+      ]
+    },
+    {
+      "name": "Tech Specialist",
+      "tier": "advanced",
+      "level_1": "Gain Fix or Program as bonus skill. +2 to related skill checks.",
+      "level_2": "Can interface directly with computers using cybernetics or psionic link.",
+      "incompatible_with": [],
+      "psychic_only": false
+    },
+    {
+      "name": "Tinker",
+      "tier": "basic",
+      "level_1": "Gain Fix as a bonus skill. Can jury-rig broken tech to work temporarily.",
+      "level_2": "Repairs take half the time. Can create improvised gadgets.",
+      "incompatible_with": [],
+      "psychic_only": false
+    },
+    {
+      "name": "Unarmed Combatant",
+      "tier": "basic",
+      "level_1": "Gain Punch as a bonus skill. Unarmed attacks deal 1d8 damage.",
+      "level_2": "Unarmed attacks deal 1d10 damage. Can punch targets in powered armor.",
+      "incompatible_with": [
+        "Close Combatant"
+      ],
+      "psychic_only": false
+    },
+    {
+      "name": "Vast Erudition",
+      "tier": "advanced",
+      "level_1": "Know all level-1 Arcanist spells. Learn 4 new spells per level instead of 2",
+      "level_2": "Know all Arcanist spells below max level you can cast",
+      "incompatible_with": [],
+      "psychic_only": false,
+      "allowed_classes": [
+        "Arcanist"
+      ]
+    },
+    {
+      "name": "Void Dancer",
+      "tier": "exotic",
+      "level_1": "Can survive in vacuum for 1 hour without protection. Move freely in zero-G.",
+      "level_2": "Immune to environmental hazards of space. Can sense spatial distortions.",
+      "incompatible_with": [],
+      "psychic_only": false
+    },
+    {
+      "name": "Wanderer",
+      "tier": "basic",
+      "level_1": "Gain Survive as a bonus skill. Can always find food and shelter in wilderness.",
+      "level_2": "Track any creature. Navigate without tools. Rarely get lost.",
+      "incompatible_with": [],
+      "psychic_only": false
+    },
+    {
+      "name": "War Caster",
+      "tier": "basic",
+      "level_1": "Physical save to avoid losing spell when injured. Don't lose spell slot on interruption",
+      "level_2": "Accept 2\u00d7spell level damage to continue casting when interrupted",
+      "incompatible_with": [],
+      "psychic_only": false,
+      "allowed_classes": [
+        "Arcanist",
+        "Pacter",
+        "Rectifier",
+        "War Mage"
+      ]
+    },
+    {
+      "name": "Waymaker",
+      "tier": "advanced",
+      "level_1": "Know exact location and bearing. Eidetic path memory. 1 System Strain to open/unlock barrier for 1 round/level",
+      "level_2": "2 System Strain On Turn: open rift to visible or previously occupied location (10m/level range) for 1 round/level",
+      "incompatible_with": [],
+      "psychic_only": false,
+      "allowed_classes": [
+        "Arcane Expert",
+        "Sunblade",
+        "Yama King"
+      ]
+    },
+    {
+      "name": "Weapon Unity",
+      "tier": "advanced",
+      "level_1": "Pick attribute; use its modifier for all weapons",
+      "level_2": "Gain Fight skill at highest combat skill level. Use Fight for all combat. Refund other combat skills",
+      "incompatible_with": [],
+      "psychic_only": false,
+      "allowed_classes": [
+        "Arcane Warrior",
+        "Godhunter",
+        "Sunblade"
+      ]
+    },
+    {
+      "name": "Witchfinder",
+      "tier": "basic",
+      "level_1": "Know Magic bonus skill. See/hear magic. Get sentence description of magical intent. Detection check vs concealed magic",
+      "level_2": "Main Action + 1 System Strain: Cha or Wis/Know Magic vs DC 7 + caster's Cast Magic to dispel (one attempt only)",
+      "incompatible_with": [],
+      "psychic_only": false,
+      "allowed_classes": [
+        "Arcane Expert",
+        "Sunblade",
+        "Yama King",
+        "Arcane Warrior",
+        "Godhunter",
+        "Sunblade"
+      ]
+    }
+  ]
+}

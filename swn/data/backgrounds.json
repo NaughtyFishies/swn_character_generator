@@ -1,0 +1,130 @@
+{
+  "backgrounds": [
+    {
+      "name": "Barbarian",
+      "free_skill": "Survive",
+      "quick_skills": ["Notice", "Exert", "Connect"],
+      "description": "From a primitive world or harsh frontier environment"
+    },
+    {
+      "name": "Clergy",
+      "free_skill": "Talk",
+      "quick_skills": ["Administer", "Know", "Connect"],
+      "description": "Religious professional or spiritual leader"
+    },
+    {
+      "name": "Courtesan",
+      "free_skill": "Perform",
+      "quick_skills": ["Notice", "Connect", "Talk"],
+      "description": "Entertainer, companion, or social expert"
+    },
+    {
+      "name": "Criminal",
+      "free_skill": "Sneak",
+      "quick_skills": ["Connect", "Notice", "Talk"],
+      "description": "Thief, smuggler, or other lawbreaker"
+    },
+    {
+      "name": "Dilettante",
+      "free_skill": "Know",
+      "quick_skills": ["Connect", "Talk", "Perform"],
+      "description": "Wealthy dabbler in various pursuits"
+    },
+    {
+      "name": "Entertainer",
+      "free_skill": "Perform",
+      "quick_skills": ["Connect", "Talk", "Exert"],
+      "description": "Professional performer or artist"
+    },
+    {
+      "name": "Merchant",
+      "free_skill": "Trade",
+      "quick_skills": ["Talk", "Connect", "Know"],
+      "description": "Trader, shopkeeper, or business professional"
+    },
+    {
+      "name": "Noble",
+      "free_skill": "Lead",
+      "quick_skills": ["Connect", "Administer", "Talk"],
+      "description": "Aristocrat or high-status individual"
+    },
+    {
+      "name": "Official",
+      "free_skill": "Administer",
+      "quick_skills": ["Lead", "Talk", "Know"],
+      "description": "Bureaucrat or government worker"
+    },
+    {
+      "name": "Peasant",
+      "free_skill": "Exert",
+      "quick_skills": ["Work", "Survive", "Notice"],
+      "description": "Farmer, laborer, or rural worker"
+    },
+    {
+      "name": "Physician",
+      "free_skill": "Know",
+      "quick_skills": ["Fix", "Notice", "Talk"],
+      "description": "Medical professional or healer"
+    },
+    {
+      "name": "Pilot",
+      "free_skill": "Pilot",
+      "quick_skills": ["Fix", "Notice", "Exert"],
+      "description": "Spacecraft or vehicle operator"
+    },
+    {
+      "name": "Politician",
+      "free_skill": "Talk",
+      "quick_skills": ["Lead", "Connect", "Notice"],
+      "description": "Elected official or political operative"
+    },
+    {
+      "name": "Scholar",
+      "free_skill": "Know",
+      "quick_skills": ["Administer", "Connect", "Fix"],
+      "description": "Academic, researcher, or learned professional"
+    },
+    {
+      "name": "Scientist",
+      "free_skill": "Know",
+      "quick_skills": ["Fix", "Notice", "Program"],
+      "description": "Researcher or technical specialist"
+    },
+    {
+      "name": "Soldier",
+      "free_skill": "Shoot",
+      "quick_skills": ["Exert", "Sneak", "Notice"],
+      "description": "Military professional or veteran"
+    },
+    {
+      "name": "Spacer",
+      "free_skill": "Fix",
+      "quick_skills": ["Pilot", "Program", "Talk"],
+      "description": "Born and raised on spacecraft"
+    },
+    {
+      "name": "Technician",
+      "free_skill": "Fix",
+      "quick_skills": ["Know", "Notice", "Program"],
+      "description": "Technical specialist or engineer"
+    },
+    {
+      "name": "Thug",
+      "free_skill": "Stab",
+      "quick_skills": ["Shoot", "Exert", "Connect"],
+      "description": "Enforcer, gangster, or street tough"
+    },
+    {
+      "name": "Vagabond",
+      "free_skill": "Survive",
+      "quick_skills": ["Notice", "Sneak", "Connect"],
+      "description": "Wanderer, drifter, or homeless individual"
+    },
+    {
+      "name": "Worker",
+      "free_skill": "Work",
+      "quick_skills": ["Fix", "Exert", "Pilot"],
+      "description": "Industrial or manual laborer"
+    }
+  ]
+}

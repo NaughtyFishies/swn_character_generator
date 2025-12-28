@@ -1,0 +1,272 @@
+{
+  "classes": {
+    "Warrior": {
+      "hp_die": 6,
+      "hp_bonus": 2,
+      "skill_points_base": 3,
+      "foci_count": 1,
+      "attack_bonus": 1,
+      "saving_throws": {
+        "Physical": 15,
+        "Evasion": 15,
+        "Mental": 16
+      },
+      "description": "Masters of combat and warfare",
+      "special_abilities": [
+        "Gains +1 attack bonus per character level",
+        "Can use Veteran's Luck once per scene to reroll an attack or damage roll"
+      ]
+    },
+    "Expert": {
+      "hp_die": 6,
+      "hp_bonus": 0,
+      "skill_points_base": 6,
+      "foci_count": 1,
+      "attack_bonus": 0,
+      "saving_throws": {
+        "Physical": 15,
+        "Evasion": 14,
+        "Mental": 15
+      },
+      "description": "Skilled specialists and problem solvers",
+      "special_abilities": [
+        "Can reroll a failed skill check once per scene",
+        "Gains bonus skill points for versatility"
+      ]
+    },
+    "Psychic": {
+      "hp_die": 6,
+      "hp_bonus": 0,
+      "skill_points_base": 4,
+      "foci_count": 1,
+      "attack_bonus": 0,
+      "saving_throws": {
+        "Physical": 16,
+        "Evasion": 15,
+        "Mental": 14
+      },
+      "description": "Wielders of mental powers and psionic abilities",
+      "special_abilities": [
+        "Gains Psychic skill at level 0",
+        "Can use psychic disciplines and techniques",
+        "Effort pool based on Psychic skill + WIS/INT modifier"
+      ],
+      "requires_psychic": true
+    },
+    "Adventurer": {
+      "hp_die": 6,
+      "hp_bonus": 1,
+      "skill_points_base": 4,
+      "foci_count": 2,
+      "attack_bonus": 1,
+      "saving_throws": {
+        "Physical": 15,
+        "Evasion": 15,
+        "Mental": 15
+      },
+      "description": "Versatile characters with diverse capabilities",
+      "special_abilities": [
+        "Gains 2 foci instead of 1",
+        "Gets +1 to attack rolls like a partial Warrior",
+        "Balanced saving throws across all categories"
+      ]
+    },
+    "Arcane Expert": {
+      "hp_die": 6,
+      "hp_bonus": 0,
+      "skill_points_base": 6,
+      "foci_count": 1,
+      "attack_bonus": 0,
+      "saving_throws": {
+        "Physical": 15,
+        "Evasion": 14,
+        "Mental": 15
+      },
+      "description": "Experts augmented by arcane abilities",
+      "special_abilities": [
+        "Can reroll a failed skill check once per scene",
+        "Can take Arcane Expert-exclusive foci"
+      ],
+      "allowed_foci": ["Arcane Expert"]
+    },
+    "Arcane Warrior": {
+      "hp_die": 6,
+      "hp_bonus": 2,
+      "skill_points_base": 3,
+      "foci_count": 1,
+      "attack_bonus": 1,
+      "saving_throws": {
+        "Physical": 15,
+        "Evasion": 15,
+        "Mental": 16
+      },
+      "description": "Warriors enhanced with magical prowess",
+      "special_abilities": [
+        "Gains +1 attack bonus per character level",
+        "All weapons count as magical",
+        "Can take Arcane Warrior-exclusive foci"
+      ],
+      "allowed_foci": ["Arcane Warrior"]
+    },
+    "Arcanist": {
+      "hp_die": 6,
+      "hp_bonus": 0,
+      "skill_points_base": 3,
+      "foci_count": 1,
+      "attack_bonus": 0,
+      "saving_throws": {
+        "Physical": 16,
+        "Evasion": 15,
+        "Mental": 14
+      },
+      "description": "Practitioners of flexible Academic magic",
+      "special_abilities": [
+        "Casts Academic spells from the Arcanist spell list",
+        "Can prepare spells each day from known spell list"
+      ],
+      "is_spellcaster": true,
+      "spell_tradition": "Arcanist"
+    },
+    "Free Nexus": {
+      "hp_die": 6,
+      "hp_bonus": 0,
+      "skill_points_base": 4,
+      "foci_count": 1,
+      "attack_bonus": 0,
+      "saving_throws": {
+        "Physical": 15,
+        "Evasion": 15,
+        "Mental": 15
+      },
+      "description": "Support specialists who empower allies",
+      "special_abilities": [
+        "Can establish Symbiosis with allies",
+        "Has Free Nexus Effort pool",
+        "Gains Nexus gifts at even levels"
+      ],
+      "has_nexus_gifts": true
+    },
+    "Godhunter": {
+      "hp_die": 6,
+      "hp_bonus": 1,
+      "skill_points_base": 4,
+      "foci_count": 1,
+      "attack_bonus": 0,
+      "saving_throws": {
+        "Physical": 15,
+        "Evasion": 15,
+        "Mental": 15
+      },
+      "description": "Hunters of Shadows and otherworldly entities",
+      "special_abilities": [
+        "Weapons count as magical",
+        "Bonus to hit Shadows and Shadow cultists",
+        "Can take Arcane Warrior foci",
+        "Gains Godhunter abilities at each level"
+      ],
+      "has_godhunter_abilities": true
+    },
+    "Pacter": {
+      "hp_die": 6,
+      "hp_bonus": 0,
+      "skill_points_base": 3,
+      "foci_count": 1,
+      "attack_bonus": 0,
+      "saving_throws": {
+        "Physical": 16,
+        "Evasion": 15,
+        "Mental": 14
+      },
+      "description": "Summoners and masters of Shadow entities",
+      "special_abilities": [
+        "Casts spells from the Pacter spell list",
+        "Specializes in summoning and controlling Shadows",
+        "Cannot betray summoned Shadows"
+      ],
+      "is_spellcaster": true,
+      "spell_tradition": "Pacter"
+    },
+    "Rectifier": {
+      "hp_die": 6,
+      "hp_bonus": 0,
+      "skill_points_base": 3,
+      "foci_count": 1,
+      "attack_bonus": 0,
+      "saving_throws": {
+        "Physical": 16,
+        "Evasion": 15,
+        "Mental": 14
+      },
+      "description": "Masters of flesh, bone, and physical transformation",
+      "special_abilities": [
+        "Casts spells from the Rectifier spell list",
+        "Can maintain Changes without Focus",
+        "Specializes in healing and transformation"
+      ],
+      "is_spellcaster": true,
+      "spell_tradition": "Rectifier",
+      "has_changes": true
+    },
+    "Sunblade": {
+      "hp_die": 6,
+      "hp_bonus": 1,
+      "skill_points_base": 4,
+      "foci_count": 1,
+      "attack_bonus": 0,
+      "saving_throws": {
+        "Physical": 15,
+        "Evasion": 15,
+        "Mental": 15
+      },
+      "description": "Mystical warrior-monks with sacred weapons",
+      "special_abilities": [
+        "Uses Sunblade skill with sacred weapon",
+        "Bonus to hit with sacred weapon",
+        "Can take Arcane Expert or Arcane Warrior foci",
+        "Gains Sunblade powers at even levels"
+      ],
+      "has_sunblade_powers": true,
+      "has_sunblade_effort": true
+    },
+    "War Mage": {
+      "hp_die": 6,
+      "hp_bonus": 0,
+      "skill_points_base": 3,
+      "foci_count": 1,
+      "attack_bonus": 0,
+      "saving_throws": {
+        "Physical": 16,
+        "Evasion": 15,
+        "Mental": 14
+      },
+      "description": "Military support mages for small unit tactics",
+      "special_abilities": [
+        "Casts spells from the War Mage spell list",
+        "Has attack bonus equal to half level",
+        "Specializes in tactical support magic"
+      ],
+      "is_spellcaster": true,
+      "spell_tradition": "War Mage",
+      "has_partial_attack_bonus": true
+    },
+    "Yama King": {
+      "hp_die": 6,
+      "hp_bonus": 0,
+      "skill_points_base": 4,
+      "foci_count": 1,
+      "attack_bonus": 0,
+      "saving_throws": {
+        "Physical": 15,
+        "Evasion": 15,
+        "Mental": 15
+      },
+      "description": "Wandering judges who manipulate law and society",
+      "special_abilities": [
+        "Passport of Hell - blend into any culture",
+        "Can take Arcane Expert foci",
+        "Gains Yama King abilities at each level"
+      ],
+      "has_yama_king_abilities": true
+    }
+  }
+}

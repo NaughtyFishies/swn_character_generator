@@ -1,0 +1,80 @@
+{
+  "skills": [
+    {
+      "name": "Administer",
+      "description": "Manage organizations, bureaucracy, and logistics"
+    },
+    {
+      "name": "Connect",
+      "description": "Make friends and find helpful contacts"
+    },
+    {
+      "name": "Exert",
+      "description": "Physical endurance, athletics, and raw strength"
+    },
+    {
+      "name": "Fix",
+      "description": "Repair and maintain technology"
+    },
+    {
+      "name": "Know",
+      "description": "General knowledge and education"
+    },
+    {
+      "name": "Lead",
+      "description": "Command and inspire others"
+    },
+    {
+      "name": "Notice",
+      "description": "Spot hidden things and sense danger"
+    },
+    {
+      "name": "Perform",
+      "description": "Artistic expression and entertainment"
+    },
+    {
+      "name": "Pilot",
+      "description": "Operate vehicles and spacecraft"
+    },
+    {
+      "name": "Program",
+      "description": "Computer programming and hacking"
+    },
+    {
+      "name": "Psychic",
+      "description": "Use psychic powers and disciplines"
+    },
+    {
+      "name": "Punch",
+      "description": "Unarmed combat"
+    },
+    {
+      "name": "Shoot",
+      "description": "Ranged weapon combat"
+    },
+    {
+      "name": "Sneak",
+      "description": "Move quietly and hide"
+    },
+    {
+      "name": "Stab",
+      "description": "Melee weapon combat"
+    },
+    {
+      "name": "Survive",
+      "description": "Wilderness survival and tracking"
+    },
+    {
+      "name": "Talk",
+      "description": "Persuasion, deception, and negotiation"
+    },
+    {
+      "name": "Trade",
+      "description": "Business and commerce"
+    },
+    {
+      "name": "Work",
+      "description": "Proficiency in a specific trade or profession"
+    }
+  ]
+}
