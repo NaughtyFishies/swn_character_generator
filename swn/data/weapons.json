@@ -1,0 +1,369 @@
+{
+  "ranged_weapons": [
+    {
+      "name": "Primitive Bow",
+      "damage": "1d6",
+      "range": "50/75",
+      "cost": 15,
+      "magazine": 1,
+      "enc": 2,
+      "tech_level": 1,
+      "burst": false,
+      "type": "projectile"
+    },
+    {
+      "name": "Advanced Bow",
+      "damage": "1d6",
+      "range": "100/150",
+      "cost": 50,
+      "magazine": 1,
+      "enc": 2,
+      "tech_level": 3,
+      "burst": false,
+      "type": "projectile"
+    },
+    {
+      "name": "Conversion Bow",
+      "damage": "1d8",
+      "range": "150/300",
+      "cost": 500,
+      "magazine": 1,
+      "enc": 2,
+      "tech_level": 4,
+      "burst": false,
+      "type": "projectile"
+    },
+    {
+      "name": "Grenade",
+      "damage": "2d6",
+      "range": "10/30",
+      "cost": 25,
+      "magazine": 1,
+      "enc": 1,
+      "tech_level": 3,
+      "burst": false,
+      "type": "explosive"
+    },
+    {
+      "name": "Crude Pistol",
+      "damage": "1d6",
+      "range": "5/15",
+      "cost": 20,
+      "magazine": 1,
+      "enc": 1,
+      "tech_level": 2,
+      "burst": false,
+      "type": "projectile"
+    },
+    {
+      "name": "Musket",
+      "damage": "1d12",
+      "range": "25/50",
+      "cost": 30,
+      "magazine": 1,
+      "enc": 2,
+      "tech_level": 2,
+      "burst": false,
+      "type": "projectile"
+    },
+    {
+      "name": "Revolver",
+      "damage": "1d8",
+      "range": "30/100",
+      "cost": 50,
+      "magazine": 6,
+      "enc": 1,
+      "tech_level": 2,
+      "burst": false,
+      "type": "projectile"
+    },
+    {
+      "name": "Rifle",
+      "damage": "1d10+2",
+      "range": "200/400",
+      "cost": 75,
+      "magazine": 6,
+      "enc": 2,
+      "tech_level": 2,
+      "burst": false,
+      "type": "projectile"
+    },
+    {
+      "name": "Shotgun",
+      "damage": "3d4",
+      "range": "10/30",
+      "cost": 50,
+      "magazine": 2,
+      "enc": 2,
+      "tech_level": 2,
+      "burst": false,
+      "type": "projectile"
+    },
+    {
+      "name": "Semi-Auto Pistol",
+      "damage": "1d6+1",
+      "range": "30/100",
+      "cost": 75,
+      "magazine": 12,
+      "enc": 1,
+      "tech_level": 3,
+      "burst": false,
+      "type": "projectile"
+    },
+    {
+      "name": "Submachine Gun",
+      "damage": "1d8",
+      "range": "30/100",
+      "cost": 200,
+      "magazine": 20,
+      "enc": 1,
+      "tech_level": 3,
+      "burst": true,
+      "type": "projectile"
+    },
+    {
+      "name": "Combat Rifle",
+      "damage": "1d12",
+      "range": "100/300",
+      "cost": 300,
+      "magazine": 30,
+      "enc": 2,
+      "tech_level": 3,
+      "burst": true,
+      "type": "projectile"
+    },
+    {
+      "name": "Combat Shotgun",
+      "damage": "3d4",
+      "range": "10/30",
+      "cost": 300,
+      "magazine": 12,
+      "enc": 2,
+      "tech_level": 3,
+      "burst": true,
+      "type": "projectile"
+    },
+    {
+      "name": "Sniper Rifle",
+      "damage": "2d8",
+      "range": "1000/2000",
+      "cost": 400,
+      "magazine": 1,
+      "enc": 2,
+      "tech_level": 3,
+      "burst": false,
+      "type": "projectile"
+    },
+    {
+      "name": "Void Carbine",
+      "damage": "2d6",
+      "range": "100/300",
+      "cost": 400,
+      "magazine": 10,
+      "enc": 2,
+      "tech_level": 4,
+      "burst": false,
+      "type": "projectile"
+    },
+    {
+      "name": "Mag Pistol",
+      "damage": "2d6+2",
+      "range": "100/300",
+      "cost": 400,
+      "magazine": 6,
+      "enc": 1,
+      "tech_level": 4,
+      "burst": false,
+      "type": "projectile"
+    },
+    {
+      "name": "Mag Rifle",
+      "damage": "2d8+2",
+      "range": "300/600",
+      "cost": 500,
+      "magazine": 10,
+      "enc": 2,
+      "tech_level": 4,
+      "burst": false,
+      "type": "projectile"
+    },
+    {
+      "name": "Spike Thrower",
+      "damage": "3d8",
+      "range": "20/40",
+      "cost": 600,
+      "magazine": 15,
+      "enc": 2,
+      "tech_level": 4,
+      "burst": true,
+      "type": "projectile"
+    },
+    {
+      "name": "Laser Pistol",
+      "damage": "1d6",
+      "range": "100/300",
+      "cost": 200,
+      "magazine": 10,
+      "enc": 1,
+      "tech_level": 4,
+      "burst": false,
+      "type": "energy"
+    },
+    {
+      "name": "Laser Rifle",
+      "damage": "1d10",
+      "range": "300/500",
+      "cost": 300,
+      "magazine": 20,
+      "enc": 2,
+      "tech_level": 4,
+      "burst": true,
+      "type": "energy"
+    },
+    {
+      "name": "Thermal Pistol",
+      "damage": "2d6",
+      "range": "25/50",
+      "cost": 300,
+      "magazine": 5,
+      "enc": 1,
+      "tech_level": 4,
+      "burst": false,
+      "type": "energy"
+    },
+    {
+      "name": "Plasma Projector",
+      "damage": "2d8",
+      "range": "50/100",
+      "cost": 400,
+      "magazine": 6,
+      "enc": 2,
+      "tech_level": 4,
+      "burst": false,
+      "type": "energy"
+    },
+    {
+      "name": "Shear Rifle",
+      "damage": "2d8",
+      "range": "100/300",
+      "cost": 600,
+      "magazine": 10,
+      "enc": 2,
+      "tech_level": 5,
+      "burst": true,
+      "type": "energy"
+    },
+    {
+      "name": "Thunder Gun",
+      "damage": "2d10",
+      "range": "100/300",
+      "cost": 1000,
+      "magazine": 6,
+      "enc": 2,
+      "tech_level": 5,
+      "burst": false,
+      "type": "energy"
+    },
+    {
+      "name": "Distortion Cannon",
+      "damage": "2d12",
+      "range": "100/300",
+      "cost": 1250,
+      "magazine": 6,
+      "enc": 2,
+      "tech_level": 5,
+      "burst": false,
+      "type": "energy"
+    }
+  ],
+  "melee_weapons": [
+    {
+      "name": "Small Primitive Weapon",
+      "damage": "1d4",
+      "shock": "1/AC 15",
+      "cost": 0,
+      "enc": 1,
+      "tech_level": 0,
+      "size": "small",
+      "advanced": false,
+      "description": "Knife, baton. Can be thrown 10m."
+    },
+    {
+      "name": "Medium Primitive Weapon",
+      "damage": "1d6+1",
+      "shock": "2/AC 13",
+      "cost": 20,
+      "enc": 1,
+      "tech_level": 0,
+      "size": "medium",
+      "advanced": false,
+      "description": "Sword, axe, spear. Can be thrown 30m."
+    },
+    {
+      "name": "Large Primitive Weapon",
+      "damage": "1d8+1",
+      "shock": "2/AC 15",
+      "cost": 30,
+      "enc": 2,
+      "tech_level": 0,
+      "size": "large",
+      "advanced": false,
+      "description": "Claymore, halberd, tetsubo. Two-handed."
+    },
+    {
+      "name": "Small Advanced Weapon",
+      "damage": "1d6",
+      "shock": "1/AC 15",
+      "cost": 40,
+      "enc": 1,
+      "tech_level": 4,
+      "size": "small",
+      "advanced": true,
+      "description": "Monoblade knife, thermal baton. Can be thrown 10m."
+    },
+    {
+      "name": "Medium Advanced Weapon",
+      "damage": "1d8+1",
+      "shock": "2/AC 13",
+      "cost": 60,
+      "enc": 1,
+      "tech_level": 4,
+      "size": "medium",
+      "advanced": true,
+      "description": "Monoblade sword, kinetic axe. Can be thrown 30m."
+    },
+    {
+      "name": "Large Advanced Weapon",
+      "damage": "1d10+1",
+      "shock": "2/AC 15",
+      "cost": 80,
+      "enc": 2,
+      "tech_level": 4,
+      "size": "large",
+      "advanced": true,
+      "description": "Chainsaw sword, kinetic halberd. Two-handed."
+    },
+    {
+      "name": "Stun Baton",
+      "damage": "1d8",
+      "shock": "1/AC 15",
+      "cost": 50,
+      "enc": 1,
+      "tech_level": 4,
+      "size": "small",
+      "advanced": true,
+      "description": "Nonlethal. Target awakens in 10 minutes with 1 HP."
+    },
+    {
+      "name": "Suit Ripper",
+      "damage": "1d6",
+      "shock": "None",
+      "cost": 75,
+      "enc": 1,
+      "tech_level": 4,
+      "size": "small",
+      "advanced": true,
+      "description": "Each hit counts as vacc suit tear."
+    }
+  ]
+}

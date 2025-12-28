@@ -12,6 +12,7 @@ from swn.models.foci import FociSelector
 from swn.models.psychic import PsychicPowerSelector
 from swn.models.spells import SpellSelector
 from swn.models.skills import SkillSet, allocate_skill_points
+from swn.models.equipment import EquipmentSelector, calculate_starting_credits
 
 
 class CharacterGenerator:
@@ -54,6 +55,9 @@ class CharacterGenerator:
             skills_data = json.load(f)
             self.all_skills = [skill["name"] for skill in skills_data["skills"]]
 
+        # Load equipment selector
+        self.equipment_selector = EquipmentSelector.load_from_files(data_dir)
+
     def generate_character(
         self,
         name: Optional[str] = None,
@@ -61,7 +65,8 @@ class CharacterGenerator:
         attribute_method: str = "roll",
         power_type: str = "normal",
         class_choice: Optional[str] = None,
-        use_quick_skills: bool = True
+        use_quick_skills: bool = True,
+        tech_level: int = 4
     ) -> Character:
         """
         Generate a complete character using official SWN rules.
@@ -73,6 +78,7 @@ class CharacterGenerator:
             power_type: "normal", "magic", or "psionic"
             class_choice: Class name or None for random
             use_quick_skills: True to use quick skills, False to roll on tables (simplified)
+            tech_level: Technology level for equipment (0-5, default 4)
 
         Returns:
             Complete Character instance
@@ -255,6 +261,18 @@ class CharacterGenerator:
 
         # Step 13: Set attack bonus
         character.attack_bonus = character.character_class.attack_bonus * character.level
+
+        # Step 14: Select equipment based on tech level
+        starting_credits = calculate_starting_credits(character.character_class.name, character.level)
+        character.equipment = self.equipment_selector.select_equipment(
+            character.character_class.name,
+            tech_level,
+            starting_credits
+        )
+
+        # Calculate remaining credits after equipment purchase
+        equipment_cost = character.equipment.total_cost()
+        character.credits = max(0, starting_credits - equipment_cost)
 
         return character
 

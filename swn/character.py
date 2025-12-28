@@ -26,6 +26,8 @@ class Character:
         self.level: int = 1
         self.power_type: str = "normal"  # normal, magic, or psionic
         self.attack_bonus: int = 0
+        self.equipment: Optional['EquipmentSet'] = None
+        self.credits: int = 0
 
     def calculate_hp(self) -> int:
         """
@@ -81,7 +83,9 @@ class Character:
             "spells": self.spells.to_dict() if self.spells else None,
             "hp": self.hp,
             "attack_bonus": self.attack_bonus,
-            "saving_throws": self.saving_throws
+            "saving_throws": self.saving_throws,
+            "equipment": self.equipment.to_dict() if self.equipment else None,
+            "credits": self.credits
         }
 
     def __str__(self) -> str:

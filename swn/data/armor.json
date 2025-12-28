@@ -1,0 +1,166 @@
+{
+  "armor": [
+    {
+      "name": "Shield",
+      "category": "primitive",
+      "ac": "13/+1 bonus",
+      "cost": 10,
+      "enc": 2,
+      "tech_level": 0,
+      "description": "Primitive or riot shield. Grants AC 13 or +1 if AC is already higher. Blocks first melee Shock each round."
+    },
+    {
+      "name": "Leather Jacks",
+      "category": "primitive",
+      "ac": 13,
+      "cost": 10,
+      "enc": 1,
+      "tech_level": 0,
+      "description": "Thick hides, quilted armor. Useless against TL4 weapons."
+    },
+    {
+      "name": "Cuirass",
+      "category": "primitive",
+      "ac": 15,
+      "cost": 50,
+      "enc": 1,
+      "tech_level": 1,
+      "description": "Brigandine, linothorax, half-plate. Useless against TL4 weapons."
+    },
+    {
+      "name": "Full Plate",
+      "category": "primitive",
+      "ac": 17,
+      "cost": 100,
+      "enc": 2,
+      "tech_level": 1,
+      "description": "Layered mail. Useless against TL4 weapons."
+    },
+    {
+      "name": "Warpaint",
+      "category": "street",
+      "ac": 12,
+      "cost": 300,
+      "enc": 0,
+      "tech_level": 4,
+      "description": "Scrap-built gang armor. +1 Morale for meaningful wearers."
+    },
+    {
+      "name": "Armored Undersuit",
+      "category": "street",
+      "ac": 13,
+      "cost": 600,
+      "enc": 0,
+      "tech_level": 4,
+      "description": "Skin-tight bodysuit. Not detectable without tactile examination."
+    },
+    {
+      "name": "Secure Clothing",
+      "category": "street",
+      "ac": 13,
+      "cost": 300,
+      "enc": 1,
+      "tech_level": 4,
+      "description": "Fashionable armor. Only detectable by tactile examination."
+    },
+    {
+      "name": "Armored Vacc Suit",
+      "category": "street",
+      "ac": 13,
+      "cost": 400,
+      "enc": 2,
+      "tech_level": 4,
+      "description": "Up-armored vacc suit. Half normal tear chance from edged weapons."
+    },
+    {
+      "name": "Deflector Array",
+      "category": "street",
+      "ac": 18,
+      "cost": 30000,
+      "enc": 0,
+      "tech_level": 5,
+      "description": "Force field nodes. Flares bright blue when deflecting attacks."
+    },
+    {
+      "name": "Force Pavis",
+      "category": "combat",
+      "ac": "15/+1 bonus",
+      "cost": 10000,
+      "enc": 1,
+      "tech_level": 5,
+      "description": "Pretech force shield. Grants AC 15 or +1 if AC is already higher. Blocks first melee Shock each round."
+    },
+    {
+      "name": "Security Armor",
+      "category": "combat",
+      "ac": 14,
+      "cost": 700,
+      "enc": 1,
+      "tech_level": 4,
+      "description": "Standard law enforcement armor with rigid plates."
+    },
+    {
+      "name": "Woven Body Armor",
+      "category": "combat",
+      "ac": 15,
+      "cost": 400,
+      "enc": 2,
+      "tech_level": 3,
+      "description": "Best TL3 armor or heavy-duty TL4 response team gear."
+    },
+    {
+      "name": "Combat Field Uniform",
+      "category": "combat",
+      "ac": 16,
+      "cost": 1000,
+      "enc": 1,
+      "tech_level": 4,
+      "description": "Standard TL4 front-line battle dress."
+    },
+    {
+      "name": "Icarus Harness",
+      "category": "combat",
+      "ac": 16,
+      "cost": 8000,
+      "enc": 1,
+      "tech_level": 4,
+      "description": "CFU with gravity damper for unlimited falls. Functions as vacc suit for 30 min."
+    },
+    {
+      "name": "Vestimentum",
+      "category": "powered",
+      "ac": 18,
+      "cost": 15000,
+      "enc": 0,
+      "tech_level": 5,
+      "description": "Ceremonial armor with microforce fields. Immune to primitive weapons."
+    },
+    {
+      "name": "Assault Suit",
+      "category": "powered",
+      "ac": 18,
+      "cost": 10000,
+      "enc": 2,
+      "tech_level": 4,
+      "description": "Advanced armor with integral comms, low-light/IR vision, energy feed. Requires Type B cell for 24h. Immune to primitive weapons."
+    },
+    {
+      "name": "Storm Armor",
+      "category": "powered",
+      "ac": 19,
+      "cost": 20000,
+      "enc": 2,
+      "tech_level": 5,
+      "description": "Assault suit + exo-augments (+4 STR for enc), gravitic boosters (20m leaps), auto-stabilization. Immune to primitive weapons."
+    },
+    {
+      "name": "Field Emitter Panoply",
+      "category": "powered",
+      "ac": 20,
+      "cost": 40000,
+      "enc": 1,
+      "tech_level": 5,
+      "description": "Pretech damper fields. All storm armor benefits, no power needed. Immune to lethal radiation."
+    }
+  ]
+}

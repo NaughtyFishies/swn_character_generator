@@ -148,6 +148,41 @@ class CharacterDisplay:
                 lines.append(f"- {ability}")
             lines.append("")
 
+        # Equipment
+        if character.equipment:
+            lines.append("EQUIPMENT")
+            lines.append("-" * 70)
+            lines.append(f"Credits: {character.credits} cr remaining")
+            lines.append(f"Total Value: {character.equipment.total_cost()} cr")
+            lines.append(f"Total Encumbrance: {character.equipment.total_encumbrance()}")
+            lines.append("")
+
+            # Armor
+            if character.equipment.armor:
+                armor = character.equipment.armor
+                ac_display = armor.properties.get("ac", "10")
+                lines.append(f"Armor: {armor.name} (AC {ac_display}, TL{armor.tech_level})")
+
+            # Weapons
+            if character.equipment.weapons:
+                lines.append("Weapons:")
+                for weapon in character.equipment.weapons:
+                    damage = weapon.properties.get("damage", "")
+                    range_val = weapon.properties.get("range", "")
+                    burst = " (burst)" if weapon.properties.get("burst") else ""
+                    shock = weapon.properties.get("shock", "")
+                    if damage and range_val:
+                        lines.append(f"  - {weapon.name}: {damage} damage, {range_val}m{burst} (TL{weapon.tech_level})")
+                    elif damage and shock:
+                        lines.append(f"  - {weapon.name}: {damage} damage, Shock {shock} (TL{weapon.tech_level})")
+
+            # Gear
+            if character.equipment.gear:
+                lines.append("Gear:")
+                for item in character.equipment.gear:
+                    lines.append(f"  - {item.name} (TL{item.tech_level})")
+            lines.append("")
+
         # Footer
         lines.append("=" * 70)
 
