@@ -8,7 +8,9 @@ A comprehensive Python-based character generator for the Stars Without Number ta
 - Follow the exact character creation steps from the core rulebook
 - Roll attributes (3d6, pick one to set to 14) or use standard array (14, 12, 11, 10, 9, 7)
 - 21 backgrounds with skill tables
-- Level-based character generation (levels 1-10)
+- Level-based character generation (levels 1-10) with proper scaling
+- Accurate skill point costs: (new level + 1) per SWN rules
+- Level-based skill caps: +1 at levels 1-2, +2 at 3-5, +3 at 6-8, +4 at 9-10
 
 ⚔️ **14 Character Classes**
 - **Base Classes**: Warrior, Expert, Psychic, Adventurer
@@ -17,16 +19,27 @@ A comprehensive Python-based character generator for the Stars Without Number ta
 
 🔮 **Magic & Psychic Systems**
 - **Spell Traditions**: 4 complete spell lists (Arcanist, Pacter, Rectifier, War Mage) with 30+ spells each
-- **Psychic Disciplines**: 6 psychic disciplines with techniques
+- **Psychic Disciplines**: 6 disciplines as individual skills (Biopsionics, Metapsionics, Precognition, Telekinesis, Telepathy, Teleportation)
+- Each discipline has a core technique (level-0) and 8-12 advanced techniques (levels 1-4)
+- Technique selection: 1 technique learned per skill level increase
+- Effort pool: 1 + highest discipline skill + WIS/INT modifier
 - **Arcane Foci**: 27 arcane foci for magic-using characters
-- Spell progression from levels 1-5
+- Spell progression from levels 1-5 with known spells and spell slots tracked separately
 
 🎯 **Advanced Features**
 - 52 total foci (25 general + 27 arcane)
 - Class-exclusive foci (Experts get non-combat, Warriors get combat bonus)
 - Automatic skill point allocation with class priorities
-- Free skill selection (one non-psychic skill of choice)
 - Export to JSON or formatted text files
+
+⚙️ **Equipment System**
+- **Tech Level Selection**: TL 0-5 (primitive to pretech)
+- **18 Armor Types**: From shields to powered armor with AC 10-20
+- **33 Weapons**: 25 ranged (bows to distortion cannons) + 8 melee weapons
+- **27 Gear Items**: Communications, medical, tools, field equipment
+- **Starting Credits**: Class/level-based (1000-2000 + 500/level)
+- **Smart Selection**: Class-appropriate equipment (Warriors get combat gear, Experts get tools)
+- Automatic encumbrance and cost tracking
 
 ## Installation
 
@@ -121,6 +134,65 @@ pacter = gen.generate_character(
 CharacterDisplay.print_character(arcanist)
 ```
 
+### Psychic Characters
+
+```python
+# Full Psychic (2 disciplines)
+psychic = gen.generate_character(
+    name="Mind Walker",
+    level=3,
+    power_type="psionic",
+    class_choice="Psychic"
+)
+# Will have 2 discipline skills (e.g., Telepathy-1, Precognition-0)
+# Each discipline grants core technique + 1 technique per skill level
+
+# Partial Psychic (1 discipline)
+arcanist_psychic = gen.generate_character(
+    name="Mystic Scholar",
+    level=2,
+    power_type="magic",
+    class_choice="Arcanist"
+)
+# Will have 1 discipline skill + spells
+
+CharacterDisplay.print_character(psychic)
+```
+
+### Equipment & Tech Levels
+
+```python
+# Standard TL4 character (modern spacefaring tech)
+modern = gen.generate_character(
+    name="Spacer",
+    level=1,
+    class_choice="Warrior",
+    tech_level=4  # Default
+)
+# Gets: Combat armor, energy weapons, compad, medkit
+
+# Primitive TL0 character (stone age)
+primitive = gen.generate_character(
+    name="Barbarian",
+    level=1,
+    class_choice="Warrior",
+    tech_level=0
+)
+# Gets: Hide armor, primitive weapons, basic supplies
+
+# Advanced TL5 character (pretech/Mandate-era)
+pretech = gen.generate_character(
+    name="Ancient Tech User",
+    level=5,
+    class_choice="Expert",
+    tech_level=5
+)
+# Gets: Powered armor, advanced energy weapons, pretech tools
+# High starting credits: 2000 + (5 × 500) = 4500 cr
+
+CharacterDisplay.print_character(modern)
+```
+
 ### Save Characters to Files
 
 ```python
@@ -159,14 +231,17 @@ character = gen.generate_character(
     attribute_method="roll",     # "roll" or "array"
     power_type="normal",         # "normal", "magic", or "psionic"
     class_choice=None,           # Class name or None for random
-    use_quick_skills=True        # Use quick skills from background
+    use_quick_skills=True,       # Use quick skills from background
+    tech_level=4                 # Equipment tech level (0-5)
 )
 ```
 
 **Parameters:**
 
 - **name** (str, optional): Character name. Auto-generated if None.
-- **level** (int): Character level, default 1.
+- **level** (int): Character level (1-10), default 1.
+  - HP, skill points, spell slots, and technique selection scale with level
+  - Skill caps: +1 (levels 1-2), +2 (3-5), +3 (6-8), +4 (9-10)
 - **attribute_method** (str):
   - `"roll"`: Roll 3d6 six times in order, pick one to set to 14
   - `"array"`: Use standard array (14, 12, 11, 10, 9, 7) randomly assigned
@@ -175,6 +250,12 @@ character = gen.generate_character(
   - `"magic"`: Character with magical abilities (for magic classes)
   - `"psionic"`: Character with psychic powers (for Psychic class)
 - **class_choice** (str, optional): Class name or None for random
+- **tech_level** (int): Equipment technology level (0-5), default 4
+  - TL0: Stone age (hide armor, clubs, bows)
+  - TL1-2: Medieval to Renaissance (plate armor, firearms)
+  - TL3: Industrial (combat rifles, woven armor)
+  - TL4: Standard spacefaring (energy weapons, vacc suits)
+  - TL5: Pretech/Mandate-era (powered armor, advanced energy weapons)
 
 ### CharacterDisplay Methods
 
@@ -222,6 +303,7 @@ character_generator/
 ├── README.md                    # This file
 ├── QUICK_START.md              # Quick reference guide
 ├── example_usage.py            # Usage examples
+├── notebook_examples.py        # Jupyter-friendly examples
 ├── swn/                        # Main package
 │   ├── __init__.py
 │   ├── character.py            # Character model
@@ -233,20 +315,24 @@ character_generator/
 │   │   ├── classes.json
 │   │   ├── foci.json
 │   │   ├── skills.json
-│   │   ├── psychic_disciplines.json
+│   │   ├── psychic_disciplines.json    # 6 disciplines with techniques
 │   │   ├── arcanist_spells.json
 │   │   ├── pacter_spells.json
 │   │   ├── rectifier_spells.json
-│   │   └── war_mage_spells.json
+│   │   ├── war_mage_spells.json
+│   │   ├── armor.json                   # NEW: 18 armor types
+│   │   ├── weapons.json                 # NEW: 33 weapons
+│   │   └── gear.json                    # NEW: 27 gear items
 │   └── models/                 # Data models
 │       ├── __init__.py
 │       ├── attributes.py
 │       ├── backgrounds.py
 │       ├── classes.py
 │       ├── foci.py
-│       ├── psychic.py
-│       ├── skills.py
-│       └── spells.py
+│       ├── psychic.py          # Disciplines as skills system
+│       ├── skills.py           # Correct skill costs
+│       ├── spells.py
+│       └── equipment.py        # NEW: Equipment selection
 ```
 
 ## Spell Progression
