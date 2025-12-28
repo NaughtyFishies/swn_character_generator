@@ -138,6 +138,14 @@
       "psychic_only": false
     },
     {
+      "name": "Diplomat",
+      "tier": "basic",
+      "level_1": "Gain Talk as a bonus skill. Speak all common sector languages, learn new ones in a week (fluent in a month). Reroll 1s on negotiation/diplomacy skill checks.",
+      "level_2": "Once per session, shift an intelligent NPC's reaction one step closer to friendly with 30 seconds of conversation.",
+      "incompatible_with": [],
+      "psychic_only": false
+    },
+    {
       "name": "Eldritch Battery",
       "tier": "advanced",
       "level_1": "Fuel ally's spell once per day (no resource cost to caster)",
@@ -365,6 +373,14 @@
       "psychic_only": true
     },
     {
+      "name": "Savage Fray",
+      "tier": "basic",
+      "level_1": "Gain Stab as a bonus skill. All enemies adjacent to you at end of your turn whom you have not attacked suffer your weapon's Shock damage if their AC is not too high.",
+      "level_2": "After suffering your first melee hit in a round, any further melee attacks from other assailants automatically miss you.",
+      "incompatible_with": [],
+      "psychic_only": false
+    },
+    {
       "name": "Savage Sorcery",
       "tier": "basic",
       "level_1": "Magic bolt (1d8 + level, 100m range, +Cast Magic to hit). +1 damage per die on damaging spells",
@@ -432,6 +448,14 @@
       "psychic_only": false
     },
     {
+      "name": "Star Captain",
+      "tier": "basic",
+      "level_1": "Gain Lead as a bonus skill. Your ship gains 2 extra Command Points at the start of each turn.",
+      "level_2": "Ship you captain gains bonus HP equal to 20% of max at start of each combat. Once per engagement, resolve a Crisis as an Instant action.",
+      "incompatible_with": [],
+      "psychic_only": false
+    },
+    {
       "name": "Starfarer",
       "tier": "basic",
       "level_1": "Gain Pilot as a bonus skill. Gain +1 to all skill checks related to spacecraft.",
@@ -479,6 +503,14 @@
       "incompatible_with": [
         "Close Combatant"
       ],
+      "psychic_only": false
+    },
+    {
+      "name": "Unique Gift",
+      "tier": "exotic",
+      "level_1": "You have a unique ability impossible for normal humans - exotic augmentation, transhuman background, or remarkable talent. GM determines what's reasonable.",
+      "level_2": "Your unique gift becomes more powerful or gains additional applications. May require System Strain for particularly powerful uses.",
+      "incompatible_with": [],
       "psychic_only": false
     },
     {
@@ -563,6 +595,14 @@
         "Godhunter",
         "Sunblade"
       ]
+    },
+    {
+      "name": "Wild Psychic Talent",
+      "tier": "basic",
+      "level_1": "Pick a psychic discipline. Gain level-0 core power OR a stand-alone level-1 technique from that discipline. Treated as having 1 Effort.",
+      "level_2": "Maximum Effort becomes 2 points. Pick a second ability (can augment level 1 choice if applicable). Cannot take level-1 core powers.",
+      "incompatible_with": [],
+      "psychic_only": false
     }
   ]
 }
