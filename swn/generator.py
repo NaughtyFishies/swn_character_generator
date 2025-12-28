@@ -119,11 +119,11 @@ class CharacterGenerator:
 
         # Step 6: Add class starting skills (if applicable)
         # Grant psychic discipline skills for psychic characters
-        # Full Psychic: 2 disciplines, Partial Psychic/Psionic type: 1 discipline
+        # Full Psychic: 2 disciplines, Partial Psychic: 1 discipline
         discipline_count = 0
         if character.character_class.name == "Psychic":
             discipline_count = 2  # Full psychic gets 2 disciplines
-        elif power_type in ["magic", "psionic"]:
+        elif power_type == "psionic":
             discipline_count = 1  # Partial psychic gets 1 discipline
 
         # Select and grant random disciplines as skills at level 0
@@ -145,7 +145,7 @@ class CharacterGenerator:
         # Exclude psychic disciplines from random allocation unless character is psychic
         psychic_disciplines = ["Biopsionics", "Metapsionics", "Precognition",
                               "Telekinesis", "Telepathy", "Teleportation"]
-        is_psychic = (power_type in ["magic", "psionic"] or
+        is_psychic = (power_type == "psionic" or
                      character.character_class.name == "Psychic")
 
         # Filter skills list for allocation
@@ -171,7 +171,7 @@ class CharacterGenerator:
         # Experts/Partial Experts get +1 non-combat, non-psychic focus
         # Warriors/Partial Warriors get +1 combat focus
 
-        has_psychic = (power_type in ["magic", "psionic"] or
+        has_psychic = (power_type == "psionic" or
                       character.character_class.name == "Psychic")
 
         # Determine combat foci (simplified - common combat foci)
@@ -223,7 +223,7 @@ class CharacterGenerator:
 
         # Step 10: Handle psychic powers
         # Generate psychic powers based on discipline skills
-        if power_type in ["magic", "psionic"] or character.character_class.name == "Psychic":
+        if power_type == "psionic" or character.character_class.name == "Psychic":
             # Get all discipline skills the character has
             psychic_disciplines = ["Biopsionics", "Metapsionics", "Precognition",
                                   "Telekinesis", "Telepathy", "Teleportation"]

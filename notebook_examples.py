@@ -504,33 +504,37 @@ for disc_name in psychic_disciplines:
         print()
 
 print("\n" + "=" * 70)
-print("Partial Psychic (Arcanist with 1 discipline)")
+print("Partial Psychic (Warrior with 1 discipline)")
 print("-" * 70)
-arcanist_psychic = gen.generate_character(
-    name="Mystic Scholar",
+print("Note: Only power_type='psionic' grants psychic abilities, not 'magic'")
+print()
+warrior_psychic = gen.generate_character(
+    name="Mind Warrior",
     level=2,
-    power_type="magic",
-    class_choice="Arcanist",
+    power_type="psionic",
+    class_choice="Warrior",
     attribute_method="array"
 )
 
-# Show that they have both spells AND psychic powers
-if arcanist_psychic.spells:
-    print(f"Spells: {len(arcanist_psychic.spells.known_spells)} known ({arcanist_psychic.spells.tradition})")
-
-if arcanist_psychic.psychic_powers:
-    print(f"Effort Pool: {arcanist_psychic.psychic_powers.effort_pool}")
+# Show psychic powers
+if warrior_psychic.psychic_powers:
+    print(f"Effort Pool: {warrior_psychic.psychic_powers.effort_pool}")
     print()
 
     for disc_name in psychic_disciplines:
-        if arcanist_psychic.skills.has_skill(disc_name):
-            skill_level = arcanist_psychic.skills.get_level(disc_name)
+        if warrior_psychic.skills.has_skill(disc_name):
+            skill_level = warrior_psychic.skills.get_level(disc_name)
             print(f"{disc_name}-{skill_level}:")
 
-            techniques = arcanist_psychic.psychic_powers.get_techniques(disc_name)
+            techniques = warrior_psychic.psychic_powers.get_techniques(disc_name)
             for tech in techniques:
                 effort_str = f"({tech.effort_cost} Effort)" if tech.effort_cost > 0 else "(Core)"
                 print(f"  • {tech.name} {effort_str}")
+
+print()
+print(f"Class: {warrior_psychic.character_class.name}")
+print(f"HP: {warrior_psychic.hp}")
+print(f"Attack Bonus: +{warrior_psychic.attack_bonus}")
 
 
 # ============================================================================

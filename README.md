@@ -147,14 +147,15 @@ psychic = gen.generate_character(
 # Will have 2 discipline skills (e.g., Telepathy-1, Precognition-0)
 # Each discipline grants core technique + 1 technique per skill level
 
-# Partial Psychic (1 discipline)
-arcanist_psychic = gen.generate_character(
-    name="Mystic Scholar",
+# Partial Psychic (1 discipline, non-Psychic class)
+# Note: Only power_type="psionic" grants psychic abilities
+warrior_psychic = gen.generate_character(
+    name="Mind Warrior",
     level=2,
-    power_type="magic",
-    class_choice="Arcanist"
+    power_type="psionic",
+    class_choice="Warrior"
 )
-# Will have 1 discipline skill + spells
+# Will have 1 discipline skill (e.g., Telekinesis-0) + warrior abilities
 
 CharacterDisplay.print_character(psychic)
 ```
