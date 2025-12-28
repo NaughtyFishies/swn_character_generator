@@ -101,11 +101,21 @@ class CharacterDisplay:
             lines.append(f"Known Spells: {len(character.spells.known_spells)}")
             lines.append("")
 
+            # Show spell slots per level
+            if character.spells.spell_slots:
+                lines.append("Spell Slots per Day:")
+                for level in range(1, 6):
+                    slots = character.spells.get_spell_slots(level)
+                    if slots > 0:
+                        level_spells = character.spells.get_spells_by_level(level)
+                        lines.append(f"  Level {level}: {len(level_spells)} known / {slots} slots")
+                lines.append("")
+
             # Group spells by level
             for level in range(1, 6):
                 level_spells = character.spells.get_spells_by_level(level)
                 if level_spells:
-                    lines.append(f"Level {level}:")
+                    lines.append(f"Level {level} Spells:")
                     for spell in level_spells:
                         lines.append(f"  - {spell.name}")
                         lines.append(f"    {spell.description}")

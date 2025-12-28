@@ -133,7 +133,7 @@ class SkillSet:
 
 
 def allocate_skill_points(skill_set: SkillSet, points: int, all_skill_names: List[str],
-                         priority_skills: List[str]):
+                         priority_skills: List[str], character_level: int = 1):
     """
     Intelligently allocate skill points to a character using official SWN rules.
 
@@ -142,6 +142,7 @@ def allocate_skill_points(skill_set: SkillSet, points: int, all_skill_names: Lis
         points: Number of points to allocate
         all_skill_names: List of all valid skill names
         priority_skills: List of class-relevant skills to prioritize
+        character_level: Character level (affects max skill level allowed)
     """
     spent = skill_set.total_points_spent()
     remaining = points - spent
@@ -150,8 +151,20 @@ def allocate_skill_points(skill_set: SkillSet, points: int, all_skill_names: Lis
     if remaining <= 0:
         return
 
-    # Determine how many skills to focus on based on points available
-    # More focused for lower point totals
+    # Determine max skill level based on character level
+    # Level 1-2: max skill 1
+    # Level 3-5: max skill 2
+    # Level 6-8: max skill 3
+    # Level 9+: max skill 4
+    if character_level <= 2:
+        max_level = 1
+    elif character_level <= 5:
+        max_level = 2
+    elif character_level <= 8:
+        max_level = 3
+    else:
+        max_level = 4
+
     max_attempts = 1000  # Prevent infinite loops
     attempts = 0
 
@@ -166,9 +179,6 @@ def allocate_skill_points(skill_set: SkillSet, points: int, all_skill_names: Lis
 
         current_level = skill_set.get_level(skill_name)
 
-        # At character creation, cap at level 1 (official SWN rules)
-        max_level = 1
-
         if current_level < max_level:
             # Calculate cost to increase skill
             cost = calculate_skill_cost(current_level)
@@ -177,7 +187,7 @@ def allocate_skill_points(skill_set: SkillSet, points: int, all_skill_names: Lis
                 skill_set.add_skill(skill_name, current_level + 1)
                 remaining -= cost
 
-        # If all priority skills are maxed, try any skill
+        # If all skills are maxed, try any skill
         all_maxed = all(skill_set.get_level(s) >= max_level for s in all_skill_names)
         if all_maxed:
             break

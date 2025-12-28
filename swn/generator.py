@@ -77,7 +77,13 @@ class CharacterGenerator:
         Returns:
             Complete Character instance
         """
-        # Step 1: Create character with name
+        # Step 1: Validate level (1-10)
+        if level < 1:
+            level = 1
+        if level > 10:
+            level = 10
+
+        # Step 2: Create character with name
         if name is None:
             name = self._generate_random_name()
 
@@ -111,9 +117,12 @@ class CharacterGenerator:
             if not character.skills.has_skill("Psychic"):
                 character.skills.add_skill("Psychic", 0)
 
-        # Step 7: Calculate available skill points (base + INT modifier)
+        # Step 7: Calculate available skill points
+        # Formula: (class base + INT modifier) + (3 points per level)
         int_mod = character.attributes.get_modifier("INT")
-        total_points = character.character_class.skill_points_base + int_mod
+        base_from_class = character.character_class.skill_points_base + int_mod
+        points_from_levels = 3 * character.level
+        total_points = base_from_class + points_from_levels
         total_points = max(1, total_points)  # Minimum 1 skill point
 
         # Step 8: Allocate remaining skill points
@@ -122,7 +131,8 @@ class CharacterGenerator:
             character.skills,
             total_points,
             self.all_skills,
-            priority_skills
+            priority_skills,
+            character.level  # Pass character level for skill cap calculation
         )
 
         # Step 8.5: Add one free non-psychic skill

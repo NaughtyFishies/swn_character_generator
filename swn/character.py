@@ -29,7 +29,9 @@ class Character:
 
     def calculate_hp(self) -> int:
         """
-        Calculate HP based on class and CON modifier.
+        Calculate HP based on class, CON modifier, and level.
+
+        Formula: Roll (1d6 + class_hp_bonus + CON_modifier) for each level and sum
 
         Returns:
             Hit points value
@@ -38,8 +40,14 @@ class Character:
             return 1
 
         con_mod = self.attributes.get_modifier("CON")
-        hp_roll = self.character_class.roll_hp()
-        return max(1, hp_roll + con_mod)
+        total_hp = 0
+
+        # Roll HP for each level
+        for _ in range(self.level):
+            hp_roll = self.character_class.roll_hp()  # Includes class hp_bonus
+            total_hp += max(1, hp_roll + con_mod)
+
+        return total_hp
 
     def calculate_saves(self) -> Dict[str, int]:
         """

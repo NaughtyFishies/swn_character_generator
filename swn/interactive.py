@@ -83,7 +83,6 @@ class InteractivePrompt:
 
         character = self.generator.generate_character(
             name=name,
-            power_level=power_level,
             power_type=power_type,
             class_choice=class_choice
         )

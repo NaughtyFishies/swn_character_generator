@@ -35,7 +35,7 @@ class Spell:
 
 
 class SpellList:
-    """Manages known spells for a spellcasting character."""
+    """Manages known spells and spell slots for a spellcasting character."""
 
     def __init__(self, tradition: str):
         """
@@ -46,6 +46,7 @@ class SpellList:
         """
         self.tradition = tradition
         self.known_spells: List[Spell] = []
+        self.spell_slots: Dict[int, int] = {}  # spell level -> number of slots
 
     def add_spell(self, spell: Spell):
         """
@@ -69,11 +70,34 @@ class SpellList:
         """
         return [s for s in self.known_spells if s.level == level]
 
+    def set_spell_slots(self, level: int, slots: int):
+        """
+        Set the number of spell slots for a given spell level.
+
+        Args:
+            level: Spell level (1-5)
+            slots: Number of spell slots
+        """
+        self.spell_slots[level] = slots
+
+    def get_spell_slots(self, level: int) -> int:
+        """
+        Get the number of spell slots for a given spell level.
+
+        Args:
+            level: Spell level (1-5)
+
+        Returns:
+            Number of spell slots (0 if none)
+        """
+        return self.spell_slots.get(level, 0)
+
     def to_dict(self) -> dict:
         """Convert spell list to dictionary format."""
         return {
             "tradition": self.tradition,
-            "spells": [spell.to_dict() for spell in self.known_spells]
+            "spells": [spell.to_dict() for spell in self.known_spells],
+            "spell_slots": self.spell_slots
         }
 
     def __str__(self) -> str:
@@ -83,16 +107,73 @@ class SpellList:
 
         lines = [f"{self.tradition} Tradition:"]
 
-        # Group by level
+        # Show spell slots per level
+        if self.spell_slots:
+            lines.append("\nSpell Slots per Day:")
+            for level in range(1, 6):
+                slots = self.spell_slots.get(level, 0)
+                if slots > 0:
+                    level_spells = self.get_spells_by_level(level)
+                    lines.append(f"  Level {level}: {len(level_spells)} known / {slots} slots")
+            lines.append("")
+
+        # Group spells by level
         for level in range(1, 6):
             level_spells = self.get_spells_by_level(level)
             if level_spells:
-                lines.append(f"\nLevel {level} Spells:")
+                lines.append(f"Level {level} Spells Known:")
                 for spell in level_spells:
                     lines.append(f"  - {spell.name}")
                     lines.append(f"    {spell.description}")
+                lines.append("")
 
         return "\n".join(lines)
+
+
+def get_spell_progression(character_level: int) -> Dict[int, Dict[str, int]]:
+    """
+    Get spell progression for Magister spellcasters.
+
+    Returns dictionary mapping spell level to {known, slots}.
+    Format: {1: {"known": 2, "slots": 3}, 2: {"known": 0, "slots": 0}, ...}
+
+    Progression table (Magister):
+    Level  L1    L2    L3    L4    L5
+    1      2/3   -     -     -     -
+    2      2/4   -     -     -     -
+    3      3/5   2/2   -     -     -
+    4      3/6   2/3   -     -     -
+    5      4/6   2/3   2/2   -     -
+    6      4/6   3/4   2/3   -     -
+    7      5/6   3/4   2/3   2/2   -
+    8      5/6   4/5   3/4   2/3   -
+    9      5/6   4/5   3/4   3/3   2/2
+    10+    5/6   4/6   3/5   3/4   2/3
+
+    Args:
+        character_level: Character level
+
+    Returns:
+        Dictionary of spell level -> {known, slots}
+    """
+    progression_table = {
+        1:  {1: {"known": 2, "slots": 3}},
+        2:  {1: {"known": 2, "slots": 4}},
+        3:  {1: {"known": 3, "slots": 5}, 2: {"known": 2, "slots": 2}},
+        4:  {1: {"known": 3, "slots": 6}, 2: {"known": 2, "slots": 3}},
+        5:  {1: {"known": 4, "slots": 6}, 2: {"known": 2, "slots": 3}, 3: {"known": 2, "slots": 2}},
+        6:  {1: {"known": 4, "slots": 6}, 2: {"known": 3, "slots": 4}, 3: {"known": 2, "slots": 3}},
+        7:  {1: {"known": 5, "slots": 6}, 2: {"known": 3, "slots": 4}, 3: {"known": 2, "slots": 3}, 4: {"known": 2, "slots": 2}},
+        8:  {1: {"known": 5, "slots": 6}, 2: {"known": 4, "slots": 5}, 3: {"known": 3, "slots": 4}, 4: {"known": 2, "slots": 3}},
+        9:  {1: {"known": 5, "slots": 6}, 2: {"known": 4, "slots": 5}, 3: {"known": 3, "slots": 4}, 4: {"known": 3, "slots": 3}, 5: {"known": 2, "slots": 2}},
+        10: {1: {"known": 5, "slots": 6}, 2: {"known": 4, "slots": 6}, 3: {"known": 3, "slots": 5}, 4: {"known": 3, "slots": 4}, 5: {"known": 2, "slots": 3}},
+    }
+
+    # Levels 10+ use the same progression as level 10
+    if character_level >= 10:
+        character_level = 10
+
+    return progression_table.get(character_level, {1: {"known": 2, "slots": 3}})
 
 
 class SpellSelector:
@@ -130,49 +211,36 @@ class SpellSelector:
 
         return cls(tradition, data["spells"])
 
-    def get_spells_for_level(self, character_level: int) -> List[Spell]:
+    def create_spell_list(self, character_level: int) -> SpellList:
         """
-        Get appropriate number of spells for a character level.
-
-        Spell progression:
-        - Level 1: 4 level-1 spells
-        - Level 2: 5 level-1 spells
-        - Level 3: 6 level-1 spells + 2 level-2 spells
-        - Level 4: 7 level-1 spells + 3 level-2 spells
-        - Level 5+: 8 level-1 spells + 4 level-2 spells + 2 level-3 spells
+        Create a complete spell list for a character based on Magister progression.
 
         Args:
             character_level: Character level
 
         Returns:
-            List of selected spells
+            SpellList instance with appropriate spells and spell slots
         """
-        spells = []
+        spell_list = SpellList(self.tradition)
 
-        # Determine spell counts by level
-        spell_counts = {
-            1: [(1, 4)],  # 4 level-1 spells
-            2: [(1, 5)],  # 5 level-1 spells
-            3: [(1, 6), (2, 2)],  # 6 level-1, 2 level-2
-            4: [(1, 7), (2, 3)],  # 7 level-1, 3 level-2
-            5: [(1, 8), (2, 4), (3, 2)],  # 8 level-1, 4 level-2, 2 level-3
-        }
+        # Get spell progression for this level
+        progression = get_spell_progression(character_level)
 
-        # For levels above 5, use level 5 progression
-        if character_level > 5:
-            character_level = 5
+        # For each spell level in the progression
+        for spell_level, counts in progression.items():
+            known = counts["known"]
+            slots = counts["slots"]
 
-        if character_level not in spell_counts:
-            character_level = 1
+            # Set spell slots
+            spell_list.set_spell_slots(spell_level, slots)
 
-        for spell_level, count in spell_counts[character_level]:
+            # Select known spells
             spell_key = f"level_{spell_level}"
-            spell_data = self.spell_data.get(spell_key, [])
+            available_spells = self.spell_data.get(spell_key, [])
 
-            if spell_data:
-                # Select random spells from this level
-                num_to_select = min(count, len(spell_data))
-                selected = random.sample(spell_data, num_to_select)
+            if available_spells and known > 0:
+                num_to_select = min(known, len(available_spells))
+                selected = random.sample(available_spells, num_to_select)
 
                 for spell_info in selected:
                     spell = Spell(
@@ -180,24 +248,6 @@ class SpellSelector:
                         level=spell_level,
                         description=spell_info["description"]
                     )
-                    spells.append(spell)
-
-        return spells
-
-    def create_spell_list(self, character_level: int) -> SpellList:
-        """
-        Create a complete spell list for a character.
-
-        Args:
-            character_level: Character level
-
-        Returns:
-            SpellList instance with appropriate spells
-        """
-        spell_list = SpellList(self.tradition)
-
-        selected_spells = self.get_spells_for_level(character_level)
-        for spell in selected_spells:
-            spell_list.add_spell(spell)
+                    spell_list.add_spell(spell)
 
         return spell_list
