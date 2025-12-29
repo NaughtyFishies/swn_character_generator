@@ -54,15 +54,37 @@ class Character:
 
     def calculate_saves(self) -> Dict[str, int]:
         """
-        Calculate saving throws based on class.
+        Calculate saving throws based on level and attributes.
+
+        Formula for each save:
+        - Physical: 16 - level - max(STR mod, CON mod)
+        - Evasion: 16 - level - max(DEX mod, INT mod)
+        - Mental: 16 - level - max(WIS mod, CHA mod)
 
         Returns:
             Dictionary with Physical, Evasion, and Mental saves
         """
-        if not self.character_class:
+        if not self.attributes:
             return {"Physical": 15, "Evasion": 15, "Mental": 15}
 
-        return self.character_class.get_saves()
+        # Get attribute modifiers
+        str_mod = self.attributes.get_modifier("STR")
+        con_mod = self.attributes.get_modifier("CON")
+        dex_mod = self.attributes.get_modifier("DEX")
+        int_mod = self.attributes.get_modifier("INT")
+        wis_mod = self.attributes.get_modifier("WIS")
+        cha_mod = self.attributes.get_modifier("CHA")
+
+        # Calculate saves using formula: 16 - level - best_attribute_mod
+        physical = 16 - self.level - max(str_mod, con_mod)
+        evasion = 16 - self.level - max(dex_mod, int_mod)
+        mental = 16 - self.level - max(wis_mod, cha_mod)
+
+        return {
+            "Physical": physical,
+            "Evasion": evasion,
+            "Mental": mental
+        }
 
     def to_dict(self) -> dict:
         """
