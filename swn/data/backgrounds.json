@@ -3,128 +3,290 @@
     {
       "name": "Barbarian",
       "free_skill": "Survive",
-      "quick_skills": ["Notice", "Exert", "Connect"],
-      "description": "From a primitive world or harsh frontier environment"
+      "quick_skills": ["Survive", "Notice", "Any Combat"],
+      "description": "From a savage world of low technology and high violence"
     },
     {
       "name": "Clergy",
       "free_skill": "Talk",
-      "quick_skills": ["Administer", "Know", "Connect"],
-      "description": "Religious professional or spiritual leader"
+      "quick_skills": ["Talk", "Perform", "Know"],
+      "description": "Religious professional, priest, monk, or spiritual leader"
     },
     {
       "name": "Courtesan",
       "free_skill": "Perform",
-      "quick_skills": ["Notice", "Connect", "Talk"],
-      "description": "Entertainer, companion, or social expert"
+      "quick_skills": ["Perform", "Notice", "Connect"],
+      "description": "Companion, entertainer, or professional of proffered pleasure"
     },
     {
       "name": "Criminal",
       "free_skill": "Sneak",
-      "quick_skills": ["Connect", "Notice", "Talk"],
-      "description": "Thief, smuggler, or other lawbreaker"
+      "quick_skills": ["Sneak", "Connect", "Talk"],
+      "description": "Thief, smuggler, spy, or other lawbreaker"
     },
     {
       "name": "Dilettante",
-      "free_skill": "Know",
-      "quick_skills": ["Connect", "Talk", "Perform"],
-      "description": "Wealthy dabbler in various pursuits"
+      "free_skill": "Connect",
+      "quick_skills": ["Connect", "Know", "Talk"],
+      "description": "Wealthy socialite who never needed a real profession"
     },
     {
       "name": "Entertainer",
       "free_skill": "Perform",
-      "quick_skills": ["Connect", "Talk", "Exert"],
-      "description": "Professional performer or artist"
+      "quick_skills": ["Perform", "Talk", "Connect"],
+      "description": "Singer, dancer, actor, poet, or professional artist"
     },
     {
       "name": "Merchant",
       "free_skill": "Trade",
-      "quick_skills": ["Talk", "Connect", "Know"],
-      "description": "Trader, shopkeeper, or business professional"
+      "quick_skills": ["Trade", "Talk", "Connect"],
+      "description": "Trader, shopkeeper, or daring far trader"
     },
     {
       "name": "Noble",
       "free_skill": "Lead",
-      "quick_skills": ["Connect", "Administer", "Talk"],
-      "description": "Aristocrat or high-status individual"
+      "quick_skills": ["Lead", "Connect", "Administer"],
+      "description": "Member of a planetary ruling class or aristocracy"
     },
     {
       "name": "Official",
       "free_skill": "Administer",
-      "quick_skills": ["Lead", "Talk", "Know"],
-      "description": "Bureaucrat or government worker"
+      "quick_skills": ["Administer", "Talk", "Connect"],
+      "description": "Bureaucrat, government clerk, or law enforcement"
     },
     {
       "name": "Peasant",
       "free_skill": "Exert",
-      "quick_skills": ["Work", "Survive", "Notice"],
-      "description": "Farmer, laborer, or rural worker"
+      "quick_skills": ["Exert", "Sneak", "Survive"],
+      "description": "Farmer, agricultural worker, or rural laborer"
     },
     {
       "name": "Physician",
-      "free_skill": "Know",
-      "quick_skills": ["Fix", "Notice", "Talk"],
-      "description": "Medical professional or healer"
+      "free_skill": "Heal",
+      "quick_skills": ["Heal", "Know", "Notice"],
+      "description": "Doctor, medic, healer, or medical professional"
     },
     {
       "name": "Pilot",
       "free_skill": "Pilot",
-      "quick_skills": ["Fix", "Notice", "Exert"],
-      "description": "Spacecraft or vehicle operator"
+      "quick_skills": ["Pilot", "Fix", "Shoot"],
+      "description": "Spacecraft, vehicle, or transport operator"
     },
     {
       "name": "Politician",
       "free_skill": "Talk",
-      "quick_skills": ["Lead", "Connect", "Notice"],
-      "description": "Elected official or political operative"
+      "quick_skills": ["Talk", "Lead", "Connect"],
+      "description": "Elected official, political operative, or public figure"
     },
     {
       "name": "Scholar",
       "free_skill": "Know",
-      "quick_skills": ["Administer", "Connect", "Fix"],
-      "description": "Academic, researcher, or learned professional"
-    },
-    {
-      "name": "Scientist",
-      "free_skill": "Know",
-      "quick_skills": ["Fix", "Notice", "Program"],
-      "description": "Researcher or technical specialist"
+      "quick_skills": ["Know", "Connect", "Administer"],
+      "description": "Scientist, sage, professor, or dedicated researcher"
     },
     {
       "name": "Soldier",
-      "free_skill": "Shoot",
-      "quick_skills": ["Exert", "Sneak", "Notice"],
-      "description": "Military professional or veteran"
+      "free_skill": "Any Combat",
+      "quick_skills": ["Any Combat", "Exert", "Survive"],
+      "description": "Professional fighter, military veteran, or warrior"
     },
     {
       "name": "Spacer",
       "free_skill": "Fix",
-      "quick_skills": ["Pilot", "Program", "Talk"],
-      "description": "Born and raised on spacecraft"
+      "quick_skills": ["Fix", "Pilot", "Program"],
+      "description": "Voidborn worker who lives and works in space"
     },
     {
       "name": "Technician",
       "free_skill": "Fix",
-      "quick_skills": ["Know", "Notice", "Program"],
-      "description": "Technical specialist or engineer"
+      "quick_skills": ["Fix", "Exert", "Notice"],
+      "description": "Builder, engineer, mechanic, or technical specialist"
     },
     {
       "name": "Thug",
-      "free_skill": "Stab",
-      "quick_skills": ["Shoot", "Exert", "Connect"],
-      "description": "Enforcer, gangster, or street tough"
+      "free_skill": "Any Combat",
+      "quick_skills": ["Any Combat", "Talk", "Connect"],
+      "description": "Enforcer, gangster, bruiser, or strong-arm"
     },
     {
       "name": "Vagabond",
       "free_skill": "Survive",
-      "quick_skills": ["Notice", "Sneak", "Connect"],
-      "description": "Wanderer, drifter, or homeless individual"
+      "quick_skills": ["Survive", "Sneak", "Notice"],
+      "description": "Wanderer, drifter, or person of the road"
     },
     {
       "name": "Worker",
       "free_skill": "Work",
-      "quick_skills": ["Fix", "Exert", "Pilot"],
-      "description": "Industrial or manual laborer"
+      "quick_skills": ["Connect", "Exert", "Work"],
+      "description": "Factory laborer, industrial worker, or service employee"
+    },
+    {
+      "name": "Arcanist Scholar",
+      "free_skill": "Know Magic",
+      "quick_skills": ["Know Magic", "Know", "Notice"],
+      "description": "Bookish wizard dedicated to magical scholarship",
+      "class_specific": "Arcanist"
+    },
+    {
+      "name": "Hirespell",
+      "free_skill": "Cast Magic",
+      "quick_skills": ["Cast Magic", "Trade", "Any Combat"],
+      "description": "Mercenary wizard who hires out their magical talents",
+      "class_specific": "Arcanist"
+    },
+    {
+      "name": "Government Mage",
+      "free_skill": "Connect",
+      "quick_skills": ["Connect", "Administer", "Work"],
+      "description": "Arcanist in the employ of a government or civil authority",
+      "class_specific": "Arcanist"
+    },
+    {
+      "name": "Arcane Muse",
+      "free_skill": "Talk",
+      "quick_skills": ["Talk", "Perform", "Connect"],
+      "description": "Hired experience provider capable of granting impossible encounters",
+      "class_specific": "Free Nexus"
+    },
+    {
+      "name": "Escaped Familiar",
+      "free_skill": "Any Skill",
+      "quick_skills": ["Any Skill", "Sneak", "Notice"],
+      "description": "Former property who escaped their master's control",
+      "class_specific": "Free Nexus"
+    },
+    {
+      "name": "Occult Proxy",
+      "free_skill": "Exert",
+      "quick_skills": ["Exert", "Notice", "Sneak"],
+      "description": "Professional helper who goes to dangerous places for employers",
+      "class_specific": "Free Nexus"
+    },
+    {
+      "name": "Godhunter Inquisitor",
+      "free_skill": "Notice",
+      "quick_skills": ["Notice", "Talk", "Connect"],
+      "description": "Trained in sniffing out Shadow cults and their abominable heresy",
+      "class_specific": "Godhunter"
+    },
+    {
+      "name": "Godhunter Templar",
+      "free_skill": "Any Combat",
+      "quick_skills": ["Any Combat", "Exert", "Notice"],
+      "description": "Consecrated to war against Shadows seeking theological foothold",
+      "class_specific": "Godhunter"
+    },
+    {
+      "name": "Vengeful Renegade",
+      "free_skill": "Any Combat",
+      "quick_skills": ["Any Combat", "Any Skill", "Connect"],
+      "description": "Former cult member or victim using knowledge as weapon against cults",
+      "class_specific": "Godhunter"
+    },
+    {
+      "name": "Pacter Chosen",
+      "free_skill": "Cast Magic",
+      "quick_skills": ["Cast Magic", "Work", "Notice"],
+      "description": "Received powers through non-traditional means rather than formal training",
+      "class_specific": "Pacter"
+    },
+    {
+      "name": "Pacter Controller",
+      "free_skill": "Cast Magic",
+      "quick_skills": ["Cast Magic", "Lead", "Exert"],
+      "description": "Specializes in summoning and controlling Shadows for your own ends",
+      "class_specific": "Pacter"
+    },
+    {
+      "name": "Pacter Dragoman",
+      "free_skill": "Cast Magic",
+      "quick_skills": ["Cast Magic", "Talk", "Know Magic"],
+      "description": "Diplomat and interpreter specializing in negotiating with Shadows",
+      "class_specific": "Pacter"
+    },
+    {
+      "name": "Amender of Flesh",
+      "free_skill": "Cast Magic",
+      "quick_skills": ["Cast Magic", "Heal", "Connect"],
+      "description": "Healer who corrects deformities and alters bodily forms",
+      "class_specific": "Rectifier"
+    },
+    {
+      "name": "Identity Artist",
+      "free_skill": "Cast Magic",
+      "quick_skills": ["Cast Magic", "Connect", "Talk"],
+      "description": "Seeks enlightenment through changing physical form and societal role",
+      "class_specific": "Rectifier"
+    },
+    {
+      "name": "Vessel of Will",
+      "free_skill": "Cast Magic",
+      "quick_skills": ["Cast Magic", "Exert", "Survive"],
+      "description": "Uses arcane arts to hone body as tool for untrammeled will",
+      "class_specific": "Rectifier"
+    },
+    {
+      "name": "Sunblade Mystic",
+      "free_skill": "Sunblade",
+      "quick_skills": ["Sunblade", "Talk", "Know"],
+      "description": "Spiritual guide embracing mysteries and seeking peaceful resolution",
+      "class_specific": "Sunblade"
+    },
+    {
+      "name": "Sunblade Warrior",
+      "free_skill": "Sunblade",
+      "quick_skills": ["Sunblade", "Any Combat", "Exert"],
+      "description": "Warrior consecrated to the sword, trained in ancient martial arts",
+      "class_specific": "Sunblade"
+    },
+    {
+      "name": "Sunblade Burnout",
+      "free_skill": "Sunblade",
+      "quick_skills": ["Sunblade", "Connect", "Any Skill"],
+      "description": "Former member who departed the order, living on society's edge",
+      "class_specific": "Sunblade"
+    },
+    {
+      "name": "War Mage Veteran",
+      "free_skill": "Cast Magic",
+      "quick_skills": ["Cast Magic", "Any Combat", "Exert"],
+      "description": "Combat veteran who served on the front lines with magical abilities",
+      "class_specific": "War Mage"
+    },
+    {
+      "name": "War Mage Officer",
+      "free_skill": "Cast Magic",
+      "quick_skills": ["Cast Magic", "Any Combat", "Lead"],
+      "description": "Former military leader who coordinated soldiers in battle",
+      "class_specific": "War Mage"
+    },
+    {
+      "name": "War Mage Rebel",
+      "free_skill": "Cast Magic",
+      "quick_skills": ["Cast Magic", "Sneak", "Any Combat"],
+      "description": "Independent War Mage outside standing military forces",
+      "class_specific": "War Mage"
+    },
+    {
+      "name": "Accountant of Life and Death",
+      "free_skill": "Notice",
+      "quick_skills": ["Notice", "Talk", "Connect"],
+      "description": "Investigator and judge trained in discernment and adjudication",
+      "class_specific": "Yama King"
+    },
+    {
+      "name": "Celestial Loss Preventer",
+      "free_skill": "Talk",
+      "quick_skills": ["Talk", "Connect", "Trade"],
+      "description": "Diplomat and negotiator salvaging bad situations",
+      "class_specific": "Yama King"
+    },
+    {
+      "name": "Devil's Incense",
+      "free_skill": "Any Combat",
+      "quick_skills": ["Any Combat", "Sneak", "Connect"],
+      "description": "Infiltrator trained in social assassination and execution",
+      "class_specific": "Yama King"
     }
   ]
 }

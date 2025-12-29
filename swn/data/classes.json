@@ -6,6 +6,7 @@
       "skill_points_base": 3,
       "foci_count": 1,
       "attack_bonus": 1,
+      "power_type": "normal",
       "saving_throws": {
         "Physical": 15,
         "Evasion": 15,
@@ -23,6 +24,7 @@
       "skill_points_base": 6,
       "foci_count": 1,
       "attack_bonus": 0,
+      "power_type": "normal",
       "saving_throws": {
         "Physical": 15,
         "Evasion": 14,
@@ -40,6 +42,7 @@
       "skill_points_base": 4,
       "foci_count": 1,
       "attack_bonus": 0,
+      "power_type": "psionic",
       "saving_throws": {
         "Physical": 16,
         "Evasion": 15,
@@ -47,9 +50,9 @@
       },
       "description": "Wielders of mental powers and psionic abilities",
       "special_abilities": [
-        "Gains 2 psychic disciplines as skills at level 0",
-        "Can use psychic disciplines and techniques",
-        "Effort pool based on highest discipline skill + WIS/INT modifier"
+        "Choose 2 psychic skills as bonus skills (can pick same twice for level-1)",
+        "Psychic disciplines are skills that can be trained like any other",
+        "Effort pool: 1 + highest psychic skill + better of WIS/CON modifier"
       ],
       "requires_psychic": true
     },
@@ -59,6 +62,7 @@
       "skill_points_base": 4,
       "foci_count": 2,
       "attack_bonus": 1,
+      "power_type": "normal",
       "saving_throws": {
         "Physical": 15,
         "Evasion": 15,
@@ -77,6 +81,7 @@
       "skill_points_base": 6,
       "foci_count": 1,
       "attack_bonus": 0,
+      "power_type": "magic",
       "saving_throws": {
         "Physical": 15,
         "Evasion": 14,
@@ -95,6 +100,7 @@
       "skill_points_base": 3,
       "foci_count": 1,
       "attack_bonus": 1,
+      "power_type": "magic",
       "saving_throws": {
         "Physical": 15,
         "Evasion": 15,
@@ -114,6 +120,7 @@
       "skill_points_base": 3,
       "foci_count": 1,
       "attack_bonus": 0,
+      "power_type": "magic",
       "saving_throws": {
         "Physical": 16,
         "Evasion": 15,
@@ -133,6 +140,7 @@
       "skill_points_base": 4,
       "foci_count": 1,
       "attack_bonus": 0,
+      "power_type": "magic",
       "saving_throws": {
         "Physical": 15,
         "Evasion": 15,
@@ -152,6 +160,7 @@
       "skill_points_base": 4,
       "foci_count": 1,
       "attack_bonus": 0,
+      "power_type": "magic",
       "saving_throws": {
         "Physical": 15,
         "Evasion": 15,
@@ -172,6 +181,7 @@
       "skill_points_base": 3,
       "foci_count": 1,
       "attack_bonus": 0,
+      "power_type": "magic",
       "saving_throws": {
         "Physical": 16,
         "Evasion": 15,
@@ -192,6 +202,7 @@
       "skill_points_base": 3,
       "foci_count": 1,
       "attack_bonus": 0,
+      "power_type": "magic",
       "saving_throws": {
         "Physical": 16,
         "Evasion": 15,
@@ -213,6 +224,7 @@
       "skill_points_base": 4,
       "foci_count": 1,
       "attack_bonus": 0,
+      "power_type": "magic",
       "saving_throws": {
         "Physical": 15,
         "Evasion": 15,
@@ -234,6 +246,7 @@
       "skill_points_base": 3,
       "foci_count": 1,
       "attack_bonus": 0,
+      "power_type": "magic",
       "saving_throws": {
         "Physical": 16,
         "Evasion": 15,
@@ -255,6 +268,7 @@
       "skill_points_base": 4,
       "foci_count": 1,
       "attack_bonus": 0,
+      "power_type": "magic",
       "saving_throws": {
         "Physical": 15,
         "Evasion": 15,

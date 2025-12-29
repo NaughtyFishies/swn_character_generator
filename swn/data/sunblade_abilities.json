@@ -1,0 +1,122 @@
+{
+  "level_1_abilities": [
+    {
+      "name": "Sunblade Wielder",
+      "level_required": 1,
+      "automatic": true,
+      "description": "When using the sacred weapon of their order, the Sunblade gains a bonus to their hit roll equal to half their class level, rounded up. Their sacred weapon always counts as a magical weapon."
+    },
+    {
+      "name": "Esoteric Secrets",
+      "level_required": 1,
+      "automatic": true,
+      "description": "The Sunblade may pick Arcane Expert or Arcane Warrior foci with their choices, but each level in either type requires two picks instead of one. They may save focus picks for later levels in order to afford such abilities."
+    },
+    {
+      "name": "Sunblade Effort",
+      "level_required": 1,
+      "automatic": true,
+      "description": "You have a Sunblade Effort score which is committed and recovered just as psychic Effort is, but is tracked separately. Your total Effort equals your Sunblade skill plus the higher of your Wisdom or Charisma modifiers."
+    }
+  ],
+  "selectable_abilities": [
+    {
+      "name": "Cosmic Insight",
+      "description": "The Sunblade may Commit Sunblade Effort for the day as a Main Action to contemplate a particular action they intend to take within the next ten seconds. The GM describes what the Sunblade would likely perceive as that action's immediately consequent result, up to a minute afterwards. These results are based on what the GM thinks is most likely to happen."
+    },
+    {
+      "name": "Deflect Bolts",
+      "description": "When wielding a Readied sacred weapon, the Sunblade may Commit Effort for the day as an Instant action to negate an otherwise successful ranged attack from a foe with equal or fewer hit dice than the Sunblade's character level. The weapon may knock a bullet aside, disrupt a plasma blast with a counter-shot, or otherwise deflect it."
+    },
+    {
+      "name": "False Visions of the World",
+      "description": "The Sunblade may Commit Sunblade Effort for the day as a Main Action to conjure an audio-visual illusion within 30 meters consisting of figures or scenes occupying no more than five meters in radius. These illusions sound and look real, but are intangible to the touch. The Sunblade can control and maintain the illusions so long as they continue to spend a Main Action each round to do so, but they cannot make them move out of the initial area of effect."
+    },
+    {
+      "name": "Insinuating Will",
+      "description": "You may Commit Sunblade Effort for the day as a Main Action to make a verbal suggestion to a single listener within 10 meters, whether or not they understand your words. The target gets a Mental save to resist; on a failure, they will believe what you have stated or carry out the request you made, unless it would expose them to physical danger or inflict deep emotional anguish. Targets who save against this ability are immune to it for a scene. Compliance or clearly incorrect belief never lasts more than one scene."
+    },
+    {
+      "name": "Long Step",
+      "description": "The Sunblade may Commit Effort as an On Turn action; as long as it remains Committed, they may use a Move action to make a leap of up to 10 meters horizontal or vertical distance. This leap counts as a Fighting Withdrawal for escaping melee engagements."
+    },
+    {
+      "name": "Mastery of Motion",
+      "description": "The Sunblade may Commit Effort for the scene as a Main Action to use the Telekinesis discipline's Telekinetic Manipulation technique for one round at a skill level equal to their Sunblade skill."
+    },
+    {
+      "name": "Mystical Resilience",
+      "description": "The Sunblade may Commit Sunblade Effort for the day as an Instant action to reroll a failed saving throw. They may reroll a saving throw with this ability only once. In addition, they gain +1 maximum hit point per character level, retroactive to first level.",
+      "hp_bonus": 1
+    },
+    {
+      "name": "Robes of Discipline",
+      "description": "When unarmored and carrying a Readied sacred weapon, whether or not it is drawn, the Sunblade's base AC equals 16 plus their Sunblade skill level. This AC can be modified by Dexterity, but not by shields."
+    },
+    {
+      "name": "Self-Sustenance",
+      "description": "The Sunblade needs neither eat nor drink, and is impervious to hostile environments as if they were wearing a vacc suit at all times."
+    },
+    {
+      "name": "Sense the Unseen",
+      "description": "The Sunblade gains an intuitive sense of any magical energies within 30 meters, including items, spellcasting or otherworldly entities."
+    },
+    {
+      "name": "Sunblade Healer",
+      "description": "By touching a living target as a Main Action, the PC can Commit Sunblade Effort for the day to heal lost hit points equal to their Sunblade skill level plus one in d6. Thus, a PC with Sunblade-1 skill would heal 2d6 damage when using this ability. The Sunblade may instead Commit Sunblade Effort for the day to cure a non-congenital sickness rather than cure hit point damage."
+    },
+    {
+      "name": "Torrent of Energy",
+      "description": "The PC may Commit Sunblade Effort for the day as a Main Action to hurl a torrent of mystical energy at one target within 30 meters. The torrent does 1d6 damage per character level, with a Physical save for half. Using this ability more than once per day forces the PC to take half the damage they inflicted on the target."
+    },
+    {
+      "name": "Universal Speech",
+      "description": "You can speak with and understand any creature with a language. You gain a level in the Diplomat focus as a bonus, acquiring level 1 in it, or level 2 if you already have the first level.",
+      "grants_focus": "Diplomat"
+    }
+  ],
+  "sacred_weapons": [
+    {
+      "type": "Unarmed Combat",
+      "damage": "1d8+Skill",
+      "shock": "Sunblade skill+1/AC 20",
+      "attribute": "Str/Dex/Wis",
+      "range": "Melee"
+    },
+    {
+      "type": "Small Melee Weapon",
+      "damage": "1d8+Skill",
+      "shock": "Sunblade skill+1/AC 20",
+      "attribute": "Str/Dex/Wis",
+      "range": "10m throw"
+    },
+    {
+      "type": "Medium Melee Weapon",
+      "damage": "1d10+Skill",
+      "shock": "Sunblade skill+1/AC 20",
+      "attribute": "Str/Dex/Wis",
+      "range": "Melee"
+    },
+    {
+      "type": "Large Melee Weapon",
+      "damage": "1d10+1+Skill",
+      "shock": "Sunblade skill+2/AC 20",
+      "attribute": "Str/Wis",
+      "range": "Melee"
+    },
+    {
+      "type": "Small Ranged Weapon",
+      "damage": "2d6+2+Skill",
+      "shock": "None",
+      "attribute": "Dex/Wis",
+      "range": "50m"
+    },
+    {
+      "type": "Large Ranged Weapon",
+      "damage": "3d8+Skill",
+      "shock": "None",
+      "attribute": "Dex/Wis",
+      "range": "500m"
+    }
+  ]
+}

@@ -11,6 +11,7 @@ from swn.models.classes import ClassTable
 from swn.models.foci import FociSelector
 from swn.models.psychic import PsychicPowerSelector
 from swn.models.spells import SpellSelector
+from swn.models.sunblade import SunbladeAbilitySelector
 from swn.models.skills import SkillSet, allocate_skill_points
 from swn.models.equipment import EquipmentSelector, calculate_starting_credits
 
@@ -55,6 +56,13 @@ class CharacterGenerator:
             skills_data = json.load(f)
             self.all_skills = [skill["name"] for skill in skills_data["skills"]]
 
+        # Load Sunblade ability selector
+        sunblade_file = data_dir / "sunblade_abilities.json"
+        if sunblade_file.exists():
+            self.sunblade_selector = SunbladeAbilitySelector.load_from_file(str(sunblade_file))
+        else:
+            self.sunblade_selector = None
+
         # Load equipment selector
         self.equipment_selector = EquipmentSelector.load_from_files(data_dir)
 
@@ -63,8 +71,8 @@ class CharacterGenerator:
         name: Optional[str] = None,
         level: int = 1,
         attribute_method: str = "roll",
-        power_type: str = "normal",
         class_choice: Optional[str] = None,
+        background_choice: Optional[str] = None,
         use_quick_skills: bool = True,
         tech_level: int = 4
     ) -> Character:
@@ -75,8 +83,8 @@ class CharacterGenerator:
             name: Character name (random if None)
             level: Character level (default 1)
             attribute_method: "roll" (3d6, pick one to 14) or "array" (14,12,11,10,9,7)
-            power_type: "normal", "magic", or "psionic"
             class_choice: Class name or None for random
+            background_choice: Background name or None for random
             use_quick_skills: True to use quick skills, False to roll on tables (simplified)
             tech_level: Technology level for equipment (0-5, default 4)
 
@@ -95,7 +103,6 @@ class CharacterGenerator:
 
         character = Character(name)
         character.level = level
-        character.power_type = power_type
 
         # Step 2: Generate attributes using chosen method
         character.attributes = Attributes.roll_attributes(attribute_method)
@@ -104,34 +111,60 @@ class CharacterGenerator:
         if class_choice:
             character.character_class = self.classes.get_class(class_choice)
         else:
-            # Don't randomly select Psychic class unless power_type is magic/psionic
-            exclude_psychic = (power_type == "normal")
-            character.character_class = self.classes.get_random_class(exclude_psychic)
+            character.character_class = self.classes.get_random_class(exclude_psychic=False)
 
-        # Step 4: Roll random background
-        character.background = self.backgrounds.get_random_background()
+        # Set power type from class
+        character.power_type = character.character_class.power_type
+
+        # Step 4: Assign or randomize background
+        if background_choice:
+            character.background = self.backgrounds.get_background_by_name(background_choice)
+            if not character.background:
+                raise ValueError(f"Unknown background: {background_choice}")
+        else:
+            character.background = self.backgrounds.get_random_background()
 
         # Step 5: Initialize skills and apply background skills
         character.skills = SkillSet()
-        character.skills.add_skill(character.background.free_skill, -1)
-        quick_skill = character.background.select_quick_skill()
+
+        # For "Any Skill" resolution, exclude psychic disciplines unless character is psychic
+        psychic_disciplines = ["Biopsionics", "Metapsionics", "Precognition",
+                              "Telekinesis", "Telepathy", "Teleportation"]
+        # We'll determine if psychic after class selection, but for background skills,
+        # we can use all non-psychic skills for now
+        non_psychic_skills = [s for s in self.all_skills if s not in psychic_disciplines]
+
+        # Use resolve_free_skill() to handle "Any Combat", "Any Skill", and other special cases
+        free_skill = character.background.resolve_free_skill(available_skills=non_psychic_skills)
+        character.skills.add_skill(free_skill, -1)
+        # select_quick_skill() also handles "Any Combat", "Any Skill", and other special cases
+        quick_skill = character.background.select_quick_skill(available_skills=non_psychic_skills)
         character.skills.add_skill(quick_skill, 0)
 
         # Step 6: Add class starting skills (if applicable)
-        # Grant psychic discipline skills for psychic characters
-        # Full Psychic: 2 disciplines, Partial Psychic: 1 discipline
-        discipline_count = 0
+        # Grant psychic discipline bonus skills for Psychic class
+        # Psychic class gets 2 psychic skill picks as bonus skills
+        # Can pick same discipline twice to get level-1 and a free level-1 technique
         if character.character_class.name == "Psychic":
-            discipline_count = 2  # Full psychic gets 2 disciplines
-        elif power_type == "psionic":
-            discipline_count = 1  # Partial psychic gets 1 discipline
+            psychic_disciplines = ["Biopsionics", "Metapsionics", "Precognition",
+                                  "Telekinesis", "Telepathy", "Teleportation"]
 
-        # Select and grant random disciplines as skills at level 0
-        if discipline_count > 0:
-            discipline_names = self.psychic_selector.get_random_disciplines(discipline_count)
-            for disc_name in discipline_names:
-                if not character.skills.has_skill(disc_name):
+            # Pick 2 bonus psychic skills (can be same or different)
+            # For random generation, we'll randomly decide if same or different
+            if random.random() < 0.3:  # 30% chance to specialize in one discipline
+                # Pick same discipline twice -> level-1
+                chosen_discipline = random.choice(psychic_disciplines)
+                character.skills.add_skill(chosen_discipline, 1)
+            else:
+                # Pick two different disciplines -> level-0 each
+                chosen_disciplines = random.sample(psychic_disciplines, 2)
+                for disc_name in chosen_disciplines:
                     character.skills.add_skill(disc_name, 0)
+
+        # Grant Sunblade skill for Sunblade class
+        if character.character_class.name == "Sunblade":
+            # Sunblades automatically get Sunblade skill at level 0
+            character.skills.add_skill("Sunblade", 0)
 
         # Step 7: Calculate available skill points
         # Formula: (class base + INT modifier) + (3 points per level)
@@ -145,8 +178,7 @@ class CharacterGenerator:
         # Exclude psychic disciplines from random allocation unless character is psychic
         psychic_disciplines = ["Biopsionics", "Metapsionics", "Precognition",
                               "Telekinesis", "Telepathy", "Teleportation"]
-        is_psychic = (power_type == "psionic" or
-                     character.character_class.name == "Psychic")
+        is_psychic = (character.power_type == "psionic")
 
         # Filter skills list for allocation
         if is_psychic:
@@ -171,8 +203,7 @@ class CharacterGenerator:
         # Experts/Partial Experts get +1 non-combat, non-psychic focus
         # Warriors/Partial Warriors get +1 combat focus
 
-        has_psychic = (power_type == "psionic" or
-                      character.character_class.name == "Psychic")
+        has_psychic = (character.power_type == "psionic")
 
         # Determine combat foci (simplified - common combat foci)
         combat_foci_names = [
@@ -223,7 +254,7 @@ class CharacterGenerator:
 
         # Step 10: Handle psychic powers
         # Generate psychic powers based on discipline skills
-        if power_type == "psionic" or character.character_class.name == "Psychic":
+        if character.power_type == "psionic":
             # Get all discipline skills the character has
             psychic_disciplines = ["Biopsionics", "Metapsionics", "Precognition",
                                   "Telekinesis", "Telepathy", "Teleportation"]
@@ -234,9 +265,10 @@ class CharacterGenerator:
 
             # Only create psychic powers if character has at least one discipline
             if discipline_skills:
+                # Effort pool uses better of WIS or CON modifier
                 effort_mod = max(
                     character.attributes.get_modifier("WIS"),
-                    character.attributes.get_modifier("INT")
+                    character.attributes.get_modifier("CON")
                 )
 
                 character.psychic_powers = self.psychic_selector.create_psychic_powers_for_character(
@@ -252,6 +284,17 @@ class CharacterGenerator:
                 # Spellcasters get Cast Magic skill
                 if not character.skills.has_skill("Cast Magic"):
                     character.skills.add_skill("Cast Magic", 0)
+
+        # Step 10.6: Handle Sunblade abilities for Sunblade class
+        if character.character_class.name == "Sunblade" and self.sunblade_selector:
+            # Get Sunblade skill level
+            sunblade_skill_level = character.skills.get_level("Sunblade")
+
+            # Generate Sunblade abilities based on character level
+            character.sunblade_abilities = self.sunblade_selector.create_sunblade_abilities(
+                character.level,
+                sunblade_skill_level
+            )
 
         # Step 11: Calculate HP
         character.hp = character.calculate_hp()

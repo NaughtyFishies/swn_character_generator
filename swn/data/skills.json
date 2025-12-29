@@ -95,6 +95,22 @@
     {
       "name": "Work",
       "description": "Proficiency in a specific trade or profession"
+    },
+    {
+      "name": "Cast Magic",
+      "description": "Ability to cast magical spells from learned traditions"
+    },
+    {
+      "name": "Know Magic",
+      "description": "Knowledge of magical theory, history, and arcane lore"
+    },
+    {
+      "name": "Heal",
+      "description": "Medical treatment and first aid"
+    },
+    {
+      "name": "Sunblade",
+      "description": "Mastery of the Sunblade sacred weapon and techniques"
     }
   ]
 }

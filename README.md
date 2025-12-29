@@ -7,22 +7,25 @@ A comprehensive Python-based character generator for the Stars Without Number ta
 ✨ **Official SWN Character Creation**
 - Follow the exact character creation steps from the core rulebook
 - Roll attributes (3d6, pick one to set to 14) or use standard array (14, 12, 11, 10, 9, 7)
-- 21 backgrounds with skill tables
+- **44 backgrounds**: 20 general + 24 class-specific backgrounds (3 each for 8 specialized classes)
+- Special skill resolution: "Any Combat" (Shoot/Stab/Punch), "Any Skill" (random non-psychic skill)
 - Level-based character generation (levels 1-10) with proper scaling
 - Accurate skill point costs: (new level + 1) per SWN rules
 - Level-based skill caps: +1 at levels 1-2, +2 at 3-5, +3 at 6-8, +4 at 9-10
 
 ⚔️ **14 Character Classes**
-- **Base Classes**: Warrior, Expert, Psychic, Adventurer
-- **Magic Classes**: Arcanist, Pacter, Rectifier, War Mage, Arcane Expert, Arcane Warrior
-- **Special Classes**: Free Nexus, Godhunter, Sunblade, Yama King
+- **Base Classes**: Warrior, Expert, Psychic, Adventurer (power type: normal)
+- **Magic Classes**: Arcanist, Pacter, Rectifier, War Mage, Arcane Expert, Arcane Warrior (power type: magic)
+- **Special Classes**: Free Nexus, Godhunter, Sunblade, Yama King (power type varies)
+- Power type automatically set based on class choice
 
 🔮 **Magic & Psychic Systems**
 - **Spell Traditions**: 4 complete spell lists (Arcanist, Pacter, Rectifier, War Mage) with 30+ spells each
 - **Psychic Disciplines**: 6 disciplines as individual skills (Biopsionics, Metapsionics, Precognition, Telekinesis, Telepathy, Teleportation)
 - Each discipline has a core technique (level-0) and 8-12 advanced techniques (levels 1-4)
 - Technique selection: 1 technique learned per skill level increase
-- Effort pool: 1 + highest discipline skill + WIS/INT modifier
+- Psychic class gets 2 bonus psychic skill picks (can pick same discipline twice for level-1)
+- Effort pool: 1 + highest discipline skill + better of WIS/CON modifier (minimum 1)
 - **Arcane Foci**: 27 arcane foci for magic-using characters
 - Spell progression from levels 1-5 with known spells and spell slots tracked separately
 
@@ -106,7 +109,8 @@ expert = gen.generate_character(
     name="Nova Tech",
     level=1,
     attribute_method="array",  # Use standard array instead of rolling
-    class_choice="Expert"
+    class_choice="Expert",
+    background_choice="Technician"  # Optional: choose specific background
 )
 
 CharacterDisplay.print_character(expert)
@@ -119,43 +123,38 @@ CharacterDisplay.print_character(expert)
 arcanist = gen.generate_character(
     name="Lyra Arcanum",
     level=2,
-    power_type="magic",
-    class_choice="Arcanist"
+    class_choice="Arcanist",
+    background_choice="Arcanist Scholar"  # Class-specific background
 )
 
 # Pacter (Shadow summoner)
 pacter = gen.generate_character(
     name="Shadow Master",
     level=1,
-    power_type="magic",
-    class_choice="Pacter"
+    class_choice="Pacter",
+    background_choice="Pacter Dragoman"  # Class-specific background
 )
 
+# Power type is automatically set to "magic" for these classes
 CharacterDisplay.print_character(arcanist)
 ```
 
 ### Psychic Characters
 
 ```python
-# Full Psychic (2 disciplines)
+# Psychic class (gets 2 bonus psychic skill picks)
 psychic = gen.generate_character(
     name="Mind Walker",
     level=3,
-    power_type="psionic",
     class_choice="Psychic"
 )
-# Will have 2 discipline skills (e.g., Telepathy-1, Precognition-0)
-# Each discipline grants core technique + 1 technique per skill level
+# Psychic class gets 2 bonus psychic skill picks as starting skills
+# Can pick same discipline twice for level-1 + free level-1 technique
+# Or pick two different disciplines for level-0 each
+# Power type automatically set to "psionic"
 
-# Partial Psychic (1 discipline, non-Psychic class)
-# Note: Only power_type="psionic" grants psychic abilities
-warrior_psychic = gen.generate_character(
-    name="Mind Warrior",
-    level=2,
-    power_type="psionic",
-    class_choice="Warrior"
-)
-# Will have 1 discipline skill (e.g., Telekinesis-0) + warrior abilities
+# Each discipline grants core technique + 1 technique per skill level
+# Effort pool: 1 + highest discipline skill + better of WIS/CON mod
 
 CharacterDisplay.print_character(psychic)
 ```
@@ -210,10 +209,10 @@ CharacterDisplay.export_json(char, "my_hero.json")
 
 ```python
 party = [
-    gen.generate_character(name="Tank", class_choice="Warrior"),
-    gen.generate_character(name="Scout", class_choice="Expert"),
-    gen.generate_character(name="Wizard", class_choice="Arcanist", power_type="magic"),
-    gen.generate_character(name="Face", class_choice="Adventurer")
+    gen.generate_character(name="Tank", class_choice="Warrior", background_choice="Soldier"),
+    gen.generate_character(name="Scout", class_choice="Expert", background_choice="Criminal"),
+    gen.generate_character(name="Wizard", class_choice="Arcanist", background_choice="Arcanist Scholar"),
+    gen.generate_character(name="Face", class_choice="Adventurer", background_choice="Dilettante")
 ]
 
 for char in party:
@@ -230,8 +229,8 @@ character = gen.generate_character(
     name=None,                   # Character name (random if None)
     level=1,                     # Character level (1-10)
     attribute_method="roll",     # "roll" or "array"
-    power_type="normal",         # "normal", "magic", or "psionic"
     class_choice=None,           # Class name or None for random
+    background_choice=None,      # Background name or None for random
     use_quick_skills=True,       # Use quick skills from background
     tech_level=4                 # Equipment tech level (0-5)
 )
@@ -246,11 +245,12 @@ character = gen.generate_character(
 - **attribute_method** (str):
   - `"roll"`: Roll 3d6 six times in order, pick one to set to 14
   - `"array"`: Use standard array (14, 12, 11, 10, 9, 7) randomly assigned
-- **power_type** (str):
-  - `"normal"`: Regular character, no psychic/magic powers
-  - `"magic"`: Character with magical abilities (for magic classes)
-  - `"psionic"`: Character with psychic powers (for Psychic class)
 - **class_choice** (str, optional): Class name or None for random
+  - Power type automatically set based on class (normal/magic/psionic)
+- **background_choice** (str, optional): Background name or None for random
+  - 20 general backgrounds available to all classes
+  - 24 class-specific backgrounds (3 each for Arcanist, Free Nexus, Godhunter, Pacter, Rectifier, Sunblade, War Mage, Yama King)
+  - Class-specific backgrounds can be used by any class but are thematically designed for specific classes
 - **tech_level** (int): Equipment technology level (0-5), default 4
   - TL0: Stone age (hide armor, clubs, bows)
   - TL1-2: Medieval to Renaissance (plate armor, firearms)
@@ -296,6 +296,99 @@ CharacterDisplay.export_json(character, "output.json")   # Export as JSON
 | Godhunter | Shadow hunters | 1d6+2 | 3+INT |
 | Sunblade | Warrior-monks | 1d6 | 3+INT |
 | Yama King | Wandering judges | 1d6 | 3+INT |
+
+## Available Backgrounds
+
+### General Backgrounds (20)
+
+Available to all classes. Each background provides a Free Skill (level -1) and 3 Quick Skills to choose from (level 0).
+
+| Background | Free Skill | Quick Skills |
+|------------|------------|--------------|
+| Barbarian | Survive | Survive, Notice, Any Combat |
+| Clergy | Talk | Talk, Perform, Know |
+| Courtesan | Perform | Perform, Notice, Connect |
+| Criminal | Sneak | Sneak, Connect, Talk |
+| Dilettante | Connect | Connect, Know, Talk |
+| Entertainer | Perform | Perform, Talk, Connect |
+| Merchant | Trade | Trade, Talk, Connect |
+| Noble | Lead | Lead, Connect, Administer |
+| Official | Administer | Administer, Talk, Connect |
+| Peasant | Exert | Exert, Sneak, Survive |
+| Physician | Heal | Heal, Know, Notice |
+| Pilot | Pilot | Pilot, Fix, Shoot |
+| Politician | Talk | Talk, Lead, Connect |
+| Scholar | Know | Know, Connect, Administer |
+| Soldier | Any Combat | Any Combat, Exert, Survive |
+| Spacer | Fix | Fix, Pilot, Program |
+| Technician | Fix | Fix, Exert, Notice |
+| Thug | Any Combat | Any Combat, Talk, Connect |
+| Vagabond | Survive | Survive, Sneak, Notice |
+| Worker | Work | Connect, Exert, Work |
+
+**Special Skill Placeholders:**
+- **Any Combat**: Resolves to Shoot, Stab, or Punch (randomly selected)
+- **Any Skill**: Resolves to any random non-psychic skill
+
+### Class-Specific Backgrounds (24)
+
+These backgrounds are thematically designed for specific classes but can be used by any class.
+
+#### Arcanist Backgrounds (3)
+| Background | Free Skill | Quick Skills | Description |
+|------------|------------|--------------|-------------|
+| Arcanist Scholar | Know Magic | Know Magic, Know, Notice | Bookish wizard dedicated to magical scholarship |
+| Hirespell | Cast Magic | Cast Magic, Trade, Any Combat | Mercenary wizard who hires out magical talents |
+| Government Mage | Connect | Connect, Administer, Work | Arcanist employed by government or civil authority |
+
+#### Free Nexus Backgrounds (3)
+| Background | Free Skill | Quick Skills | Description |
+|------------|------------|--------------|-------------|
+| Arcane Muse | Talk | Talk, Perform, Connect | Hired experience provider capable of granting impossible encounters |
+| Escaped Familiar | Any Skill | Any Skill, Sneak, Notice | Former property who escaped their master's control |
+| Occult Proxy | Exert | Exert, Notice, Sneak | Professional helper who goes to dangerous places for employers |
+
+#### Godhunter Backgrounds (3)
+| Background | Free Skill | Quick Skills | Description |
+|------------|------------|--------------|-------------|
+| Godhunter Inquisitor | Notice | Notice, Talk, Connect | Trained in sniffing out Shadow cults and heresy |
+| Godhunter Templar | Any Combat | Any Combat, Exert, Notice | Consecrated to war against Shadows |
+| Vengeful Renegade | Any Combat | Any Combat, Any Skill, Connect | Former cult member using knowledge as weapon |
+
+#### Pacter Backgrounds (3)
+| Background | Free Skill | Quick Skills | Description |
+|------------|------------|--------------|-------------|
+| Pacter Chosen | Cast Magic | Cast Magic, Work, Notice | Received powers through non-traditional means |
+| Pacter Controller | Cast Magic | Cast Magic, Lead, Exert | Specializes in summoning and controlling Shadows |
+| Pacter Dragoman | Cast Magic | Cast Magic, Talk, Know Magic | Diplomat specializing in negotiating with Shadows |
+
+#### Rectifier Backgrounds (3)
+| Background | Free Skill | Quick Skills | Description |
+|------------|------------|--------------|-------------|
+| Amender of Flesh | Cast Magic | Cast Magic, Heal, Connect | Healer who corrects deformities and alters bodily forms |
+| Identity Artist | Cast Magic | Cast Magic, Connect, Talk | Seeks enlightenment through changing physical form |
+| Vessel of Will | Cast Magic | Cast Magic, Exert, Survive | Uses arcane arts to hone body as tool for will |
+
+#### Sunblade Backgrounds (3)
+| Background | Free Skill | Quick Skills | Description |
+|------------|------------|--------------|-------------|
+| Sunblade Mystic | Sunblade | Sunblade, Talk, Know | Spiritual guide embracing mysteries and seeking peaceful resolution |
+| Sunblade Warrior | Sunblade | Sunblade, Any Combat, Exert | Warrior consecrated to the sword with ancient martial training |
+| Sunblade Burnout | Sunblade | Sunblade, Connect, Any Skill | Former member who departed the order, living on society's edge |
+
+#### War Mage Backgrounds (3)
+| Background | Free Skill | Quick Skills | Description |
+|------------|------------|--------------|-------------|
+| War Mage Veteran | Cast Magic | Cast Magic, Any Combat, Exert | Combat veteran who served on front lines with magical abilities |
+| War Mage Officer | Cast Magic | Cast Magic, Any Combat, Lead | Former military leader who coordinated soldiers in battle |
+| War Mage Rebel | Cast Magic | Cast Magic, Sneak, Any Combat | Independent War Mage outside standing military forces |
+
+#### Yama King Backgrounds (3)
+| Background | Free Skill | Quick Skills | Description |
+|------------|------------|--------------|-------------|
+| Accountant of Life and Death | Notice | Notice, Talk, Connect | Investigator and judge trained in discernment and adjudication |
+| Celestial Loss Preventer | Talk | Talk, Connect, Trade | Diplomat and negotiator salvaging bad situations |
+| Devil's Incense | Any Combat | Any Combat, Sneak, Connect | Infiltrator trained in social assassination and execution |
 
 ## Project Structure
 
@@ -354,12 +447,18 @@ character_generator/
 char = gen.generate_character(attribute_method="array")
 ```
 
-### For Magic Users
+### For Class-Specific Characters
 ```python
-# Always set power_type="magic" for spellcasters
-mage = gen.generate_character(
+# Use class-specific backgrounds for thematic characters
+arcanist = gen.generate_character(
     class_choice="Arcanist",
-    power_type="magic"  # Important!
+    background_choice="Arcanist Scholar"  # Thematic background
+)
+
+# Or use general backgrounds for variety
+godhunter = gen.generate_character(
+    class_choice="Godhunter",
+    background_choice="Soldier"  # General background works too
 )
 ```
 
@@ -378,8 +477,20 @@ for i, char in enumerate(options, 1):
 - The `swn/` folder should be in the same directory
 
 **Characters have no spells**
-- For magic classes, set `power_type="magic"`
-- Example: `gen.generate_character(class_choice="Arcanist", power_type="magic")`
+- Make sure you're using a magic class (Arcanist, Pacter, Rectifier, War Mage, etc.)
+- Power type is automatically set based on class choice
+- Spells are only granted to classes with `is_spellcaster=True`
+
+**Psychic class has no psychic powers**
+- Psychic class automatically gets 2 bonus psychic skill picks
+- Power type is automatically set to "psionic" for Psychic class
+- Psychic powers are generated based on discipline skills
+
+**Background not found**
+- Check spelling of background name (case-insensitive)
+- Use `gen.backgrounds.get_all_background_names()` to see all available backgrounds
+- General backgrounds (20) work with all classes
+- Class-specific backgrounds (24) are thematic but work with any class
 
 **Low HP rolls**
 - HP is rolled randomly (1d6 + modifiers)

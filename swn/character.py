@@ -21,6 +21,7 @@ class Character:
         self.foci: List['Focus'] = []
         self.psychic_powers: Optional['PsychicPowers'] = None
         self.spells: Optional['SpellList'] = None
+        self.sunblade_abilities: Optional['SunbladeAbilitySet'] = None
         self.hp: int = 0
         self.saving_throws: Dict[str, int] = {}
         self.level: int = 1
@@ -81,6 +82,7 @@ class Character:
             "foci": [focus.to_dict() for focus in self.foci],
             "psychic_powers": self.psychic_powers.to_dict() if self.psychic_powers else None,
             "spells": self.spells.to_dict() if self.spells else None,
+            "sunblade_abilities": self.sunblade_abilities.to_dict() if self.sunblade_abilities else None,
             "hp": self.hp,
             "attack_bonus": self.attack_bonus,
             "saving_throws": self.saving_throws,

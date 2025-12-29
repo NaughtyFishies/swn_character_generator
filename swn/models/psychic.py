@@ -128,7 +128,7 @@ class PsychicPowers:
         Initialize psychic powers.
 
         Args:
-            effort_pool: Maximum effort points (1 + highest discipline skill + WIS/INT mod)
+            effort_pool: Maximum effort points (1 + highest discipline skill + better of WIS/CON mod)
         """
         self.effort_pool = effort_pool
         # Map: discipline name -> list of chosen techniques (in order chosen)
@@ -322,20 +322,22 @@ class PsychicPowerSelector:
         """
         Calculate effort pool based on highest discipline skill.
 
-        Formula: 1 + highest discipline skill level + WIS or INT modifier (whichever is higher)
+        Formula: 1 + highest discipline skill level + better of WIS or CON modifier
+        Minimum Effort is always 1, even with penalties.
 
         Args:
             discipline_skills: Dict of discipline_name -> skill_level
-            effort_modifier: WIS or INT modifier (whichever is higher)
+            effort_modifier: Better of WIS or CON modifier
 
         Returns:
-            Effort pool value
+            Effort pool value (minimum 1)
         """
         if not discipline_skills:
             return 1
 
         highest_skill = max(discipline_skills.values())
-        return 1 + highest_skill + max(0, effort_modifier)
+        effort = 1 + highest_skill + effort_modifier
+        return max(1, effort)  # Minimum 1 even with penalties
 
     def create_psychic_powers_for_character(self, discipline_skills: Dict[str, int],
                                            effort_modifier: int) -> PsychicPowers:
@@ -347,7 +349,7 @@ class PsychicPowerSelector:
 
         Args:
             discipline_skills: Dict of discipline_name -> skill_level
-            effort_modifier: WIS or INT modifier for effort pool
+            effort_modifier: Better of WIS or CON modifier for effort pool
 
         Returns:
             PsychicPowers instance
