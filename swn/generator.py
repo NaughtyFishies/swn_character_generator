@@ -198,12 +198,13 @@ class CharacterGenerator:
         # Step 8.5: No longer adding a "free" skill here
         # (Removed to match official SWN rules and fix skill point budget)
 
-        # Step 9: Select foci based on class
-        # Everyone gets 1 focus
-        # Experts/Partial Experts get +1 non-combat, non-psychic focus
-        # Warriors/Partial Warriors get +1 combat focus
+        # Step 9: Select foci based on class and level
+        # Base: Everyone gets 1 focus at level 1 (Adventurer gets 2)
+        # Level progression: +1 focus at levels 2, 5, 7, and 10
+        # Class bonuses: Warriors get +1 combat, Experts get +1 non-combat
 
         has_psychic = (character.power_type == "psionic")
+        class_name = character.character_class.name
 
         # Determine combat foci (simplified - common combat foci)
         combat_foci_names = [
@@ -212,43 +213,80 @@ class CharacterGenerator:
             "Arcane Physique", "Blade Ward", "Soul Shield", "Weapon Unity"
         ]
 
+        # Calculate total foci to grant
+        base_foci = 2 if class_name == "Adventurer" else 1
+
+        # Add foci from level progression (levels 2, 5, 7, 10)
+        level_foci = sum(1 for threshold in [2, 5, 7, 10] if character.level >= threshold)
+
+        # Add class-specific bonus foci
+        class_bonus_foci = 0
+        if class_name in ["Warrior", "Arcane Warrior", "Expert", "Arcane Expert"]:
+            class_bonus_foci = 1
+
+        total_foci = base_foci + level_foci + class_bonus_foci
+
         foci_list = []
 
-        # Base focus for everyone
-        base_focus = self.foci_selector.select_random_foci(
-            1, "normal", has_psychic, character.character_class.name
-        )
-        if base_focus:
-            foci_list.extend(base_focus)
+        # Select foci one at a time to ensure compatibility
+        for i in range(total_foci):
+            # Determine what type of focus this should be
+            if i == 0:
+                # First focus is always normal
+                focus_type = "normal"
+            elif class_name == "Adventurer" and i == 1:
+                # Second focus for Adventurer is normal
+                focus_type = "normal"
+            elif class_name in ["Warrior", "Arcane Warrior"] and i == (base_foci + level_foci):
+                # Last focus for Warriors must be combat
+                focus_type = "combat"
+            elif class_name in ["Expert", "Arcane Expert"] and i == (base_foci + level_foci):
+                # Last focus for Experts must be non-combat, non-psychic
+                focus_type = "non-combat"
+            else:
+                # All other foci are normal
+                focus_type = "normal"
 
-        # Class-specific bonus focus
-        class_name = character.character_class.name
-
-        # Experts and Partial Experts get non-combat, non-psychic bonus
-        if class_name in ["Expert", "Arcane Expert"]:  # Partial Expert in Adventurer handled separately
-            all_foci = self.foci_selector.foci
-            non_combat_non_psychic = [
-                f for f in all_foci
-                if f.name not in combat_foci_names and not f.psychic_only
-                and (f.allowed_classes is None or class_name in f.allowed_classes)
-                and all(f.is_compatible_with(existing) for existing in foci_list)
-            ]
-            if non_combat_non_psychic:
-                bonus = random.choice(non_combat_non_psychic)
-                foci_list.append(bonus)
-
-        # Warriors and Partial Warriors get combat bonus
-        elif class_name in ["Warrior", "Arcane Warrior"]:  # Partial Warrior in Adventurer handled separately
-            all_foci = self.foci_selector.foci
-            combat_foci = [
-                f for f in all_foci
-                if f.name in combat_foci_names
-                and (f.allowed_classes is None or class_name in f.allowed_classes)
-                and all(f.is_compatible_with(existing) for existing in foci_list)
-            ]
-            if combat_foci:
-                bonus = random.choice(combat_foci)
-                foci_list.append(bonus)
+            # Select appropriate focus
+            if focus_type == "combat":
+                all_foci = self.foci_selector.foci
+                available = [
+                    f for f in all_foci
+                    if f.name in combat_foci_names
+                    and (f.allowed_classes is None or class_name in f.allowed_classes)
+                    and all(f.is_compatible_with(existing) for existing in foci_list)
+                ]
+                if available:
+                    foci_list.append(random.choice(available))
+            elif focus_type == "non-combat":
+                all_foci = self.foci_selector.foci
+                available = [
+                    f for f in all_foci
+                    if f.name not in combat_foci_names and not f.psychic_only
+                    and (f.allowed_classes is None or class_name in f.allowed_classes)
+                    and all(f.is_compatible_with(existing) for existing in foci_list)
+                ]
+                if available:
+                    foci_list.append(random.choice(available))
+            else:  # normal
+                selected = self.foci_selector.select_random_foci(
+                    1, "normal", has_psychic, class_name
+                )
+                if selected:
+                    # Check compatibility with existing foci
+                    compatible = [f for f in selected if all(f.is_compatible_with(existing) for existing in foci_list)]
+                    if compatible:
+                        foci_list.append(compatible[0])
+                    elif selected:
+                        # If not compatible, try again with different focus
+                        all_foci = self.foci_selector.foci
+                        available = [
+                            f for f in all_foci
+                            if (f.allowed_classes is None or class_name in f.allowed_classes)
+                            and all(f.is_compatible_with(existing) for existing in foci_list)
+                        ]
+                        if available:
+                            foci_list.append(random.choice(available))
 
         character.foci = foci_list
 
