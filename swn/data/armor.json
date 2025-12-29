@@ -82,6 +82,15 @@
       "description": "Force field nodes. Flares bright blue when deflecting attacks."
     },
     {
+      "name": "Blast Shield",
+      "category": "combat",
+      "ac": "16/+2 bonus",
+      "cost": 500,
+      "enc": 1,
+      "tech_level": 4,
+      "description": "Reinforced ballistic shield. Grants AC 16 or +2 if AC is already higher. Blocks first ranged Shock each round."
+    },
+    {
       "name": "Force Pavis",
       "category": "combat",
       "ac": "15/+1 bonus",

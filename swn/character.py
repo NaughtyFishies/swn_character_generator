@@ -86,6 +86,64 @@ class Character:
             "Mental": mental
         }
 
+    def calculate_ac(self) -> int:
+        """
+        Calculate Armor Class based on armor, shield, and DEX modifier.
+
+        Formula:
+        - Base AC = max(10, armor_ac) + DEX modifier
+        - Shield: Either sets minimum AC or adds bonus, whichever is higher
+
+        Returns:
+            Armor Class value
+        """
+        if not self.attributes:
+            return 10
+
+        # Start with base AC
+        base_ac = 10
+
+        # Get DEX modifier
+        dex_mod = self.attributes.get_modifier("DEX")
+
+        # Apply armor if equipped
+        if self.equipment and self.equipment.armor:
+            armor_ac_value = self.equipment.armor.properties.get("ac", 10)
+            # Handle numeric AC (most armor)
+            if isinstance(armor_ac_value, int):
+                base_ac = max(10, armor_ac_value)
+            # Handle string AC (shouldn't happen for armor, but just in case)
+            elif isinstance(armor_ac_value, str):
+                try:
+                    base_ac = max(10, int(armor_ac_value.split("/")[0]))
+                except (ValueError, IndexError):
+                    base_ac = 10
+
+        # Add DEX modifier to AC
+        ac = base_ac + dex_mod
+
+        # Apply shield if equipped
+        if self.equipment and self.equipment.shield:
+            shield_ac_value = self.equipment.shield.properties.get("ac", "10")
+
+            # Parse shield AC notation (e.g., "16/+2 bonus")
+            if isinstance(shield_ac_value, str) and "/" in shield_ac_value:
+                try:
+                    parts = shield_ac_value.split("/")
+                    min_ac = int(parts[0])
+                    bonus_str = parts[1].replace("bonus", "").replace("+", "").strip()
+                    bonus = int(bonus_str)
+
+                    # Apply the better of: setting AC to min_ac, or adding bonus
+                    ac = max(min_ac, ac + bonus)
+                except (ValueError, IndexError):
+                    pass  # If parsing fails, shield has no effect
+            elif isinstance(shield_ac_value, int):
+                # Simple numeric shield AC (just in case)
+                ac = max(ac, shield_ac_value)
+
+        return ac
+
     def to_dict(self) -> dict:
         """
         Serialize character to dictionary format.

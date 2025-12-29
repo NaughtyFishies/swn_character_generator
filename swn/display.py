@@ -133,6 +133,7 @@ class CharacterDisplay:
         # Combat Stats
         lines.append("COMBAT")
         lines.append("-" * 70)
+        lines.append(f"Armor Class: {character.calculate_ac()}")
         lines.append(f"Hit Points: {character.hp}")
         lines.append(f"Attack Bonus: +{character.attack_bonus}")
         if character.saving_throws:
@@ -160,8 +161,14 @@ class CharacterDisplay:
             # Armor
             if character.equipment.armor:
                 armor = character.equipment.armor
-                ac_display = armor.properties.get("ac", "10")
-                lines.append(f"Armor: {armor.name} (AC {ac_display}, TL{armor.tech_level})")
+                lines.append(f"Armor: {armor.name} (TL{armor.tech_level}, {armor.enc} enc)")
+
+            # Shield
+            if character.equipment.shield:
+                shield = character.equipment.shield
+                shield_ac = shield.properties.get("ac", "")
+                lines.append(f"Shield: {shield.name} (AC {shield_ac}, TL{shield.tech_level}, {shield.enc} enc)")
+                lines.append("")
 
             # Weapons
             if character.equipment.weapons:

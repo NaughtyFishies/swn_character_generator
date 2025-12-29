@@ -53,12 +53,17 @@ class EquipmentSet:
     def __init__(self):
         """Initialize empty equipment set."""
         self.armor: Optional[Equipment] = None
+        self.shield: Optional[Equipment] = None
         self.weapons: List[Equipment] = []
         self.gear: List[Equipment] = []
 
     def add_armor(self, armor: Equipment):
         """Add armor to the set."""
         self.armor = armor
+
+    def add_shield(self, shield: Equipment):
+        """Add shield to the set."""
+        self.shield = shield
 
     def add_weapon(self, weapon: Equipment):
         """Add weapon to the set."""
@@ -73,6 +78,8 @@ class EquipmentSet:
         total = 0
         if self.armor:
             total += self.armor.cost
+        if self.shield:
+            total += self.shield.cost
         total += sum(w.cost for w in self.weapons)
         total += sum(g.cost for g in self.gear)
         return total
@@ -82,6 +89,8 @@ class EquipmentSet:
         total = 0
         if self.armor:
             total += self.armor.enc
+        if self.shield:
+            total += self.shield.enc
         total += sum(w.enc for w in self.weapons)
         total += sum(g.enc for g in self.gear)
         return total
@@ -91,6 +100,8 @@ class EquipmentSet:
         items = []
         if self.armor:
             items.append(self.armor)
+        if self.shield:
+            items.append(self.shield)
         items.extend(self.weapons)
         items.extend(self.gear)
         return items
@@ -99,6 +110,7 @@ class EquipmentSet:
         """Convert equipment set to dictionary."""
         return {
             "armor": self.armor.to_dict() if self.armor else None,
+            "shield": self.shield.to_dict() if self.shield else None,
             "weapons": [w.to_dict() for w in self.weapons],
             "gear": [g.to_dict() for g in self.gear],
             "total_cost": self.total_cost(),
@@ -115,11 +127,15 @@ class EquipmentSelector:
         Initialize equipment selector.
 
         Args:
-            armor_data: List of armor items
+            armor_data: List of armor items (includes shields)
             weapons_data: Dict with 'ranged_weapons' and 'melee_weapons' lists
             gear_data: List of gear items
         """
-        self.armor_items = [Equipment(**item) for item in armor_data]
+        # Separate shields from armor based on AC notation containing "bonus"
+        all_armor = [Equipment(**item) for item in armor_data]
+        self.armor_items = [a for a in all_armor if "/" not in str(a.properties.get("ac", ""))]
+        self.shield_items = [a for a in all_armor if "/" in str(a.properties.get("ac", ""))]
+
         # Weapons don't have category in JSON, so add it when creating Equipment
         self.ranged_weapons = [Equipment(category="ranged_weapon", **item)
                                for item in weapons_data.get("ranged_weapons", [])]
@@ -171,6 +187,14 @@ class EquipmentSelector:
             equipment_set.add_armor(armor)
             remaining_credits -= armor.cost
 
+        # Select shield (50% chance for Warriors, 15% for others)
+        shield_chance = 0.5 if character_class in ["Warrior", "Arcane Warrior"] else 0.15
+        if random.random() < shield_chance:
+            shield = self._select_shield(character_class, tech_level, remaining_credits)
+            if shield:
+                equipment_set.add_shield(shield)
+                remaining_credits -= shield.cost
+
         # Select 2 weapons (1 ranged, 1 melee typically)
         weapons = self._select_weapons(character_class, tech_level, remaining_credits)
         for weapon in weapons:
@@ -212,6 +236,25 @@ class EquipmentSelector:
         available.sort(key=lambda a: self._parse_ac(a), reverse=True)
         # Pick from top 3 to add variety
         return random.choice(available[:min(3, len(available))])
+
+    def _select_shield(self, character_class: str, tech_level: int,
+                      max_cost: int) -> Optional[Equipment]:
+        """Select appropriate shield based on class and budget."""
+        # Filter by tech level and cost (shields should be affordable)
+        available = [s for s in self.shield_items
+                    if s.tech_level <= tech_level and s.cost <= max_cost * 0.1]
+
+        if not available:
+            return None
+
+        # Warriors prefer blast shield or better if they can afford it
+        if character_class in ["Warrior", "Arcane Warrior"]:
+            # Prefer higher protection shields
+            available.sort(key=lambda s: self._parse_shield_bonus(s), reverse=True)
+            return available[0] if available else None
+
+        # Others just pick any affordable shield
+        return random.choice(available)
 
     def _select_weapons(self, character_class: str, tech_level: int,
                        max_cost: int) -> List[Equipment]:
@@ -345,6 +388,18 @@ class EquipmentSelector:
             # Handle shield format "13/+1 bonus"
             return int(ac_str.split("/")[0])
         return int(ac_str)
+
+    def _parse_shield_bonus(self, shield: Equipment) -> int:
+        """Parse the bonus value from shield AC notation for sorting."""
+        ac_str = str(shield.properties.get("ac", "10/+0 bonus"))
+        if "/" in ac_str:
+            try:
+                # Extract bonus from "16/+2 bonus" format
+                bonus_str = ac_str.split("/")[1].replace("bonus", "").replace("+", "").strip()
+                return int(bonus_str)
+            except (ValueError, IndexError):
+                return 0
+        return 0
 
 
 def calculate_starting_credits(character_class: str, level: int) -> int:
