@@ -109,6 +109,7 @@
       "description": "Warriors enhanced with magical prowess",
       "special_abilities": [
         "Gains +1 attack bonus per character level",
+        "Can use Veteran's Luck once per scene to reroll an attack or damage roll",
         "All weapons count as magical",
         "Can take Arcane Warrior-exclusive foci"
       ],
