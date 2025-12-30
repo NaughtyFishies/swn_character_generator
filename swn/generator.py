@@ -182,6 +182,32 @@ class CharacterGenerator:
         total_points = base_from_class + points_from_levels
         total_points = max(1, total_points)  # Minimum 1 skill point
 
+        # Step 7.5: For Sunblade class, max out Sunblade skill first
+        if character.character_class.name == "Sunblade":
+            # Determine max skill level based on character level
+            if character.level <= 2:
+                max_sunblade_level = 1
+            elif character.level <= 5:
+                max_sunblade_level = 2
+            elif character.level <= 8:
+                max_sunblade_level = 3
+            else:
+                max_sunblade_level = 4
+
+            # Spend points to max out Sunblade skill
+            current_sunblade_level = character.skills.get_level("Sunblade")
+            while current_sunblade_level < max_sunblade_level:
+                # Cost to level up: (current_level + 1) + 1
+                cost = current_sunblade_level + 2
+                if cost <= total_points:
+                    # Can afford to level up
+                    current_sunblade_level += 1
+                    character.skills.skills["Sunblade"].level = current_sunblade_level
+                    total_points -= cost
+                else:
+                    # Can't afford more levels
+                    break
+
         # Step 8: Allocate remaining skill points
         # Exclude psychic disciplines from random allocation unless character is psychic
         psychic_disciplines = ["Biopsionics", "Metapsionics", "Precognition",
