@@ -84,6 +84,53 @@ class CharacterDisplay:
             lines.append("No foci")
             lines.append("")
 
+        # Godhunter Abilities
+        if character.godhunter_abilities:
+            lines.append("GODHUNTER ABILITIES")
+            lines.append("-" * 70)
+
+            # Display calculated bonuses
+            true_hand = character.godhunter_abilities.calculate_true_hand_bonus()
+            armor_contempt = character.godhunter_abilities.calculate_armor_of_contempt_bonus()
+            scorn_bonus = character.godhunter_abilities.calculate_sacrilegious_scorn_bonus()
+            grim_det = character.godhunter_abilities.calculate_grim_determination_bonus()
+
+            lines.append(f"True Hand: +{true_hand} to hit Shadows/cultists")
+            lines.append(f"Armor of Contempt: +{armor_contempt} AC vs Shadows/cultists")
+            if scorn_bonus > 0:
+                lines.append(f"Sacrilegious Scorn: +{scorn_bonus} saves vs Shadow effects")
+            if grim_det > 0:
+                lines.append(f"Grim Determination: +{grim_det} HP")
+            if character.level >= 5:
+                righteous_dmg = character.godhunter_abilities.calculate_righteous_fire_damage()
+                lines.append(f"Righteous Fire: +{righteous_dmg} damage (auto vs Shadows)")
+            lines.append("")
+
+            # Display all abilities
+            lines.append("Abilities:")
+            for ability in character.godhunter_abilities.selected_abilities:
+                lines.append(f"  - {ability.name} (Level {ability.level_required})")
+                # Wrap long descriptions
+                desc = ability.description
+                if len(desc) > 66:
+                    # Simple word wrapping
+                    words = desc.split()
+                    current_line = "    "
+                    for word in words:
+                        if len(current_line) + len(word) + 1 > 70:
+                            lines.append(current_line)
+                            current_line = "    " + word
+                        else:
+                            if len(current_line) > 4:
+                                current_line += " " + word
+                            else:
+                                current_line += word
+                    if len(current_line) > 4:
+                        lines.append(current_line)
+                else:
+                    lines.append(f"    {desc}")
+            lines.append("")
+
         # Yama King Abilities
         if character.yama_king_abilities:
             lines.append("YAMA KING ABILITIES")

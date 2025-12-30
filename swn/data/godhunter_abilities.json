@@ -1,0 +1,75 @@
+{
+  "level_1_abilities": [
+    {
+      "name": "Purity of Arms",
+      "level_required": 1,
+      "automatic": true,
+      "description": "Any weapon or unarmed attack counts as a magical weapon for the purposes of affecting targets only subject to magical weapons. The Godhunter may take Arcane Warrior foci with their initial focus pick and any other they may accrue. If taken as a partial Adept class, no more than half of their total foci, rounded up, can be Arcane Warrior foci unless their other partial class also allows access to them."
+    },
+    {
+      "name": "True Hand",
+      "level_required": 1,
+      "automatic": true,
+      "description": "The Godhunter receives a bonus to hit rolls against Shadows and Shadow cultists equal to half their character level, rounded up."
+    },
+    {
+      "name": "Grim Determination",
+      "level_required": 1,
+      "automatic": true,
+      "hp_bonus": 1,
+      "description": "Gain a +1 bonus to maximum hit points at this and every odd character level thereafter."
+    }
+  ],
+  "level_abilities": [
+    {
+      "name": "Sacrilegious Scorn",
+      "level_required": 2,
+      "description": "Gain a +2 bonus to all saving throws against magical or mundane effects created by Shadows or Shadow cultists. This bonus increases to +4 at level 6."
+    },
+    {
+      "name": "Armor of Contempt",
+      "level_required": 2,
+      "description": "The Godhunter gains an AC bonus against Shadows and Shadow cultists equal to half their level, rounded up."
+    },
+    {
+      "name": "True Eyes",
+      "level_required": 3,
+      "description": "The Godhunter may make a Mental saving throw to automatically pierce any magical illusions created or magical disguises adopted by a Shadow or cultist. Failure means a new attempt cannot be made until a new scene begins."
+    },
+    {
+      "name": "Stench of Heresy",
+      "level_required": 4,
+      "description": "By accepting a point of System Strain, the Godhunter can concentrate on their surroundings as a Main Action, detecting the presence of Shadows, Shadow cultists, or the past performance of Shadow cult worship rites within the past week anywhere in the immediate vicinity. The radius of the sense extends up to 30 meters and penetrates all barriers. The sense only indicates whether or not there are Shadows, Shadow cultists, or past worship rites within the area, not specific identities or locations. Magical cloaks that would interfere with this sense can be penetrated on a successful Mental save."
+    },
+    {
+      "name": "Righteous Fire",
+      "level_required": 5,
+      "description": "The Godhunter's personal weapons or unarmed attacks are limned with crackling arcane energy, adding their character level in damage to all successful hits. Against Shadows and Shadow cultists this damage is always inflicted, whether or not the attack roll hits."
+    },
+    {
+      "name": "Feed the Fury",
+      "level_required": 6,
+      "description": "As an On Turn action whenever the Godhunter is within 30 meters of a Shadow, they can choose to regain twice their character level in lost hit points. They may do this even when incapacitated or unconscious, but they can do this only once per scene. This ability only functions if the Godhunter is trying to kill or otherwise fight the Shadow in question; allied or neutral Shadows will not enable this ability."
+    },
+    {
+      "name": "Nemesis Pursuit",
+      "level_required": 7,
+      "description": "As an On Turn action, a Godhunter can tag a visible Shadow or a Shadow cultist. Until the Godhunter tags a different target, they have an intuitive knowledge of the exact position of their target, regardless of the distance between them. By accepting a point of System Strain and taking a Move action, they can teleport to a point within 10 meters of the target, provided the target is within 100 meters. This teleportation can be performed only once per round."
+    },
+    {
+      "name": "Storm of Desecration",
+      "level_required": 8,
+      "description": "Once per scene as a Main Action the Godhunter can erupt in a frenzy of violence that allows them to make an attack roll against up to six targets within range of their weapon, or within 10 meters for melee weapons. Each attack is rolled separately and each target can be attacked only once."
+    },
+    {
+      "name": "True Rebuke",
+      "level_required": 9,
+      "description": "The Godhunter's attack rolls against Shadows and Shadow cultists are always automatically successful, assuming a hit is physically possible. This ability applies even to vehicle-mounted weapons if the target is being helmed or controlled by Shadows or Shadow cultists."
+    },
+    {
+      "name": "Deus Vult",
+      "level_required": 10,
+      "description": "The Godhunter automatically succeeds at all saving throws against magical or mundane effects created by Shadows or Shadow cultists. For damage rolls and other variable effects inflicted by such actions, the result is always the minimum possible. Weapon damage or other mundane damage inflicted by Shadows and Shadow cultists is always the minimum possible."
+    }
+  ]
+}

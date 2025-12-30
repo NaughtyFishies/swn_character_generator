@@ -23,6 +23,7 @@ class Character:
         self.spells: Optional['SpellList'] = None
         self.sunblade_abilities: Optional['SunbladeAbilitySet'] = None
         self.yama_king_abilities: Optional['YamaKingAbilitySet'] = None
+        self.godhunter_abilities: Optional['GodhunterAbilitySet'] = None
         self.hp: int = 0
         self.saving_throws: Dict[str, int] = {}
         self.level: int = 1
@@ -36,6 +37,7 @@ class Character:
         Calculate HP based on class, CON modifier, and level.
 
         Formula: Roll (1d6 + class_hp_bonus + CON_modifier) for each level and sum
+        Godhunter bonus: +1 HP at levels 1, 3, 5, 7, 9 (Grim Determination)
 
         Returns:
             Hit points value
@@ -50,6 +52,10 @@ class Character:
         for _ in range(self.level):
             hp_roll = self.character_class.roll_hp()  # Includes class hp_bonus
             total_hp += max(1, hp_roll + con_mod)
+
+        # Add Godhunter Grim Determination bonus
+        if self.godhunter_abilities:
+            total_hp += self.godhunter_abilities.calculate_grim_determination_bonus()
 
         return total_hp
 
@@ -165,6 +171,7 @@ class Character:
             "spells": self.spells.to_dict() if self.spells else None,
             "sunblade_abilities": self.sunblade_abilities.to_dict() if self.sunblade_abilities else None,
             "yama_king_abilities": self.yama_king_abilities.to_dict() if self.yama_king_abilities else None,
+            "godhunter_abilities": self.godhunter_abilities.to_dict() if self.godhunter_abilities else None,
             "hp": self.hp,
             "attack_bonus": self.attack_bonus,
             "saving_throws": self.saving_throws,

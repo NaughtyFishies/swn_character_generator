@@ -13,6 +13,7 @@ from swn.models.psychic import PsychicPowerSelector
 from swn.models.spells import SpellSelector
 from swn.models.sunblade import SunbladeAbilitySelector
 from swn.models.yama_king import YamaKingAbilitySelector
+from swn.models.godhunter import GodhunterAbilitySelector
 from swn.models.skills import SkillSet, allocate_skill_points
 from swn.models.equipment import EquipmentSelector, calculate_starting_credits
 
@@ -70,6 +71,13 @@ class CharacterGenerator:
             self.yama_king_selector = YamaKingAbilitySelector.load_from_file(str(yama_king_file))
         else:
             self.yama_king_selector = None
+
+        # Load Godhunter ability selector
+        godhunter_file = data_dir / "godhunter_abilities.json"
+        if godhunter_file.exists():
+            self.godhunter_selector = GodhunterAbilitySelector.load_from_file(str(godhunter_file))
+        else:
+            self.godhunter_selector = None
 
         # Load equipment selector
         self.equipment_selector = EquipmentSelector.load_from_files(data_dir)
@@ -414,6 +422,13 @@ class CharacterGenerator:
         if character.character_class.name == "Yama King" and self.yama_king_selector:
             # Generate Yama King abilities based on character level
             character.yama_king_abilities = self.yama_king_selector.create_yama_king_abilities(
+                character.level
+            )
+
+        # Step 10.8: Handle Godhunter abilities for Godhunter class
+        if character.character_class.name == "Godhunter" and self.godhunter_selector:
+            # Generate Godhunter abilities based on character level
+            character.godhunter_abilities = self.godhunter_selector.create_godhunter_abilities(
                 character.level
             )
 
