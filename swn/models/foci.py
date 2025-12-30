@@ -55,6 +55,23 @@ class Focus:
             return False
         return True
 
+    def is_truly_incompatible_with(self, other_focus: 'Focus') -> bool:
+        """
+        Check if this focus is truly incompatible (excluding same-name check).
+        Used for leveling up foci.
+
+        Args:
+            other_focus: Focus to check compatibility with
+
+        Returns:
+            False if incompatible (returns opposite of is_compatible for consistency)
+        """
+        if other_focus.name in self.incompatible_with:
+            return False
+        if self.name in other_focus.incompatible_with:
+            return False
+        return True
+
     def to_dict(self) -> dict:
         """Convert focus to dictionary format."""
         return {

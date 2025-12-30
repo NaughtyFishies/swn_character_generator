@@ -270,6 +270,28 @@ class CharacterGenerator:
 
         foci_list = []
 
+        def can_add_or_upgrade_focus(focus_name: str, existing_foci: List) -> bool:
+            """Check if we can add a new focus or upgrade an existing one."""
+            existing_focus = next((f for f in existing_foci if f.name == focus_name), None)
+            if existing_focus:
+                # Can only upgrade if currently at level 1
+                return existing_focus.level == 1
+            # Can add if not incompatible with existing foci
+            return True
+
+        def add_or_upgrade_focus(focus: 'Focus', existing_foci: List):
+            """Add a new focus or upgrade an existing level 1 focus to level 2."""
+            existing_focus = next((f for f in existing_foci if f.name == focus.name), None)
+            if existing_focus and existing_focus.level == 1:
+                # Upgrade existing focus to level 2
+                existing_focus.level = 2
+            elif not existing_focus:
+                # Add new focus at level 1
+                import copy
+                new_focus = copy.deepcopy(focus)
+                new_focus.level = 1
+                existing_foci.append(new_focus)
+
         # Select foci one at a time to ensure compatibility
         for i in range(total_foci):
             # Determine what type of focus this should be
@@ -296,39 +318,43 @@ class CharacterGenerator:
                     f for f in all_foci
                     if f.name in combat_foci_names
                     and (f.allowed_classes is None or class_name in f.allowed_classes)
-                    and all(f.is_compatible_with(existing) for existing in foci_list)
+                    and can_add_or_upgrade_focus(f.name, foci_list)
+                    and all(f.is_truly_incompatible_with(existing) for existing in foci_list)
                 ]
                 if available:
-                    foci_list.append(random.choice(available))
+                    add_or_upgrade_focus(random.choice(available), foci_list)
             elif focus_type == "non-combat":
                 all_foci = self.foci_selector.foci
                 available = [
                     f for f in all_foci
                     if f.name not in combat_foci_names and not f.psychic_only
                     and (f.allowed_classes is None or class_name in f.allowed_classes)
-                    and all(f.is_compatible_with(existing) for existing in foci_list)
+                    and can_add_or_upgrade_focus(f.name, foci_list)
+                    and all(f.is_truly_incompatible_with(existing) for existing in foci_list)
                 ]
                 if available:
-                    foci_list.append(random.choice(available))
+                    add_or_upgrade_focus(random.choice(available), foci_list)
             else:  # normal
                 selected = self.foci_selector.select_random_foci(
                     1, "normal", has_psychic, class_name
                 )
                 if selected:
-                    # Check compatibility with existing foci
-                    compatible = [f for f in selected if all(f.is_compatible_with(existing) for existing in foci_list)]
-                    if compatible:
-                        foci_list.append(compatible[0])
-                    elif selected:
-                        # If not compatible, try again with different focus
+                    # Check if we can add or upgrade this focus
+                    focus_candidate = selected[0]
+                    if (can_add_or_upgrade_focus(focus_candidate.name, foci_list)
+                        and all(focus_candidate.is_truly_incompatible_with(existing) for existing in foci_list)):
+                        add_or_upgrade_focus(focus_candidate, foci_list)
+                    else:
+                        # Try again with different focus
                         all_foci = self.foci_selector.foci
                         available = [
                             f for f in all_foci
                             if (f.allowed_classes is None or class_name in f.allowed_classes)
-                            and all(f.is_compatible_with(existing) for existing in foci_list)
+                            and can_add_or_upgrade_focus(f.name, foci_list)
+                            and all(f.is_truly_incompatible_with(existing) for existing in foci_list)
                         ]
                         if available:
-                            foci_list.append(random.choice(available))
+                            add_or_upgrade_focus(random.choice(available), foci_list)
 
         character.foci = foci_list
 
@@ -390,7 +416,9 @@ class CharacterGenerator:
         character.equipment = self.equipment_selector.select_equipment(
             character.character_class.name,
             tech_level,
-            starting_credits
+            starting_credits,
+            character.power_type,
+            character.foci
         )
 
         # Calculate remaining credits after equipment purchase

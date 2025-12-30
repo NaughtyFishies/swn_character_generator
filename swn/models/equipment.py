@@ -166,7 +166,8 @@ class EquipmentSelector:
         return cls(armor_data, weapons_data, gear_data)
 
     def select_equipment(self, character_class: str, tech_level: int,
-                        credits_budget: int = 10000) -> EquipmentSet:
+                        credits_budget: int = 10000, power_type: str = "none",
+                        foci: List = None) -> EquipmentSet:
         """
         Select appropriate equipment for a character.
 
@@ -174,6 +175,8 @@ class EquipmentSelector:
             character_class: Character class name
             tech_level: Technology level (0-5)
             credits_budget: Maximum credits to spend
+            power_type: Character power type (magic, psychic, sunblade, or none)
+            foci: List of character's Focus objects
 
         Returns:
             EquipmentSet with selected equipment
@@ -181,8 +184,9 @@ class EquipmentSelector:
         equipment_set = EquipmentSet()
         remaining_credits = credits_budget
 
-        # Select armor based on class preferences
-        armor = self._select_armor(character_class, tech_level, remaining_credits)
+        # Select armor based on class preferences and encumbrance restrictions
+        armor = self._select_armor(character_class, tech_level, remaining_credits,
+                                   power_type, foci or [])
         if armor:
             equipment_set.add_armor(armor)
             remaining_credits -= armor.cost
@@ -211,11 +215,40 @@ class EquipmentSelector:
         return equipment_set
 
     def _select_armor(self, character_class: str, tech_level: int,
-                     max_cost: int) -> Optional[Equipment]:
-        """Select appropriate armor based on class."""
+                     max_cost: int, power_type: str = "none",
+                     foci: List = None) -> Optional[Equipment]:
+        """Select appropriate armor based on class and encumbrance restrictions."""
         # Filter by tech level and cost
         available = [a for a in self.armor_items
                     if a.tech_level <= tech_level and a.cost <= max_cost]
+
+        if not available:
+            return None
+
+        # Apply encumbrance restrictions based on power type
+        if power_type == "magic":
+            # Magic classes need enc 0 unless they have Armored Technique focus
+            armored_technique_level = 0
+            if foci:
+                for focus in foci:
+                    if hasattr(focus, 'name') and focus.name == "Armored Technique":
+                        armored_technique_level = getattr(focus, 'level', 1)
+                        break
+
+            if armored_technique_level == 0:
+                # No Armored Technique: only enc 0
+                available = [a for a in available if a.enc == 0]
+            elif armored_technique_level == 1:
+                # Armored Technique level 1: enc 0-1
+                available = [a for a in available if a.enc <= 1]
+            # Level 2: no restriction
+
+        elif character_class in ["Warrior", "Arcane Warrior"]:
+            # Heavy warrior classes can use enc 2
+            available = [a for a in available if a.enc <= 2]
+        else:
+            # Most classes prefer enc 1
+            available = [a for a in available if a.enc <= 1]
 
         if not available:
             return None

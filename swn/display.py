@@ -67,8 +67,18 @@ class CharacterDisplay:
         lines.append("-" * 70)
         if character.foci:
             for focus in character.foci:
-                lines.append(f"[{focus.name}]")
-                lines.append(f"  {focus.level_1}")
+                # Show focus level
+                focus_header = f"[{focus.name}"
+                if focus.level == 2:
+                    focus_header += " - Level 2"
+                focus_header += "]"
+                lines.append(focus_header)
+
+                # Show appropriate description based on level
+                if focus.level == 2:
+                    lines.append(f"  {focus.level_2}")
+                else:
+                    lines.append(f"  {focus.level_1}")
                 lines.append("")
         else:
             lines.append("No foci")
