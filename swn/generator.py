@@ -122,23 +122,31 @@ class CharacterGenerator:
             if not character.background:
                 raise ValueError(f"Unknown background: {background_choice}")
         else:
-            character.background = self.backgrounds.get_random_background()
+            # Select random background filtered by class (includes class-specific + general)
+            character.background = self.backgrounds.get_random_background(
+                class_name=character.character_class.name
+            )
 
         # Step 5: Initialize skills and apply background skills
         character.skills = SkillSet()
 
-        # For "Any Skill" resolution, exclude psychic disciplines unless character is psychic
+        # For "Any Skill" resolution, exclude psychic disciplines and class-specific skills
         psychic_disciplines = ["Biopsionics", "Metapsionics", "Precognition",
                               "Telekinesis", "Telepathy", "Teleportation"]
-        # We'll determine if psychic after class selection, but for background skills,
-        # we can use all non-psychic skills for now
-        non_psychic_skills = [s for s in self.all_skills if s not in psychic_disciplines]
+        class_specific_skills = ["Sunblade", "Cast Magic", "Know Magic"]
+
+        # Build list of available skills for background selection
+        # Exclude both psychic disciplines and class-specific skills
+        background_available_skills = [
+            s for s in self.all_skills
+            if s not in psychic_disciplines and s not in class_specific_skills
+        ]
 
         # Use resolve_free_skill() to handle "Any Combat", "Any Skill", and other special cases
-        free_skill = character.background.resolve_free_skill(available_skills=non_psychic_skills)
+        free_skill = character.background.resolve_free_skill(available_skills=background_available_skills)
         character.skills.add_skill(free_skill, -1)
         # select_quick_skill() also handles "Any Combat", "Any Skill", and other special cases
-        quick_skill = character.background.select_quick_skill(available_skills=non_psychic_skills)
+        quick_skill = character.background.select_quick_skill(available_skills=background_available_skills)
         character.skills.add_skill(quick_skill, 0)
 
         # Step 6: Add class starting skills (if applicable)
@@ -180,11 +188,19 @@ class CharacterGenerator:
                               "Telekinesis", "Telepathy", "Teleportation"]
         is_psychic = (character.power_type == "psionic")
 
+        # Class-specific skills that should never be randomly allocated
+        class_specific_skills = [
+            "Sunblade",      # Only for Sunblade class
+            "Cast Magic",    # Only for spellcaster classes
+            "Know Magic"     # Only for magic-using classes
+        ]
+
         # Filter skills list for allocation
-        if is_psychic:
-            available_skills = self.all_skills
-        else:
-            available_skills = [s for s in self.all_skills if s not in psychic_disciplines]
+        available_skills = [s for s in self.all_skills if s not in class_specific_skills]
+
+        # Also exclude psychic disciplines for non-psychic characters
+        if not is_psychic:
+            available_skills = [s for s in available_skills if s not in psychic_disciplines]
 
         priority_skills = character.character_class.get_priority_skills()
         allocate_skill_points(

@@ -49,6 +49,13 @@ def main():
     )
 
     parser.add_argument(
+        "--level", "-l",
+        type=int,
+        default=1,
+        help="Character level (1-10, default: 1)"
+    )
+
+    parser.add_argument(
         "--count",
         type=int,
         default=1,
@@ -88,6 +95,7 @@ def main():
         if args.count == 1:
             character = generator.generate_character(
                 name=args.name,
+                level=args.level,
                 class_choice=args.char_class,
                 background_choice=args.background
             )
@@ -109,6 +117,7 @@ def main():
             characters = generator.generate_multiple(
                 args.count,
                 name=None,  # Always random names for batch
+                level=args.level,
                 class_choice=args.char_class,
                 background_choice=args.background
             )

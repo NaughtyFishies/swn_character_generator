@@ -148,14 +148,21 @@ class BackgroundTable:
 
         return cls(backgrounds)
 
-    def get_random_background(self) -> Background:
+    def get_random_background(self, class_name: Optional[str] = None) -> Background:
         """
-        Select a random background.
+        Select a random background, optionally filtered by class.
+
+        Args:
+            class_name: Optional class name to filter backgrounds
 
         Returns:
             Random Background instance
         """
-        return random.choice(self.backgrounds)
+        available_backgrounds = self.get_backgrounds_by_class(class_name)
+        if not available_backgrounds:
+            # Fallback to general backgrounds if no match
+            available_backgrounds = self.get_backgrounds_by_class(None)
+        return random.choice(available_backgrounds)
 
     def get_background_by_name(self, name: str) -> Optional[Background]:
         """
