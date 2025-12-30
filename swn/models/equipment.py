@@ -299,7 +299,34 @@ class EquipmentSelector:
         available_melee = [w for w in self.melee_weapons if w.tech_level <= tech_level]
 
         # Class-based weapon preferences
-        if character_class == "Warrior":
+        if character_class == "Sunblade":
+            # Sunblades primarily use melee weapons (sacred weapon style)
+            # Get primary melee weapon
+            melee_weapons_pref = [w for w in available_melee
+                                  if w.properties.get("size") in ["medium", "large"]
+                                  and w.cost <= max_cost * 0.3]
+            if not melee_weapons_pref:
+                melee_weapons_pref = [w for w in available_melee if w.cost <= max_cost * 0.3]
+
+            if melee_weapons_pref:
+                weapons.append(random.choice(melee_weapons_pref))
+                max_cost -= weapons[0].cost
+
+            # 70% chance for second melee weapon, 30% chance for light ranged backup
+            if random.random() < 0.7:
+                # Second melee weapon
+                secondary_melee = [w for w in available_melee
+                                  if w.cost <= max_cost and w.name not in [weapons[0].name if weapons else ""]]
+                if secondary_melee:
+                    weapons.append(random.choice(secondary_melee))
+            else:
+                # Light ranged backup
+                light_ranged = [w for w in available_ranged
+                               if w.enc == 1 and w.cost <= max_cost * 0.15]
+                if light_ranged:
+                    weapons.append(random.choice(light_ranged))
+
+        elif character_class == "Warrior":
             # Warriors prefer heavy weapons
             rifles = [w for w in available_ranged
                      if w.enc == 2 and w.cost <= max_cost * 0.3]
