@@ -84,6 +84,52 @@ class CharacterDisplay:
             lines.append("No foci")
             lines.append("")
 
+        # Sunblade Abilities
+        if character.sunblade_abilities:
+            lines.append("SUNBLADE ABILITIES")
+            lines.append("-" * 70)
+
+            # Display sacred weapon
+            weapon = character.sunblade_abilities.sacred_weapon
+            lines.append(f"Sacred Weapon: {weapon.weapon_type}")
+            lines.append(f"  Damage: {weapon.damage}, Shock: {weapon.shock}, Range: {weapon.range}")
+            lines.append("")
+
+            # Display effort pool and hit bonus
+            wis_mod = character.attributes.get_modifier("WIS")
+            cha_mod = character.attributes.get_modifier("CHA")
+            effort_pool = character.sunblade_abilities.calculate_effort_pool(wis_mod, cha_mod)
+            hit_bonus = character.sunblade_abilities.calculate_hit_bonus()
+
+            lines.append(f"Sunblade Effort Pool: {effort_pool}")
+            lines.append(f"Sacred Weapon Hit Bonus: +{hit_bonus}")
+            lines.append("")
+
+            # Display all abilities
+            lines.append("Abilities:")
+            for ability in character.sunblade_abilities.selected_abilities:
+                lines.append(f"  - {ability.name}")
+                # Wrap long descriptions
+                desc = ability.description
+                if len(desc) > 66:
+                    # Simple word wrapping
+                    words = desc.split()
+                    current_line = "    "
+                    for word in words:
+                        if len(current_line) + len(word) + 1 > 70:
+                            lines.append(current_line)
+                            current_line = "    " + word
+                        else:
+                            if len(current_line) > 4:
+                                current_line += " " + word
+                            else:
+                                current_line += word
+                    if len(current_line) > 4:
+                        lines.append(current_line)
+                else:
+                    lines.append(f"    {desc}")
+            lines.append("")
+
         # Psychic Powers
         if character.psychic_powers:
             lines.append("PSYCHIC POWERS")
