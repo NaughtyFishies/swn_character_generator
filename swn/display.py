@@ -84,6 +84,35 @@ class CharacterDisplay:
             lines.append("No foci")
             lines.append("")
 
+        # Yama King Abilities
+        if character.yama_king_abilities:
+            lines.append("YAMA KING ABILITIES")
+            lines.append("-" * 70)
+
+            # Display all abilities
+            for ability in character.yama_king_abilities.selected_abilities:
+                lines.append(f"- {ability.name} (Level {ability.level_required})")
+                # Wrap long descriptions
+                desc = ability.description
+                if len(desc) > 66:
+                    # Simple word wrapping
+                    words = desc.split()
+                    current_line = "  "
+                    for word in words:
+                        if len(current_line) + len(word) + 1 > 70:
+                            lines.append(current_line)
+                            current_line = "  " + word
+                        else:
+                            if len(current_line) > 2:
+                                current_line += " " + word
+                            else:
+                                current_line += word
+                    if len(current_line) > 2:
+                        lines.append(current_line)
+                else:
+                    lines.append(f"  {desc}")
+            lines.append("")
+
         # Sunblade Abilities
         if character.sunblade_abilities:
             lines.append("SUNBLADE ABILITIES")

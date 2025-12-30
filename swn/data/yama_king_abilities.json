@@ -1,0 +1,74 @@
+{
+  "level_1_abilities": [
+    {
+      "name": "Passport of Hell",
+      "level_required": 1,
+      "automatic": true,
+      "description": "You instinctively blend into whatever culture or society you are physically occupying. You can speak, read, and write the local language flawlessly so long as you are involved with that society, and intuitively know enough about the culture to avoid breaking important taboos or standing out with odd behavior. This does not change your physical appearance."
+    },
+    {
+      "name": "Uncanny Bargain",
+      "level_required": 1,
+      "automatic": true,
+      "description": "You may choose Arcane Expert foci with your focus picks. If taken as a partial Yama King class, no more than half your foci, rounded up, can be Arcane Expert foci unless the other class also grants access to them."
+    },
+    {
+      "name": "Tallies Thrown Down",
+      "level_required": 1,
+      "automatic": true,
+      "description": "When making an Execution Attack, your attack roll or skill check to hit is invariably successful."
+    }
+  ],
+  "level_abilities": [
+    {
+      "name": "Judicious Understanding",
+      "level_required": 2,
+      "description": "You acquire an innate comprehension of whatever legal jurisdiction you currently physically inhabit or have physically inhabited in the past. You have a professional-grade legal understanding of all local laws or law-equivalent customs. When making Know, Administer, Connect, or Trade skill checks related to legal matters or social customs, roll 3d6 and drop the lowest die."
+    },
+    {
+      "name": "Colorless Face",
+      "level_required": 2,
+      "description": "Your Passport of Hell ability is upgraded, allowing you to adopt the appearance and ordinary clothing of a mathematically averaged member of the society you physically occupy. This false face remains static for any given culture, and you can only have one false identity per culture, but it has its own DNA and physical form and cannot be detected by non-magical means. Shifting into and out of this face takes a Main Action, and you can do it whether or not you are currently physically occupying the cultural space from which you originally derived the identity."
+    },
+    {
+      "name": "Constable's Inducement of Truth",
+      "level_required": 3,
+      "description": "The same round in which you or your comrades personally strike and cause pain to a target, you may ask the target a single question, assuming they are still alive. The target makes a Mental save; on a failure, they must provide one sentence of a truthful, undeceptive answer made to the best of their knowledge. If they succeed on the save, they resist the inducement to speak. This ability can be used on a particular target only once per day."
+    },
+    {
+      "name": "Consecrated Bargain",
+      "level_required": 4,
+      "description": "When you make a deal with an NPC, you may accept a point of System Strain to charge the bargain with magical force. The NPC is aware of this if you do so, as well as the consequences of breaking the deal. If either you or the NPC break the agreement or violate its good-faith intent, this ability ends and the counterparty becomes instantly aware of the violation and its context and may optionally immediately inflict 1d8 hit points of damage on the culprit per hit die or character level of the offended party."
+    },
+    {
+      "name": "The Scent of Offense",
+      "level_required": 5,
+      "description": "When personally commissioned by a subject who has suffered a broken bargain or been the victim of what their society would consider a significant crime, you may unerringly trace the primary offending party, having a constant sense of their direction and rough distance provided they are in the same solar system. The victim must know the culprit's name or have a clear idea of their real appearance to invoke this ability. You may track only one culprit at a time, and cannot pick up an abandoned trail unless you visit the victim personally again. You do not count as a victim for your own use of this ability."
+    },
+    {
+      "name": "The Magistrate's Fist",
+      "level_required": 6,
+      "description": "Against the current target of The Scent of Offense you roll your attack rolls and damage rolls twice, taking the better result."
+    },
+    {
+      "name": "The Magistrate's Edict",
+      "level_required": 7,
+      "description": "Once per day, as a Main Action, you may decree one law that all NPCs in your presence will obey to the extent that they obey any important local law or custom. NPCs will obey even irrational or inexplicable laws if they have orderly habits or are not greatly inconvenienced by it. Laws that will clearly cause them harm to obey or threaten significant injury or loss will be ignored. NPCs pressed to perform distasteful acts by their inclination to compliance can make a Mental save to resist the decree. The law remains in effect only for the rest of the scene."
+    },
+    {
+      "name": "Silent Leges",
+      "level_required": 8,
+      "description": "As a Main Action, accept a point of System Strain to become imperceptible to sentient living creatures around you. The shroud lasts for five minutes, or until you act to draw attention."
+    },
+    {
+      "name": "Censor's Gaze",
+      "level_required": 9,
+      "description": "An NPC in your presence who attempts to lie to you or deceive you must make a Mental saving throw before they can attempt to do so. Success makes them immune for the scene."
+    },
+    {
+      "name": "Bearer of the Vermillion Rescript",
+      "level_required": 10,
+      "description": "Once per day, you and your present allies have one scene worth of time in which they are entirely outside the local laws and customs. You may do anything with legal impunity; data recording the event will somehow become corrupted or lost, and NPCs learning about it later will forget the information, rationalize your behavior as reasonable, or blame someone else for it. NPCs present at the time you perform unlawful or unacceptable acts may act to stop you in the moment if you are personally threatening or endangering them, but otherwise require a Mental save to act against you. You will never suffer formal legal or cultural repercussions for your actions, but offended individuals may still respond with extra-legal measures and actions."
+    }
+  ]
+}

@@ -12,6 +12,7 @@ from swn.models.foci import FociSelector
 from swn.models.psychic import PsychicPowerSelector
 from swn.models.spells import SpellSelector
 from swn.models.sunblade import SunbladeAbilitySelector
+from swn.models.yama_king import YamaKingAbilitySelector
 from swn.models.skills import SkillSet, allocate_skill_points
 from swn.models.equipment import EquipmentSelector, calculate_starting_credits
 
@@ -62,6 +63,13 @@ class CharacterGenerator:
             self.sunblade_selector = SunbladeAbilitySelector.load_from_file(str(sunblade_file))
         else:
             self.sunblade_selector = None
+
+        # Load Yama King ability selector
+        yama_king_file = data_dir / "yama_king_abilities.json"
+        if yama_king_file.exists():
+            self.yama_king_selector = YamaKingAbilitySelector.load_from_file(str(yama_king_file))
+        else:
+            self.yama_king_selector = None
 
         # Load equipment selector
         self.equipment_selector = EquipmentSelector.load_from_files(data_dir)
@@ -400,6 +408,13 @@ class CharacterGenerator:
             character.sunblade_abilities = self.sunblade_selector.create_sunblade_abilities(
                 character.level,
                 sunblade_skill_level
+            )
+
+        # Step 10.7: Handle Yama King abilities for Yama King class
+        if character.character_class.name == "Yama King" and self.yama_king_selector:
+            # Generate Yama King abilities based on character level
+            character.yama_king_abilities = self.yama_king_selector.create_yama_king_abilities(
+                character.level
             )
 
         # Step 11: Calculate HP
