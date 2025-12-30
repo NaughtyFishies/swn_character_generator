@@ -24,14 +24,15 @@ CharacterDisplay.print_character(random_char)
 print("\n\n")
 
 # ============================================================================
-# EXAMPLE 2: Specify Name and Class
+# EXAMPLE 2: Specify Name, Class, and Background
 # ============================================================================
-print("EXAMPLE 2: Named Warrior Character")
+print("EXAMPLE 2: Named Warrior with Soldier Background")
 print("=" * 70)
 
 warrior = gen.generate_character(
     name="Kane Striker",
-    class_choice="Warrior"
+    class_choice="Warrior",
+    background_choice="Soldier"
 )
 CharacterDisplay.print_character(warrior)
 print("\n\n")
@@ -60,7 +61,6 @@ print("=" * 70)
 psychic = gen.generate_character(
     name="Mind Bender",
     level=3,
-    power_type="psionic",
     class_choice="Psychic"
 )
 CharacterDisplay.print_character(psychic)
@@ -76,7 +76,6 @@ arcanist = gen.generate_character(
     name="Lyra Arcanum",
     level=2,
     attribute_method="array",
-    power_type="magic",
     class_choice="Arcanist"
 )
 CharacterDisplay.print_character(arcanist)
@@ -113,7 +112,7 @@ print("=" * 70)
 party_configs = [
     {"name": "Tank", "class_choice": "Warrior"},
     {"name": "Scout", "class_choice": "Expert"},
-    {"name": "Mage", "class_choice": "Arcanist", "power_type": "magic"},
+    {"name": "Mage", "class_choice": "Arcanist"},
     {"name": "Face", "class_choice": "Adventurer"}
 ]
 
@@ -138,19 +137,15 @@ gen.generate_character(
     name="Character Name",           # Optional, random if None
     level=1,                         # Character level (1-10)
     attribute_method="roll",         # "roll" or "array"
-    power_type="normal",             # "normal", "magic", or "psionic"
     class_choice="Warrior",          # Class name or None for random
-    use_quick_skills=True            # Use quick skills (default True)
+    background_choice="Soldier",     # Background name or None for random
+    use_quick_skills=True,           # Use quick skills (default True)
+    tech_level=4                     # Tech level for equipment (0-5, default 4)
 )
 
 ATTRIBUTE METHODS:
   - "roll": Roll 3d6 six times in order, pick one to set to 14
   - "array": Use standard array (14, 12, 11, 10, 9, 7) randomly assigned
-
-POWER TYPES:
-  - "normal": Regular character, no psychic powers
-  - "magic": Gets psychic disciplines (for magic classes)
-  - "psionic": Gets psychic disciplines (for Psychic class)
 
 AVAILABLE CLASSES:
   Base Classes:
@@ -172,6 +167,34 @@ AVAILABLE CLASSES:
     - Godhunter: Shadow hunters
     - Sunblade: Warrior-monks
     - Yama King: Wandering judges
+
+AVAILABLE BACKGROUNDS:
+  General Backgrounds (can be used with any class):
+    - Barbarian: From a savage world
+    - Clergy: Religious professional
+    - Courtesan: Companion or entertainer
+    - Criminal: Thief or smuggler
+    - Dilettante: Wealthy socialite
+    - Entertainer: Performer or artist
+    - Merchant: Trader or shopkeeper
+    - Noble: Aristocrat
+    - Official: Bureaucrat
+    - Peasant: Farmer or laborer
+    - Physician: Doctor or medic
+    - Pilot: Spacecraft operator
+    - Politician: Elected official
+    - Scholar: Scientist or professor
+    - Soldier: Military veteran
+    - Spacer: Voidborn worker
+    - Technician: Engineer or mechanic
+    - Thug: Enforcer or gangster
+    - Vagabond: Wanderer or drifter
+    - Worker: Industrial laborer
+
+  Arcanist-Specific Backgrounds (can be used with any class, but designed for Arcanist):
+    - Arcanist Scholar: Bookish wizard dedicated to magical scholarship
+    - Hirespell: Mercenary wizard who hires out their magical talents
+    - Government Mage: Arcanist in the employ of a government or civil authority
 
 DISPLAY & SAVE METHODS:
   - CharacterDisplay.print_character(char)        # Print to console

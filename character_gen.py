@@ -37,24 +37,15 @@ def main():
     )
 
     parser.add_argument(
-        "--power-level", "-p",
-        choices=["weak", "normal", "strong"],
-        default="normal",
-        help="Power level: weak, normal, or strong (default: normal)"
-    )
-
-    parser.add_argument(
-        "--power-type", "-t",
-        choices=["normal", "magic", "psionic"],
-        default="normal",
-        help="Power type: normal, magic, or psionic (default: normal)"
-    )
-
-    parser.add_argument(
         "--class", "-c",
         dest="char_class",
-        choices=["Warrior", "Expert", "Psychic", "Adventurer"],
         help="Character class (random if not specified)"
+    )
+
+    parser.add_argument(
+        "--background", "-b",
+        dest="background",
+        help="Character background (random if not specified)"
     )
 
     parser.add_argument(
@@ -97,9 +88,8 @@ def main():
         if args.count == 1:
             character = generator.generate_character(
                 name=args.name,
-                power_level=args.power_level,
-                power_type=args.power_type,
-                class_choice=args.char_class
+                class_choice=args.char_class,
+                background_choice=args.background
             )
 
             # Display character
@@ -119,9 +109,8 @@ def main():
             characters = generator.generate_multiple(
                 args.count,
                 name=None,  # Always random names for batch
-                power_level=args.power_level,
-                power_type=args.power_type,
-                class_choice=args.char_class
+                class_choice=args.char_class,
+                background_choice=args.background
             )
 
             for i, character in enumerate(characters, 1):

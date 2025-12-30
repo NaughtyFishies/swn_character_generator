@@ -11,8 +11,9 @@ class CharacterClass:
 
     def __init__(self, name: str, hp_die: int, hp_bonus: int, skill_points_base: int,
                  foci_count: int, attack_bonus: int, saving_throws: Dict[str, int],
-                 description: str = "", special_abilities: List[str] = None,
-                 is_spellcaster: bool = False, spell_tradition: str = None):
+                 power_type: str = "normal", description: str = "",
+                 special_abilities: List[str] = None, is_spellcaster: bool = False,
+                 spell_tradition: str = None):
         """
         Initialize a character class.
 
@@ -24,6 +25,7 @@ class CharacterClass:
             foci_count: Number of foci the class gets
             attack_bonus: Attack bonus per level
             saving_throws: Dict of save types to target numbers
+            power_type: Power type of the class (normal, magic, or psionic)
             description: Class description
             special_abilities: List of special ability descriptions
             is_spellcaster: Whether this class casts spells
@@ -36,6 +38,7 @@ class CharacterClass:
         self.foci_count = foci_count
         self.attack_bonus = attack_bonus
         self.saving_throws = saving_throws
+        self.power_type = power_type
         self.description = description
         self.special_abilities = special_abilities or []
         self.is_spellcaster = is_spellcaster
@@ -160,6 +163,7 @@ class ClassTable:
                 foci_count=class_data["foci_count"],
                 attack_bonus=class_data["attack_bonus"],
                 saving_throws=class_data["saving_throws"],
+                power_type=class_data.get("power_type", "normal"),
                 description=class_data.get("description", ""),
                 special_abilities=class_data.get("special_abilities", []),
                 is_spellcaster=class_data.get("is_spellcaster", False),

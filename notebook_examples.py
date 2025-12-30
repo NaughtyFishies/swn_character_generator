@@ -27,13 +27,10 @@ print()
 base_classes = ["Warrior", "Expert", "Psychic", "Adventurer"]
 
 for class_name in base_classes:
-    power_type = "psionic" if class_name == "Psychic" else "normal"
-
     char = gen.generate_character(
         name=f"Sample {class_name}",
         level=1,
         attribute_method="array",
-        power_type=power_type,
         class_choice=class_name
     )
 
@@ -63,7 +60,6 @@ for class_name in magic_classes:
         name=f"Sample {class_name}",
         level=1,
         attribute_method="array",
-        power_type="magic",  # Important for magic classes!
         class_choice=class_name
     )
 
@@ -117,18 +113,9 @@ for category, classes in all_classes.items():
     print("-" * 70)
 
     for class_name in classes:
-        # Determine power type
-        power_type = "normal"
-        if class_name == "Psychic":
-            power_type = "psionic"
-        elif class_name in ["Arcanist", "Pacter", "Rectifier", "War Mage",
-                           "Arcane Expert", "Arcane Warrior"]:
-            power_type = "magic"
-
         char = gen.generate_character(
             level=1,
             attribute_method="array",
-            power_type=power_type,
             class_choice=class_name
         )
 
@@ -176,7 +163,6 @@ for level in range(1, 6):
         name=f"Arcanist L{level}",
         level=level,
         attribute_method="array",
-        power_type="magic",
         class_choice="Arcanist"
     )
 
@@ -200,8 +186,8 @@ print()
 party_configs = [
     {"name": "Brutus", "class_choice": "Warrior", "level": 2},
     {"name": "Cipher", "class_choice": "Expert", "level": 2},
-    {"name": "Mystic", "class_choice": "Arcanist", "level": 2, "power_type": "magic"},
-    {"name": "Shadow", "class_choice": "Pacter", "level": 2, "power_type": "magic"},
+    {"name": "Mystic", "class_choice": "Arcanist", "level": 2},
+    {"name": "Shadow", "class_choice": "Pacter", "level": 2},
 ]
 
 for config in party_configs:
@@ -254,8 +240,7 @@ print()
 my_character = gen.generate_character(
     name="My Hero",
     level=3,
-    class_choice="Arcane Warrior",
-    power_type="magic"
+    class_choice="Arcane Warrior"
 )
 
 # Save as text
@@ -318,7 +303,6 @@ for class_name, description in spell_classes.items():
     char = gen.generate_character(
         name=f"Test {class_name}",
         level=3,
-        power_type="magic",
         class_choice=class_name
     )
 
@@ -358,18 +342,9 @@ print(f"{'Class':20} | {'HP':3} | {'Skills':6} | {'Foci':4} | {'AB':2} | Feature
 print("-" * 90)
 
 for class_name in all_class_names:
-    # Determine power type
-    power_type = "normal"
-    if class_name == "Psychic":
-        power_type = "psionic"
-    elif class_name in ["Arcanist", "Pacter", "Rectifier", "War Mage",
-                       "Arcane Expert", "Arcane Warrior"]:
-        power_type = "magic"
-
     char = gen.generate_character(
         level=1,
         attribute_method="array",
-        power_type=power_type,
         class_choice=class_name
     )
 
@@ -476,7 +451,6 @@ print("-" * 70)
 psychic = gen.generate_character(
     name="Mind Walker",
     level=3,
-    power_type="psionic",
     class_choice="Psychic",
     attribute_method="array"
 )
@@ -504,37 +478,10 @@ for disc_name in psychic_disciplines:
         print()
 
 print("\n" + "=" * 70)
-print("Partial Psychic (Warrior with 1 discipline)")
+print("Note: Only the Psychic class has psychic disciplines")
 print("-" * 70)
-print("Note: Only power_type='psionic' grants psychic abilities, not 'magic'")
-print()
-warrior_psychic = gen.generate_character(
-    name="Mind Warrior",
-    level=2,
-    power_type="psionic",
-    class_choice="Warrior",
-    attribute_method="array"
-)
+print("Other classes do not have psionic powers unless they are the Psychic class.")
 
-# Show psychic powers
-if warrior_psychic.psychic_powers:
-    print(f"Effort Pool: {warrior_psychic.psychic_powers.effort_pool}")
-    print()
-
-    for disc_name in psychic_disciplines:
-        if warrior_psychic.skills.has_skill(disc_name):
-            skill_level = warrior_psychic.skills.get_level(disc_name)
-            print(f"{disc_name}-{skill_level}:")
-
-            techniques = warrior_psychic.psychic_powers.get_techniques(disc_name)
-            for tech in techniques:
-                effort_str = f"({tech.effort_cost} Effort)" if tech.effort_cost > 0 else "(Core)"
-                print(f"  • {tech.name} {effort_str}")
-
-print()
-print(f"Class: {warrior_psychic.character_class.name}")
-print(f"HP: {warrior_psychic.hp}")
-print(f"Attack Bonus: +{warrior_psychic.attack_bonus}")
 
 
 # ============================================================================
@@ -572,7 +519,6 @@ arcanist_10 = gen.generate_character(
     name="Archmage Supreme",
     level=10,
     class_choice="Arcanist",
-    power_type="magic",
     tech_level=5,
     attribute_method="array"
 )

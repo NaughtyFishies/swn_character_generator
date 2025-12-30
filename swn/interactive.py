@@ -22,33 +22,7 @@ class InteractivePrompt:
         print("=" * 70)
         print()
 
-        # Step 1: Get power level
-        print("Choose character power level:")
-        print("  1. Weak - Below average stats, fewer skills, basic foci only")
-        print("  2. Normal - Standard game balance (recommended)")
-        print("  3. Strong - Above average stats, more skills, access to exotic foci")
-        print()
-
-        power_level = self._prompt_choice(
-            "Select power level (1-3): ",
-            {"1": "weak", "2": "normal", "3": "strong"},
-            default="2"
-        )
-
-        # Step 2: Get power type
-        print("\nChoose power type:")
-        print("  1. Normal - Standard character, no psychic abilities")
-        print("  2. Magic - Character with 1-2 psychic disciplines")
-        print("  3. Psionic - Powerful psychic with 2-3 disciplines")
-        print()
-
-        power_type = self._prompt_choice(
-            "Select power type (1-3): ",
-            {"1": "normal", "2": "magic", "3": "psionic"},
-            default="1"
-        )
-
-        # Step 3: Get class
+        # Step 1: Get class
         print("\nChoose character class:")
         print("  1. Warrior - Combat specialist with high HP and attack bonus")
         print("  2. Expert - Skill specialist with many skill points")
@@ -71,26 +45,73 @@ class InteractivePrompt:
             default="5"
         )
 
-        # Step 4: Get name
+        # Step 2: Get background
+        print("\nChoose character background:")
+        print("  1. Random")
+        print("  2. Barbarian - From a savage world of low technology")
+        print("  3. Soldier - Professional fighter or military veteran")
+        print("  4. Spacer - Voidborn worker in space")
+        print("  5. Technician - Engineer or mechanic")
+        print("  6. Physician - Doctor or medic")
+        print("  7. Scholar - Scientist or professor")
+        print("  8. Criminal - Thief, smuggler, or spy")
+        print("  9. See full list...")
+        print()
+
+        bg_choice = input("Select background (1-9): ").strip()
+
+        if bg_choice == "9":
+            # Show full list
+            print("\nAll available backgrounds:")
+            bg_names = self.generator.backgrounds.get_all_background_names()
+            for i, bg_name in enumerate(bg_names, 1):
+                print(f"  {i}. {bg_name}")
+            print()
+            bg_input = input(f"Select background (1-{len(bg_names)}) or name: ").strip()
+
+            # Try to parse as number
+            try:
+                bg_idx = int(bg_input) - 1
+                if 0 <= bg_idx < len(bg_names):
+                    background_choice = bg_names[bg_idx]
+                else:
+                    background_choice = None
+            except ValueError:
+                # Treat as name
+                background_choice = bg_input if bg_input else None
+        else:
+            bg_map = {
+                "1": None,
+                "2": "Barbarian",
+                "3": "Soldier",
+                "4": "Spacer",
+                "5": "Technician",
+                "6": "Physician",
+                "7": "Scholar",
+                "8": "Criminal"
+            }
+            background_choice = bg_map.get(bg_choice, None)
+
+        # Step 3: Get name
         print("\nEnter character name (press Enter for random name):")
         name = input("> ").strip()
         if not name:
             name = None
 
-        # Step 5: Generate character
+        # Step 4: Generate character
         print("\nGenerating character...")
         print()
 
         character = self.generator.generate_character(
             name=name,
-            power_type=power_type,
-            class_choice=class_choice
+            class_choice=class_choice,
+            background_choice=background_choice
         )
 
-        # Step 6: Display result
+        # Step 5: Display result
         CharacterDisplay.print_character(character)
 
-        # Step 7: Offer to save
+        # Step 6: Offer to save
         print("\nWould you like to save this character to a file? (y/n): ", end="")
         save_choice = input().strip().lower()
 
@@ -104,7 +125,7 @@ class InteractivePrompt:
             CharacterDisplay.save_to_file(character, filename)
             print(f"\nCharacter saved to {filename}")
 
-        # Step 8: Offer to generate another
+        # Step 7: Offer to generate another
         print("\nGenerate another character? (y/n): ", end="")
         again = input().strip().lower()
 
