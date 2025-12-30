@@ -16,18 +16,25 @@ A comprehensive Python-based character generator for the Stars Without Number ta
 ⚔️ **14 Character Classes**
 - **Base Classes**: Warrior, Expert, Psychic, Adventurer (power type: normal)
 - **Magic Classes**: Arcanist, Pacter, Rectifier, War Mage, Arcane Expert, Arcane Warrior (power type: magic)
-- **Special Classes**: Free Nexus, Godhunter, Sunblade, Yama King (power type varies)
+- **Special Classes**: Free Nexus ✨*NEW*, Godhunter, Sunblade, Yama King (power type varies)
 - Power type automatically set based on class choice
+- Free Nexus: Symbiotic support class with 14 Nexus gifts
+- Godhunter: Shadow hunters with bonuses vs Shadows
+- Sunblade: Warrior-monks with sacred weapons
+- Yama King: Wandering judges with social manipulation abilities
 
 🔮 **Magic & Psychic Systems**
 - **Spell Traditions**: 4 complete spell lists (Arcanist, Pacter, Rectifier, War Mage) with 30+ spells each
+- **Arcanist Tradition** ⚡*UPDATED*: Unlimited spells known, limited prepared per day (differs from other traditions)
+  - Levels 1-5: 2-4 spells per level, Levels 6+: 5-8 spells per level
+  - Correct spell slots: 1/2/2/3/3/3/4/4/5/5 at levels 1-10 (less than other traditions)
+- **Other Traditions**: Limited known spells with more spell slots (standard Magister progression)
 - **Psychic Disciplines**: 6 disciplines as individual skills (Biopsionics, Metapsionics, Precognition, Telekinesis, Telepathy, Teleportation)
 - Each discipline has a core technique (level-0) and 8-12 advanced techniques (levels 1-4)
 - Technique selection: 1 technique learned per skill level increase
 - Psychic class gets 2 bonus psychic skill picks (can pick same discipline twice for level-1)
 - Effort pool: 1 + highest discipline skill + better of WIS/CON modifier (minimum 1)
 - **Arcane Foci**: 27 arcane foci for magic-using characters
-- Spell progression from levels 1-5 with known spells and spell slots tracked separately
 
 🎯 **Advanced Features**
 - 52 total foci (25 general + 27 arcane)
@@ -59,7 +66,78 @@ python3 -c "from swn.generator import CharacterGenerator; print('✓ Installatio
 
 ## Quick Start
 
-### Generate Your First Character
+### Option 1: Interactive Jupyter Notebook ⭐ **Recommended for Beginners**
+
+We provide a comprehensive Jupyter notebook with all options documented and easy variable configuration.
+
+#### Local Jupyter
+
+```bash
+# Install Jupyter if needed
+pip install jupyter
+
+# Launch the notebook
+jupyter notebook character_generator_notebook.ipynb
+```
+
+#### Google Colab (No Installation Required!)
+
+You can run this notebook in Google Colab without installing anything:
+
+**Method 1: Upload Files to Colab**
+1. Go to [Google Colab](https://colab.research.google.com/)
+2. Upload the entire project folder to your Colab session:
+   ```python
+   from google.colab import files
+   import zipfile
+   import os
+
+   # Upload the project as a zip file
+   uploaded = files.upload()
+
+   # Extract it
+   for filename in uploaded.keys():
+       with zipfile.ZipFile(filename, 'r') as zip_ref:
+           zip_ref.extractall('.')
+
+   # Change to the project directory
+   os.chdir('swn_character_generator')
+   ```
+
+3. Then run the notebook cells normally!
+
+**Method 2: Clone from GitHub** (if you have it in a repo)
+```python
+!git clone <your-repo-url>
+%cd swn_character_generator
+```
+
+**Method 3: Direct Notebook Upload**
+1. Go to [Google Colab](https://colab.research.google.com/)
+2. File → Upload notebook
+3. Upload `character_generator_notebook.ipynb`
+4. Add a setup cell at the top to upload the `swn` folder:
+   ```python
+   from google.colab import files
+   import zipfile
+
+   # Upload swn folder as zip
+   print("Upload the swn folder as a zip file")
+   uploaded = files.upload()
+
+   # Extract swn folder
+   with zipfile.ZipFile(list(uploaded.keys())[0], 'r') as zip_ref:
+       zip_ref.extractall('.')
+   ```
+
+**The notebook includes:**
+- **Complete documentation** of all 14 classes, 44 backgrounds, and options
+- **Easy configuration section** - just change variables and run
+- **Pre-configured examples** for common character types
+- **Multiple character generation** examples
+- Perfect for learning the system!
+
+### Option 2: Python Script
 
 ```python
 from swn.generator import CharacterGenerator
@@ -75,7 +153,7 @@ char = gen.generate_character()
 CharacterDisplay.print_character(char)
 ```
 
-### Command Line Quick Test
+### Option 3: Command Line Quick Test
 
 ```bash
 python3 -c "
@@ -159,6 +237,47 @@ psychic = gen.generate_character(
 CharacterDisplay.print_character(psychic)
 ```
 
+### Special Class Characters
+
+```python
+# Free Nexus (symbiotic support class)
+free_nexus = gen.generate_character(
+    name="Symbiote",
+    level=6,
+    class_choice="Free Nexus",
+    background_choice="Escaped Familiar"  # Class-specific background
+)
+# Level 1: Gains Symbiosis and Free Nexus Effort abilities
+# Levels 2, 4, 6: Gains 1 Nexus gift each (3 gifts at level 6)
+# Effort pool: 3 gifts + max(WIS, CHA modifier)
+# Can establish symbiosis with allies to share abilities
+
+# Sunblade (warrior-monk with sacred weapon)
+sunblade = gen.generate_character(
+    name="Blade Master",
+    level=4,
+    class_choice="Sunblade",
+    background_choice="Sunblade Warrior"  # Class-specific background
+)
+# Level 1: Gets Sacred Weapon, Sunblade Effort, Radiance
+# Levels 2, 4: Gains 1 selectable ability each (5 total at level 4)
+# Sacred weapon gets +½ level to hit bonus
+
+# Godhunter (Shadow hunter)
+godhunter = gen.generate_character(
+    name="Shadow Slayer",
+    level=5,
+    class_choice="Godhunter",
+    background_choice="Godhunter Templar"  # Class-specific background
+)
+# Gains abilities every level (8 total at level 5)
+# Grim Determination: +3 HP at level 5 (odd levels only)
+# True Hand: +3 to hit vs Shadows/cultists
+# Armor of Contempt: +3 AC vs Shadows/cultists
+
+CharacterDisplay.print_character(free_nexus)
+```
+
 ### Equipment & Tech Levels
 
 ```python
@@ -198,12 +317,63 @@ CharacterDisplay.print_character(modern)
 ```python
 char = gen.generate_character(name="My Hero")
 
-# Save as formatted text file
+# Save as formatted text file (overwrites)
 CharacterDisplay.save_to_file(char, "my_hero.txt")
 
-# Save as JSON (for data processing/storage)
+# Save as JSON (overwrites)
 CharacterDisplay.export_json(char, "my_hero.json")
 ```
+
+### Generate Multiple Characters to Review
+
+**NEW in v1.1.0**: Use `append_to_file()` to generate multiple characters to one file, then review and pick your favorites!
+
+```python
+# Example 1: Generate 5 warriors and pick the best one
+print("Generating 5 Warrior options...")
+for i in range(5):
+    char = gen.generate_character(level=1, class_choice="Warrior")
+    CharacterDisplay.append_to_file(char, "warriors.txt")
+    print(f"  {i+1}. {char.name} - HP: {char.hp}, AC: {char.calculate_ac()}")
+
+print("\nAll warriors saved to 'warriors.txt' - open it and pick your favorite!")
+
+# Example 2: Generate party options (3 options per role)
+party_roles = ["Warrior", "Expert", "Arcanist", "Psychic"]
+
+for role in party_roles:
+    print(f"\nGenerating {role} options:")
+    for i in range(3):
+        char = gen.generate_character(level=1, class_choice=role)
+
+        # Append to text file (human-readable)
+        CharacterDisplay.append_to_file(char, "party_options.txt")
+
+        # Append to JSON file (creates array)
+        CharacterDisplay.append_json_to_file(char, "party_options.json")
+
+        print(f"  {i+1}. {char.name} (HP: {char.hp})")
+
+print("\n✅ 12 characters saved!")
+print("   Text: party_options.txt (review all options)")
+print("   JSON: party_options.json (array for processing)")
+
+# Example 3: Generate and compare characters at different levels
+for level in [1, 3, 5, 7, 10]:
+    char = gen.generate_character(
+        name=f"Level {level} Warrior",
+        level=level,
+        class_choice="Warrior"
+    )
+    CharacterDisplay.append_to_file(char, "level_comparison.txt")
+    print(f"Level {level}: HP={char.hp}, Attack=+{char.attack_bonus}")
+```
+
+**Key Features:**
+- `append_to_file()`: Adds character to text file with spacing between characters
+- `append_json_to_file()`: Maintains JSON array of characters `[{char1}, {char2}, ...]`
+- Perfect for generating multiple options and reviewing them all at once
+- Files can be opened in any text editor
 
 ### Generate a Party
 
@@ -261,10 +431,31 @@ character = gen.generate_character(
 ### CharacterDisplay Methods
 
 ```python
-CharacterDisplay.print_character(character)              # Print to console
-CharacterDisplay.save_to_file(character, "output.txt")   # Save as text
-CharacterDisplay.export_json(character, "output.json")   # Export as JSON
+# Display to console
+CharacterDisplay.print_character(character)
+
+# Save single character (overwrites file)
+CharacterDisplay.save_to_file(character, "output.txt")
+CharacterDisplay.export_json(character, "output.json")
+
+# Append multiple characters (NEW in v1.1.0)
+CharacterDisplay.append_to_file(character, "output.txt")          # Append to text file
+CharacterDisplay.append_json_to_file(character, "output.json")    # Append to JSON array
 ```
+
+**Method Details:**
+
+- **`print_character(character)`**: Prints formatted character sheet to console
+- **`save_to_file(character, filename)`**: Saves single character to text file (overwrites)
+- **`export_json(character, filename)`**: Exports single character as JSON (overwrites)
+- **`append_to_file(character, filename)`** ✨*NEW*: Appends character to text file with spacing
+  - First call creates file, subsequent calls append
+  - Automatically adds separators between characters
+  - Perfect for generating multiple options to review
+- **`append_json_to_file(character, filename)`** ✨*NEW*: Appends character to JSON array
+  - Maintains array structure: `[{char1}, {char2}, ...]`
+  - First call creates array, subsequent calls add to it
+  - Great for batch processing or data analysis
 
 ## Available Classes
 
@@ -290,12 +481,39 @@ CharacterDisplay.export_json(character, "output.json")   # Export as JSON
 
 ### Special Classes
 
-| Class | Description | HP Die | Skills |
-|-------|-------------|--------|--------|
-| Free Nexus | Support with symbiosis | 1d6 | 4+INT |
-| Godhunter | Shadow hunters | 1d6+2 | 3+INT |
-| Sunblade | Warrior-monks | 1d6 | 3+INT |
-| Yama King | Wandering judges | 1d6 | 3+INT |
+| Class | Description | HP Die | Skills | Special Abilities |
+|-------|-------------|--------|--------|-------------------|
+| Free Nexus | Support with symbiosis | 1d6 | 4+INT | Gains Nexus gifts at even levels (2, 4, 6, 8, 10) |
+| Godhunter | Shadow hunters | 1d6+2 | 3+INT | Gains abilities every level, bonuses vs Shadows |
+| Sunblade | Warrior-monks | 1d6 | 3+INT | Sacred weapon, gains abilities at even levels |
+| Yama King | Wandering judges | 1d6 | 3+INT | Gains abilities every level, social manipulation |
+
+#### Free Nexus Details
+- **Level 1**: 2 base abilities (Symbiosis, Free Nexus Effort)
+- **Levels 2, 4, 6, 8, 10**: Gain 1 Nexus gift each (5 total at level 10)
+- **Effort Pool**: Number of gifts + max(WIS, CHA modifier)
+- **Symbiotic Healing**: Scales with level (1d6 per 2 levels, rounded up)
+- **14 Nexus Gifts**: Arcane Battery, Borrowed Brilliance, Cognitive Backup, Diffuse Strain, Distributed War Mind, Distributive Action, Full Override, Group Symbiosis, Psychic Battery, Red Well, Reflexive Action, Shared Mind, Symbiotic Healing, Two Minds One Flesh
+
+#### Godhunter Details
+- **Level 1**: 3 base abilities (Grim Determination, True Hand, Armor of Contempt)
+- **Levels 2-10**: Gain abilities specified for each level
+- **Grim Determination**: +1 HP at odd levels (1, 3, 5, 7, 9)
+- **True Hand**: +½ level to hit vs Shadows/cultists
+- **13 Total Abilities** at level 10
+
+#### Sunblade Details
+- **Level 1**: 3 automatic abilities (Sacred Weapon, Sunblade Effort, Radiance)
+- **Levels 2, 4, 6, 8, 10**: Gain 1 selectable ability each (8 total at level 10)
+- **Sacred Weapon**: Chosen melee weapon with special properties
+- **Effort Pool**: Number of abilities + max(WIS, CHA modifier)
+- **Hit Bonus**: +½ level with sacred weapon
+
+#### Yama King Details
+- **Level 1**: 3 base abilities (Passport of Hell, Uncanny Bargain, Tallies Thrown Down)
+- **Levels 2-10**: Gain abilities specified for each level
+- **13 Total Abilities** at level 10
+- Specializes in social manipulation, judgment, and execution attacks
 
 ## Available Backgrounds
 
@@ -394,11 +612,12 @@ These backgrounds are thematically designed for specific classes but can be used
 
 ```
 character_generator/
-├── README.md                    # This file
-├── QUICK_START.md              # Quick reference guide
-├── example_usage.py            # Usage examples
-├── notebook_examples.py        # Jupyter-friendly examples
-├── swn/                        # Main package
+├── README.md                           # This file
+├── QUICK_START.md                      # Quick reference guide
+├── character_generator_notebook.ipynb  # ⭐ Interactive Jupyter notebook (NEW!)
+├── example_usage.py                    # Usage examples
+├── notebook_examples.py                # Jupyter-friendly examples
+├── swn/                                # Main package
 │   ├── __init__.py
 │   ├── character.py            # Character model
 │   ├── generator.py            # Character generation logic
@@ -410,13 +629,17 @@ character_generator/
 │   │   ├── foci.json
 │   │   ├── skills.json
 │   │   ├── psychic_disciplines.json    # 6 disciplines with techniques
-│   │   ├── arcanist_spells.json
-│   │   ├── pacter_spells.json
-│   │   ├── rectifier_spells.json
-│   │   ├── war_mage_spells.json
-│   │   ├── armor.json                   # NEW: 18 armor types
-│   │   ├── weapons.json                 # NEW: 33 weapons
-│   │   └── gear.json                    # NEW: 27 gear items
+│   │   ├── arcanist_spells.json        # Academic magic tradition
+│   │   ├── pacter_spells.json          # Shadow summoning tradition
+│   │   ├── rectifier_spells.json       # Transformation tradition
+│   │   ├── war_mage_spells.json        # Tactical magic tradition
+│   │   ├── sunblade_abilities.json     # Sunblade special abilities
+│   │   ├── yama_king_abilities.json    # Yama King special abilities
+│   │   ├── godhunter_abilities.json    # Godhunter special abilities
+│   │   ├── free_nexus_gifts.json       # Free Nexus gifts & abilities
+│   │   ├── armor.json                  # 18 armor types
+│   │   ├── weapons.json                # 33 weapons
+│   │   └── gear.json                   # 27 gear items
 │   └── models/                 # Data models
 │       ├── __init__.py
 │       ├── attributes.py
@@ -425,19 +648,61 @@ character_generator/
 │       ├── foci.py
 │       ├── psychic.py          # Disciplines as skills system
 │       ├── skills.py           # Correct skill costs
-│       ├── spells.py
-│       └── equipment.py        # NEW: Equipment selection
+│       ├── spells.py           # Spell system with Arcanist/Magister progressions
+│       ├── equipment.py        # Equipment selection system
+│       ├── sunblade.py         # Sunblade abilities
+│       ├── yama_king.py        # Yama King abilities
+│       ├── godhunter.py        # Godhunter abilities
+│       └── free_nexus.py       # Free Nexus gifts & abilities
 ```
 
 ## Spell Progression
 
-| Level | Level-1 Spells | Level-2 Spells | Level-3 Spells |
-|-------|----------------|----------------|----------------|
-| 1 | 4 | — | — |
-| 2 | 5 | — | — |
-| 3 | 6 | 2 | — |
-| 4 | 7 | 3 | — |
-| 5+ | 8 | 4 | 2 |
+### Magister Traditions (Pacter, Rectifier, War Mage)
+
+These traditions use the standard Magister progression with limited known spells and spell slots:
+
+| Level | L1 Known/Slots | L2 Known/Slots | L3 Known/Slots | L4 Known/Slots | L5 Known/Slots |
+|-------|----------------|----------------|----------------|----------------|----------------|
+| 1 | 2 / 3 | — | — | — | — |
+| 2 | 2 / 4 | — | — | — | — |
+| 3 | 3 / 5 | 2 / 2 | — | — | — |
+| 4 | 3 / 6 | 2 / 3 | — | — | — |
+| 5 | 4 / 6 | 2 / 3 | 2 / 2 | — | — |
+| 6 | 4 / 6 | 3 / 4 | 2 / 3 | — | — |
+| 7 | 5 / 6 | 3 / 4 | 2 / 3 | 2 / 2 | — |
+| 8 | 5 / 6 | 4 / 5 | 3 / 4 | 2 / 3 | — |
+| 9 | 5 / 6 | 4 / 5 | 3 / 4 | 3 / 3 | 2 / 2 |
+| 10+ | 5 / 6 | 4 / 6 | 3 / 5 | 3 / 4 | 2 / 3 |
+
+### Arcanist Tradition
+
+Arcanists use a unique progression where they can learn **unlimited spells** but can only **prepare a limited number per day**:
+
+**Prepared Spells per Day:**
+
+| Level | L1 | L2 | L3 | L4 | L5 |
+|-------|----|----|----|----|-----|
+| 1 | 1 | — | — | — | — |
+| 2 | 2 | — | — | — | — |
+| 3 | 2 | 1 | — | — | — |
+| 4 | 3 | 2 | — | — | — |
+| 5 | 3 | 2 | 1 | — | — |
+| 6 | 3 | 3 | 2 | — | — |
+| 7 | 4 | 3 | 2 | 1 | — |
+| 8 | 4 | 3 | 3 | 2 | — |
+| 9 | 5 | 4 | 3 | 2 | 1 |
+| 10+ | 5 | 4 | 3 | 3 | 2 |
+
+**Spells Known (Generated):**
+- Levels 1-5: 2-4 spells per level (similar to Magister)
+- Levels 6+: 5-8 spells per level (extensive spell library)
+- No hard limit on total spells that can be learned
+
+**Key Differences:**
+- **Arcanist**: FEWER prepared slots but MANY MORE spells known
+- **Other Traditions**: MORE spell slots but LIMITED spells known
+- Arcanists must prepare their daily spells from their larger spell library each day
 
 ## Tips & Best Practices
 
@@ -521,9 +786,49 @@ This generator is provided for personal, non-commercial use.
 - **Codex of the Black Sun**: Magic system for SWN
 - Character Generator: Built with Python standard library only
 
-## Version
+## Version & Recent Updates
 
-Current Version: 1.0.0
+Current Version: 1.1.0
+
+### Version 1.1.0 (Latest)
+**Free Nexus Class Implementation**
+- ✅ Added complete Free Nexus class with symbiotic abilities
+- 2 base abilities at level 1 (Symbiosis, Free Nexus Effort)
+- 14 Nexus gifts gained at even levels (2, 4, 6, 8, 10)
+- Effort pool calculation: Number of gifts + max(WIS, CHA modifier)
+- Symbiotic Healing scales with level (1d6 per 2 levels)
+- 3 class-specific backgrounds (Arcane Muse, Escaped Familiar, Occult Proxy)
+
+**Arcanist Spell Progression Fix**
+- ✅ Fixed Arcanist to use correct spell slot progression
+- Changed from Magister progression (6/5/4/3 slots) to Arcanist progression (4/3/3/2 slots)
+- Arcanists now can learn many more spells but prepare fewer per day
+- Levels 1-5: 2-4 spells known per level
+- Levels 6+: 5-8 spells known per level (extensive spell library)
+- Properly reflects "unlimited spells known, limited prepared" mechanic
+
+**Append Functions for Multiple Character Generation**
+- ✅ Added `append_to_file()` method to CharacterDisplay
+- ✅ Added `append_json_to_file()` method to CharacterDisplay
+- Generate multiple characters to one file for easy review
+- `append_to_file()`: Appends formatted character sheets to text file with spacing
+- `append_json_to_file()`: Maintains JSON array of characters `[{char1}, {char2}, ...]`
+- Perfect workflow: Generate 5+ options, review them all, pick your favorite!
+
+**Interactive Jupyter Notebook**
+- ✅ Added `character_generator_notebook.ipynb`
+- Complete documentation of all 14 classes and 44 backgrounds
+- Easy variable configuration section - just change and run
+- Pre-configured examples for common character types
+- Perfect for beginners and learning the system
+- Includes multiple character generation examples
+
+### Version 1.0.0
+- Initial release with 14 character classes
+- Complete equipment system with tech levels 0-5
+- Psychic disciplines, spell traditions, and special class abilities
+- 44 backgrounds (20 general + 24 class-specific)
+- Sunblade, Yama King, and Godhunter special classes
 
 ---
 

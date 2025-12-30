@@ -1,0 +1,74 @@
+{
+  "level_1_abilities": [
+    {
+      "name": "Symbiosis",
+      "level_required": 1,
+      "automatic": true,
+      "description": "As an Instant action once per round, nominate a visible, willing target within 30 meters that is not you. Until you change your selection, the target counts as your symbiotic partner for use of your Nexus gifts, provided they remain within 300 meters. Only one Free Nexus can partner with a given target on any single round."
+    },
+    {
+      "name": "Free Nexus Effort",
+      "level_required": 1,
+      "automatic": true,
+      "description": "You have a Free Nexus Effort score that fuels all your abilities. It is committed and recovered just as psychic Effort is, but is tracked separately. Your total Free Nexus Effort equals your number of Nexus gifts, plus the better of your Wisdom or Charisma attribute modifiers."
+    }
+  ],
+  "nexus_gifts": [
+    {
+      "name": "Arcane Battery",
+      "description": "You gain the Eldritch Battery focus at level-2, with the difference that it only applies to your partner, and you can fuel two spells they cast each day before risking damage."
+    },
+    {
+      "name": "Borrowed Brilliance",
+      "description": "Commit Free Nexus Effort for the scene as an Instant action immediately before making an attack roll or a skill check. You make the attack or skill check as if your partner was the one making it, using their bonuses and skills."
+    },
+    {
+      "name": "Cognitive Backup",
+      "description": "Commit Free Nexus Effort for the day as an Instant action when your partner fails a skill check or attack roll. They may reroll the skill check at a -2 penalty or the attack roll at a -4 penalty. This gift can be used only once per roll."
+    },
+    {
+      "name": "Diffuse Strain",
+      "description": "When you remain partnered with a single target for a full night's rest, your partner sheds two additional points of System Strain beyond what they would ordinarily recover. Once per day per partner, you can Commit Free Nexus Effort for the day to remove a point of System Strain from them."
+    },
+    {
+      "name": "Distributed War Mind",
+      "description": "Commit Free Nexus Effort for the scene as an Instant action to refresh a Warrior partner's class ability, allowing them to use it a second time in the scene. This gift can be used only once per scene per partner."
+    },
+    {
+      "name": "Distributive Action",
+      "description": "During your turn in a round, you may confer either or both of your Main Action or your Move on one partner, sacrificing it to grant them a bonus action of the appropriate type."
+    },
+    {
+      "name": "Full Override",
+      "description": "As an On Turn action, you or your partner may concede full control to the other. The controlling subject's body becomes motionless; they instead take their actions with the controlled subject's body, using their own attack bonus and skill levels, but the controlled subject's physical attributes and hit points. Spells available, Effort, and System Strain remain those of the controlling subject. Thus, if a psychic PC took control of the Free Nexus, they'd use their own Effort and incur their own System Strain for any activities involving psychic powers. An override may be ended as an On Turn action on either participant's part."
+    },
+    {
+      "name": "Group Symbiosis",
+      "description": "Your Symbiosis ability expands, allowing you to have up to a half-dozen partners at once. When using a gift that involves Committing Effort, however, the benefits of that commitment apply to only one partner per action. Thus, you could Diffuse Strain for the whole party, but you can only Commit Effort to reduce System Strain for one partner at a time."
+    },
+    {
+      "name": "Psychic Battery",
+      "description": "Once per round as an Instant action, Commit Free Nexus Effort for the day to refresh one point of Committed Effort for a Psychic partner. You can use this gift once per scene per Psychic partner, or any number of times if you have ten minutes to focus on it."
+    },
+    {
+      "name": "Red Well",
+      "description": "Your partner automatically stabilizes at zero hit points, assuming the injury was not impossible for anyone to survive. In addition, you may commit Free Nexus Effort for the scene as an Instant action when your partner takes damage or incurs System Strain. You receive the damage or System Strain instead, even if that damage would kill you."
+    },
+    {
+      "name": "Reflexive Action",
+      "description": "Commit Free Nexus Effort for the scene as an Instant action. Your partner immediately can take a Main Action of their choice. This gift can only be used once per scene per partner."
+    },
+    {
+      "name": "Shared Mind",
+      "description": "You and your partner may voluntarily share thoughts and sensory input, and your senses count as both \"unaided sight\" and \"personal presence\" for your partner's use of teleportation, telepathy, or other abilities that require such."
+    },
+    {
+      "name": "Symbiotic Healing",
+      "description": "Commit Free Nexus Effort for the day as an On Turn action to heal your partner for up to 1d6 lost hit points per two character levels you have, rounded up. You may use this gift once per round."
+    },
+    {
+      "name": "Two Minds, One Flesh",
+      "description": "Whenever you or your partner must make a Mental saving throw, both of you roll it. If either roll is a success, the target's roll counts as a success. If both are failures, only the original target suffers the consequences. In addition, food, drink, sleep, or oxygen taken by one of you also nourishes or rests the other."
+    }
+  ]
+}

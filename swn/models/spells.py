@@ -176,6 +176,81 @@ def get_spell_progression(character_level: int) -> Dict[int, Dict[str, int]]:
     return progression_table.get(character_level, {1: {"known": 2, "slots": 3}})
 
 
+def get_arcanist_spell_slots(character_level: int) -> Dict[int, int]:
+    """
+    Get spell slots (prepared spells per day) for Arcanist spellcasters.
+
+    Arcanists can learn unlimited spells but can only prepare a limited number per day.
+
+    Progression table (Arcanist):
+    Level  L1  L2  L3  L4  L5
+    1      1   -   -   -   -
+    2      2   -   -   -   -
+    3      2   1   -   -   -
+    4      3   2   -   -   -
+    5      3   2   1   -   -
+    6      3   3   2   -   -
+    7      4   3   2   1   -
+    8      4   3   3   2   -
+    9      5   4   3   2   1
+    10+    5   4   3   3   2
+
+    Args:
+        character_level: Character level
+
+    Returns:
+        Dictionary of spell level -> slots
+    """
+    slots_table = {
+        1:  {1: 1},
+        2:  {1: 2},
+        3:  {1: 2, 2: 1},
+        4:  {1: 3, 2: 2},
+        5:  {1: 3, 2: 2, 3: 1},
+        6:  {1: 3, 2: 3, 3: 2},
+        7:  {1: 4, 2: 3, 3: 2, 4: 1},
+        8:  {1: 4, 2: 3, 3: 3, 4: 2},
+        9:  {1: 5, 2: 4, 3: 3, 4: 2, 5: 1},
+        10: {1: 5, 2: 4, 3: 3, 4: 3, 5: 2},
+    }
+
+    # Levels 10+ use the same progression as level 10
+    if character_level >= 10:
+        character_level = 10
+
+    return slots_table.get(character_level, {1: 1})
+
+
+def get_arcanist_known_spells(character_level: int) -> Dict[int, int]:
+    """
+    Generate reasonable number of known spells for an Arcanist.
+
+    Arcanists can technically learn unlimited spells, but for generation:
+    - Levels 1-5: Similar to Magister (2-4 spells per level)
+    - Levels 6+: Significantly more (5-8 spells per level)
+
+    Args:
+        character_level: Character level
+
+    Returns:
+        Dictionary of spell level -> number of known spells
+    """
+    known = {}
+
+    # Determine which spell levels are available
+    arcanist_slots = get_arcanist_spell_slots(character_level)
+
+    for spell_level in arcanist_slots.keys():
+        if character_level < 6:
+            # Early levels: similar to Magister (2-4 spells)
+            known[spell_level] = random.randint(2, 4)
+        else:
+            # Higher levels: many more spells (5-8 per level)
+            known[spell_level] = random.randint(5, 8)
+
+    return known
+
+
 class SpellSelector:
     """Manages spell selection for spellcasting classes."""
 
@@ -213,7 +288,10 @@ class SpellSelector:
 
     def create_spell_list(self, character_level: int) -> SpellList:
         """
-        Create a complete spell list for a character based on Magister progression.
+        Create a complete spell list for a character.
+
+        Uses Arcanist progression for Arcanists (unlimited known spells, limited prepared slots).
+        Uses Magister progression for all other traditions (limited known spells and slots).
 
         Args:
             character_level: Character level
@@ -223,31 +301,63 @@ class SpellSelector:
         """
         spell_list = SpellList(self.tradition)
 
-        # Get spell progression for this level
-        progression = get_spell_progression(character_level)
+        # Handle Arcanist differently (unlimited known spells)
+        if self.tradition == "Arcanist":
+            # Get spell slots (prepared per day)
+            arcanist_slots = get_arcanist_spell_slots(character_level)
 
-        # For each spell level in the progression
-        for spell_level, counts in progression.items():
-            known = counts["known"]
-            slots = counts["slots"]
+            # Get reasonable number of known spells for generation
+            known_counts = get_arcanist_known_spells(character_level)
 
-            # Set spell slots
-            spell_list.set_spell_slots(spell_level, slots)
+            # For each spell level
+            for spell_level, slots in arcanist_slots.items():
+                # Set spell slots (prepared per day)
+                spell_list.set_spell_slots(spell_level, slots)
 
-            # Select known spells
-            spell_key = f"level_{spell_level}"
-            available_spells = self.spell_data.get(spell_key, [])
+                # Select known spells
+                spell_key = f"level_{spell_level}"
+                available_spells = self.spell_data.get(spell_key, [])
 
-            if available_spells and known > 0:
-                num_to_select = min(known, len(available_spells))
-                selected = random.sample(available_spells, num_to_select)
+                known = known_counts.get(spell_level, 0)
 
-                for spell_info in selected:
-                    spell = Spell(
-                        name=spell_info["name"],
-                        level=spell_level,
-                        description=spell_info["description"]
-                    )
-                    spell_list.add_spell(spell)
+                if available_spells and known > 0:
+                    num_to_select = min(known, len(available_spells))
+                    selected = random.sample(available_spells, num_to_select)
+
+                    for spell_info in selected:
+                        spell = Spell(
+                            name=spell_info["name"],
+                            level=spell_level,
+                            description=spell_info["description"]
+                        )
+                        spell_list.add_spell(spell)
+
+        else:
+            # Handle other traditions (Magister progression)
+            progression = get_spell_progression(character_level)
+
+            # For each spell level in the progression
+            for spell_level, counts in progression.items():
+                known = counts["known"]
+                slots = counts["slots"]
+
+                # Set spell slots
+                spell_list.set_spell_slots(spell_level, slots)
+
+                # Select known spells
+                spell_key = f"level_{spell_level}"
+                available_spells = self.spell_data.get(spell_key, [])
+
+                if available_spells and known > 0:
+                    num_to_select = min(known, len(available_spells))
+                    selected = random.sample(available_spells, num_to_select)
+
+                    for spell_info in selected:
+                        spell = Spell(
+                            name=spell_info["name"],
+                            level=spell_level,
+                            description=spell_info["description"]
+                        )
+                        spell_list.add_spell(spell)
 
         return spell_list

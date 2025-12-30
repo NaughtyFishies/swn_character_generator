@@ -206,6 +206,72 @@ class CharacterDisplay:
                     lines.append(f"    {desc}")
             lines.append("")
 
+        # Free Nexus Gifts
+        if character.free_nexus_abilities:
+            lines.append("FREE NEXUS GIFTS")
+            lines.append("-" * 70)
+
+            # Display effort pool and healing
+            wis_mod = character.attributes.get_modifier("WIS")
+            cha_mod = character.attributes.get_modifier("CHA")
+            effort_pool = character.free_nexus_abilities.calculate_effort_pool(wis_mod, cha_mod)
+            healing_dice = character.free_nexus_abilities.calculate_symbiotic_healing()
+
+            lines.append(f"Free Nexus Effort Pool: {effort_pool}")
+            lines.append(f"Symbiotic Healing: {healing_dice}")
+            lines.append("")
+
+            # Display base abilities
+            lines.append("Base Abilities:")
+            for ability in character.free_nexus_abilities.base_abilities:
+                lines.append(f"  - {ability.name}")
+                # Wrap long descriptions
+                desc = ability.description
+                if len(desc) > 66:
+                    # Simple word wrapping
+                    words = desc.split()
+                    current_line = "    "
+                    for word in words:
+                        if len(current_line) + len(word) + 1 > 70:
+                            lines.append(current_line)
+                            current_line = "    " + word
+                        else:
+                            if len(current_line) > 4:
+                                current_line += " " + word
+                            else:
+                                current_line += word
+                    if len(current_line) > 4:
+                        lines.append(current_line)
+                else:
+                    lines.append(f"    {desc}")
+            lines.append("")
+
+            # Display Nexus gifts
+            if character.free_nexus_abilities.selected_gifts:
+                lines.append("Nexus Gifts:")
+                for gift in character.free_nexus_abilities.selected_gifts:
+                    lines.append(f"  - {gift.name}")
+                    # Wrap long descriptions
+                    desc = gift.description
+                    if len(desc) > 66:
+                        # Simple word wrapping
+                        words = desc.split()
+                        current_line = "    "
+                        for word in words:
+                            if len(current_line) + len(word) + 1 > 70:
+                                lines.append(current_line)
+                                current_line = "    " + word
+                            else:
+                                if len(current_line) > 4:
+                                    current_line += " " + word
+                                else:
+                                    current_line += word
+                        if len(current_line) > 4:
+                            lines.append(current_line)
+                    else:
+                        lines.append(f"    {desc}")
+                lines.append("")
+
         # Psychic Powers
         if character.psychic_powers:
             lines.append("PSYCHIC POWERS")
@@ -351,6 +417,67 @@ class CharacterDisplay:
         """
         with open(filename, 'w') as f:
             json.dump(character.to_dict(), f, indent=2)
+
+    @staticmethod
+    def append_to_file(character: Character, filename: str):
+        """
+        Append character sheet to text file.
+
+        Adds the character to the file with separators between characters.
+        Useful for generating multiple characters and reviewing them all.
+
+        Args:
+            character: Character to append
+            filename: Output filename
+        """
+        sheet = CharacterDisplay.format_character_sheet(character)
+
+        # Check if file exists and has content
+        try:
+            with open(filename, 'r') as f:
+                existing_content = f.read()
+                needs_separator = len(existing_content.strip()) > 0
+        except FileNotFoundError:
+            needs_separator = False
+
+        # Append with separator if needed
+        with open(filename, 'a') as f:
+            if needs_separator:
+                f.write("\n\n\n")  # Add space between characters
+            f.write(sheet)
+
+    @staticmethod
+    def append_json_to_file(character: Character, filename: str):
+        """
+        Append character as JSON to file.
+
+        Maintains a JSON array of characters in the file.
+        First character creates the array, subsequent characters are added to it.
+
+        Args:
+            character: Character to append
+            filename: Output filename
+        """
+        import os
+
+        # Read existing data if file exists
+        if os.path.exists(filename):
+            try:
+                with open(filename, 'r') as f:
+                    characters = json.load(f)
+                    if not isinstance(characters, list):
+                        characters = [characters]
+            except (json.JSONDecodeError, ValueError):
+                characters = []
+        else:
+            characters = []
+
+        # Add new character
+        characters.append(character.to_dict())
+
+        # Write back
+        with open(filename, 'w') as f:
+            json.dump(characters, f, indent=2)
 
     @staticmethod
     def print_character(character: Character):

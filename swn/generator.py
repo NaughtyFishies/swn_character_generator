@@ -14,6 +14,7 @@ from swn.models.spells import SpellSelector
 from swn.models.sunblade import SunbladeAbilitySelector
 from swn.models.yama_king import YamaKingAbilitySelector
 from swn.models.godhunter import GodhunterAbilitySelector
+from swn.models.free_nexus import FreeNexusGiftSelector
 from swn.models.skills import SkillSet, allocate_skill_points
 from swn.models.equipment import EquipmentSelector, calculate_starting_credits
 
@@ -78,6 +79,13 @@ class CharacterGenerator:
             self.godhunter_selector = GodhunterAbilitySelector.load_from_file(str(godhunter_file))
         else:
             self.godhunter_selector = None
+
+        # Load Free Nexus gift selector
+        free_nexus_file = data_dir / "free_nexus_gifts.json"
+        if free_nexus_file.exists():
+            self.free_nexus_selector = FreeNexusGiftSelector.load_from_file(str(free_nexus_file))
+        else:
+            self.free_nexus_selector = None
 
         # Load equipment selector
         self.equipment_selector = EquipmentSelector.load_from_files(data_dir)
@@ -429,6 +437,13 @@ class CharacterGenerator:
         if character.character_class.name == "Godhunter" and self.godhunter_selector:
             # Generate Godhunter abilities based on character level
             character.godhunter_abilities = self.godhunter_selector.create_godhunter_abilities(
+                character.level
+            )
+
+        # Step 10.9: Handle Free Nexus gifts for Free Nexus class
+        if character.character_class.name == "Free Nexus" and self.free_nexus_selector:
+            # Generate Free Nexus gifts based on character level
+            character.free_nexus_abilities = self.free_nexus_selector.create_free_nexus_abilities(
                 character.level
             )
 

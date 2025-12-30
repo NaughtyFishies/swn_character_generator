@@ -24,6 +24,7 @@ class Character:
         self.sunblade_abilities: Optional['SunbladeAbilitySet'] = None
         self.yama_king_abilities: Optional['YamaKingAbilitySet'] = None
         self.godhunter_abilities: Optional['GodhunterAbilitySet'] = None
+        self.free_nexus_abilities: Optional['FreeNexusAbilitySet'] = None
         self.hp: int = 0
         self.saving_throws: Dict[str, int] = {}
         self.level: int = 1
@@ -172,6 +173,7 @@ class Character:
             "sunblade_abilities": self.sunblade_abilities.to_dict() if self.sunblade_abilities else None,
             "yama_king_abilities": self.yama_king_abilities.to_dict() if self.yama_king_abilities else None,
             "godhunter_abilities": self.godhunter_abilities.to_dict() if self.godhunter_abilities else None,
+            "free_nexus_abilities": self.free_nexus_abilities.to_dict() if self.free_nexus_abilities else None,
             "hp": self.hp,
             "attack_bonus": self.attack_bonus,
             "saving_throws": self.saving_throws,
